@@ -3,3 +3,6 @@ authors = ["tomoyuki-nakabayashi"]
 multilingual = false
 src = "src"
 title = "Embedded Rust Techniques"
+
+[output.html.playpen]
+editable = true
