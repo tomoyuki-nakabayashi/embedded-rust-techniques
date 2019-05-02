@@ -1,0 +1,5 @@
+[book]
+authors = ["tomoyuki-nakabayashi"]
+multilingual = false
+src = "src"
+title = "Embedded Rust Techniques"
