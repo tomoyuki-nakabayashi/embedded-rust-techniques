@@ -10,16 +10,17 @@
   - [リンカ]
   - [アセンブリ]
   - [メモリアロケータ]
-- [ツール]
+  - [entryポイント]
+- [ツール](./04-tools/tools.md)
   - [Cargo]
-  - [コンパイラ]
-- [ライブラリ / フレームワーク](./04-library/library.md)
+  - [コンパイラ](./04-tools/compiler.md)
+- [ライブラリ / フレームワーク](./05-library/library.md)
   - [heapless]
   - [RTFM]
   - [testing]
   - [rt crates]
   - [Tock]
-- [プログラミングテクニック]
+- [プログラミングテクニック](./06-programming-techniques)
   - [型状態プログラミング]
   - [ゼロコスト抽象化]
   - [シングルトン]
@@ -32,4 +33,6 @@
   - [C -> Rust]
   - [ケーススタディ Zephyr]
 - [ドキュメント]
+  - [参考文献]
+  - [mdbook]
  -->
