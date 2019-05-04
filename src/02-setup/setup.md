@@ -18,7 +18,7 @@
 
 Cortex-Mをターゲットとするこれらのインストール手順は、[`The Embedded Rust Bookのインストール`]に記載されています。
 
-[`The Embedded Rust Bookのインストール`](https://tomoyuki-nakabayashi.github.io/book/intro/install.html)
+[`The Embedded Rust Bookのインストール`]: https://tomoyuki-nakabayashi.github.io/book/intro/install.html
 
 ## Rust
 
@@ -44,7 +44,7 @@ $ rustc --print target-list
 
 次に、ターゲットシステムがサポートされていない場合ですが、ターゲットの`specification`をJSON形式のファイルで用意します。
 
-[コンパイラサポート](../04-tools/compiler.md)
+[コンパイラサポート]: ../04-tools/compiler.md
 
 ## GDB
 
