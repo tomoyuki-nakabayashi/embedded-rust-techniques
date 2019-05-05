@@ -47,6 +47,8 @@ Rustからリンカスクリプトのシンボルを参照することも可能�
 
 リンカスクリプトで作成したシンボルを`u8`の変数として、そのアドレスを利用します。
 
+> 補足：ROMからRAMへ
+
 ### extern
 
 [`extern`]は、Rustのキーワードで、*外部*とのインタフェースに使用されます。
@@ -94,6 +96,15 @@ pub unsafe extern "C" fn Reset() -> ! {
     /* ... */
 }
 ```
+
+### linkageアトリビュート
+
+`linkage`アトリビュートは、まだunstableの状態です。
+[linkage feature]のissueで議論が続いています。
+このアトリビュートは、シンボルのリンケージを制御するものです。
+例えば、特定のシンボルをweakにしてデフォルト実装を与えたり、明示的に外部リンケージにすることができます。
+
+[linkage feature]: https://github.com/rust-lang/rust/issues/29603
 
 ### 出典
 

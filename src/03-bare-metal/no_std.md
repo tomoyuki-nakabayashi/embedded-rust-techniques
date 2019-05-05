@@ -55,3 +55,9 @@ panicの主な処理は`std`クレートで定義されています。
 `core`クレートは、文字列やスライスのような言語プリミティブと、アトミック操作のようなプロセッサ機能を利用するためのAPIを提供しています。
 
 先程コンパイルエラーになったことからわかるように、`core`クレートを使ったベアメタルプログラミングは、`std`を利用したプログラミングとは一味違ったものになります。
+
+#### 出典
+
+- Embedonomicon: [最小限の`#![no_std]`プログラム]
+
+[最小限の`#![no_std]`プログラム]: https://tomoyuki-nakabayashi.github.io/embedonomicon/smallest-no-std.html

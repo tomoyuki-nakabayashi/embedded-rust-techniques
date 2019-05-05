@@ -112,3 +112,9 @@ extern crate panic_abort;
 ```
 
 上記コードでは、`cargo build`した時は`panic-halt`クレートと、`cargo build --release`した時は`panic-abort`クレートとリンクします。
+
+#### 出典
+
+- The Embedded Rust Book: [2.5.パニック]
+
+[2.5.パニック]: https://tomoyuki-nakabayashi.github.io/book/start/panicking.html

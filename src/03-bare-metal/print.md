@@ -104,3 +104,9 @@ Hello Rust
 ```
 panicked at 'explicit panic!', src/main.rs:10:5
 ```
+
+#### 出典
+
+- Discovery: [urpintln!]
+
+[urpintln!]: https://tomoyuki-nakabayashi.github.io/discovery/11-usart/uprintln.html

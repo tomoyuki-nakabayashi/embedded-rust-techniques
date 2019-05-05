@@ -7,8 +7,8 @@
   - [panic](./03-bare-metal/panic.md)
   - [print!マクロ](./03-bare-metal/print.md)
   - [リンカ](./03-bare-metal/linker.md)
+  - [アセンブリ](./03-bare-metal/assembly.md)
 <!-- 
-  - [アセンブリ]
   - [メモリアロケータ]
   - [entryポイント]
 - [ツール](./04-tools/tools.md)
