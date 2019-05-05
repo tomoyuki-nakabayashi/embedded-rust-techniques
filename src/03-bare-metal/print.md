@@ -68,7 +68,7 @@ UARTペリフェラルの初期化がが必要な点や、TXバッファに空�
 上記コードでは、イテレータで1バイトずつ取得し、`write_byte`関数でUARTに1バイトずつ送信します。
 
 それでは、実行してみましょう。
-`03-bare-metal/print`ディレクトリに、動作するサンプルがあります。
+`03-bare-metal/print`ディレクトリに、QEMUで動作するサンプルがあります。
 リセットベクタ内で、`println!`マクロを呼び出します。
 
 ```rust,ignore
@@ -85,4 +85,22 @@ $ cargo run
 ```
      Running `qemu-system-arm -cpu cortex-m3 -machine lm3s6965evb -nographic -semihosting-config enable=on,target=native -kernel target/thumbv7m-none-eabi/debug/print`
 Hello Rust
+```
+
+> 注意：このサンプルはQEMUでしか動作しません。QEMUのUARTは初期設定不要で雑に使えるため、
+> 非常に便利です。
+
+また、[panic]で紹介した通り、panic時の情報を表示する際も便利です。
+
+```rust,ignore
+{{#include ../../ci/03-bare-metal/print/src/main.rs:7:7}}
+{{#include ../../ci/03-bare-metal/print/src/main.rs:10:10}}
+{{#include ../../ci/03-bare-metal/print/src/main.rs:12:13}}
+{{#include ../../ci/03-bare-metal/print/src/main.rs:56:60}}
+```
+
+実行すると、panicを発生させたソースコードの位置と、メッセージを表示します。
+
+```
+panicked at 'explicit panic!', src/main.rs:10:5
 ```

@@ -7,8 +7,8 @@ use core::panic::PanicInfo;
 pub unsafe extern "C" fn Reset() -> ! {
     println!("Hello {}", "Rust");
 
-    // 戻れないため、ここで無限ループに入ります
-    loop {}
+    panic!("explicit panic!");
+    // loop {} // panicでunreachableになるため、不要です
 }
 
 fn write_byte(c: u8) {
@@ -54,6 +54,7 @@ impl Write for UartWriter {
 pub static RESET_VECTOR: unsafe extern "C" fn() -> ! = Reset;
 
 #[panic_handler]
-fn panic(_panic: &PanicInfo<'_>) -> ! {
+fn panic(panic: &PanicInfo) -> ! {
+    println!("{}", panic);
     loop {}
 }
