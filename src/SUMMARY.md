@@ -8,12 +8,13 @@
   - [print!マクロ](./03-bare-metal/print.md)
   - [リンカ](./03-bare-metal/linker.md)
   - [アセンブリ](./03-bare-metal/assembly.md)
+  - [メモリアロケータ](./03-bare-metal/allocator.md)
 <!-- 
-  - [メモリアロケータ]
   - [entryポイント]
 - [ツール](./04-tools/tools.md)
   - [Cargo]
-  - [コンパイラ](./04-tools/compiler.md)
+  - [コンパイラサポート](./04-tools/compiler.md)
+  - [rustc lint]
 - [ライブラリ / フレームワーク](./05-library/library.md)
   - [heapless]
   - [RTFM]
