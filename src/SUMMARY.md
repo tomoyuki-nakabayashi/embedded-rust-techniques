@@ -9,8 +9,8 @@
   - [リンカ](./03-bare-metal/linker.md)
   - [アセンブリ](./03-bare-metal/assembly.md)
   - [メモリアロケータ](./03-bare-metal/allocator.md)
-<!-- 
-  - [entryポイント]
+  - [entryポイント](./03-bare-metal/entry.md)
+<!--
 - [ツール](./04-tools/tools.md)
   - [Cargo]
   - [コンパイラサポート](./04-tools/compiler.md)
