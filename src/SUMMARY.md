@@ -10,9 +10,9 @@
   - [アセンブリ](./03-bare-metal/assembly.md)
   - [メモリアロケータ](./03-bare-metal/allocator.md)
   - [entryポイント](./03-bare-metal/entry.md)
-<!--
 - [ツール](./04-tools/tools.md)
-  - [Cargo]
+  - [Cargo](./04-tools/cargo.md)
+<!--
   - [コンパイラサポート](./04-tools/compiler.md)
   - [rustc lint]
 - [ライブラリ / フレームワーク](./05-library/library.md)
