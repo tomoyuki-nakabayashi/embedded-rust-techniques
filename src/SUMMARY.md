@@ -12,9 +12,9 @@
   - [entryポイント](./03-bare-metal/entry.md)
 - [ツール](./04-tools/tools.md)
   - [Cargo](./04-tools/cargo.md)
-<!--
   - [コンパイラサポート](./04-tools/compiler.md)
-  - [rustc lint]
+  - [rustc lint](./04-tools/lint.md)
+<!--
 - [ライブラリ / フレームワーク](./05-library/library.md)
   - [heapless]
   - [RTFM]
