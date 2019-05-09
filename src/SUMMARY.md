@@ -13,7 +13,7 @@
 - [ツール](./04-tools/tools.md)
   - [Cargo](./04-tools/cargo.md)
   - [コンパイラサポート](./04-tools/compiler.md)
-  - [rustc lint](./04-tools/lint.md)
+  - [rustc](./04-tools/rustc.md)
 <!--
 - [ライブラリ / フレームワーク](./05-library/library.md)
   - [heapless]
