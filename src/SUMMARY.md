@@ -16,12 +16,12 @@
   - [rustc](./04-tools/rustc.md)
 - [ライブラリ / フレームワーク](./05-library/library.md)
   - [heapless](./05-library/heapless.md)
+  - [no_stdクレート](./05-library/no_std_crates.md)
 <!--
+  - [svd2rust]
   - [RTFM]
-  - [testing]
-  - [rt crates]
   - [Tock]
-  - [no_std crates]
+  - [testing]
 - [プログラミングテクニック](./06-programming-techniques)
   - [型状態プログラミング]
   - [ゼロコスト抽象化]
