@@ -17,8 +17,8 @@
 - [ライブラリ / フレームワーク](./05-library/library.md)
   - [heapless](./05-library/heapless.md)
   - [no_stdクレート](./05-library/no_std_crates.md)
+  - [svd2rust](./05-library/svd2rust.md)
 <!--
-  - [svd2rust]
   - [RTFM]
   - [Tock]
   - [testing]
