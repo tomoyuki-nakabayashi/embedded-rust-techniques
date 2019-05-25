@@ -18,8 +18,8 @@
   - [heapless](./05-library/heapless.md)
   - [no_stdクレート](./05-library/no_std_crates.md)
   - [svd2rust](./05-library/svd2rust.md)
+  - [RTFM](./05-library/rtfm.md)
 <!--
-  - [RTFM]
   - [Tock]
   - [testing]
 - [プログラミングテクニック](./06-programming-techniques)
