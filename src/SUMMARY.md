@@ -19,9 +19,9 @@
   - [no_stdクレート](./05-library/no_std_crates.md)
   - [svd2rust](./05-library/svd2rust.md)
   - [RTFM](./05-library/rtfm.md)
+  - [Tock](./05-library/tock.md)
+  - [testing](./05-library/testing.md)
 <!--
-  - [Tock]
-  - [testing]
 - [プログラミングテクニック](./06-programming-techniques)
   - [型状態プログラミング]
   - [ゼロコスト抽象化]
