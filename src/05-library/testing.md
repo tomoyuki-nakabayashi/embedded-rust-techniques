@@ -1,6 +1,7 @@
 ## テスト
 
 テストを活用することは、組込みやベアメタルの開発でも非常に重要です。
+しかし、Rustのテストフレームワークは標準ライブラリに依存しており、`#[no_std]`環境で使うことができません。
 ここでは、組込み / ベアメタルRustのプロジェクトで利用されているテストやCIについて紹介します。
 
 ### Dual target
@@ -12,7 +13,24 @@
 ### custom test framework
 
 Writing an OS in Rustで紹介されている方法です。
-QEMUで動作します。
+unstableな[custom_test_frameworks]フィーチャを利用します。
+
+[custom_test_frameworks]: https://doc.rust-lang.org/unstable-book/language-features/custom-test-frameworks.html
+
+Rust標準のテストフレームワークと比較すると、パニックすることをテストする`should_panic`などの機能が利用できません。
+
+```rust,ignore
+#![feature(custom_test_frameworks)]
+#![test_runner(crate::test_runner)]
+
+#[cfg(test)]
+fn test_runner(tests: &[&dyn Fn()]) {
+    println!("Running {} tests", tests.len());
+    for test in tests {
+        test();
+    }
+}
+```
 
 ### uTest
 
