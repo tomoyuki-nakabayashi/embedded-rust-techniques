@@ -21,19 +21,19 @@
   - [RTFM](./05-library/rtfm.md)
   - [Tock](./05-library/tock.md)
   - [testing](./05-library/testing.md)
+- [FFI](./06-ffi/ffi.md)
 <!--
+  - [Rust -> C]
+  - [C -> Rust]
+  - [ケーススタディ Zephyr]
+- [組込みLinux]
+  - [Yocto]
 - [プログラミングテクニック](./06-programming-techniques)
   - [型状態プログラミング]
   - [ゼロコスト抽象化]
   - [シングルトン]
   - [アトリビュート]
   - [unsafe]
-- [組込みLinux]
-  - [Yocto]
-- [FFI]
-  - [Rust -> C]
-  - [C -> Rust]
-  - [ケーススタディ Zephyr]
 - [ドキュメント]
   - [参考文献]
   - [mdbook]
