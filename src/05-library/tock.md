@@ -9,8 +9,6 @@ Cortex-Mアーキテクチャに対応しています。
 
 ### 主な機能
 
-> Tockは現状RTOSではありません。
-
 ### design
 
 TockのKernelはRustで実装されています。
@@ -35,3 +33,7 @@ C言語用のユーザランドライブラリ[libtock-c]には、`newlib`や`li
 [libtock-rs]は、2019年5月現在、`WIP`の状態です。
 
 [libtock-rs]: https://github.com/tock/libtock-rs
+
+### コラム〜TockはRTOSじゃない！？〜
+
+> Tockは現状RTOSではありません。

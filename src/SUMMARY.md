@@ -22,8 +22,8 @@
   - [Tock](./05-library/tock.md)
   - [testing](./05-library/testing.md)
 - [FFI](./06-ffi/ffi.md)
+  - [RustからCを呼ぶ](./06-ffi/c-with-rust.md)
 <!--
-  - [Rust -> C]
   - [C -> Rust]
   - [ケーススタディ Zephyr]
 - [組込みLinux]
