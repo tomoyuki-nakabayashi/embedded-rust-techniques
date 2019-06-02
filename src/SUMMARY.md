@@ -23,8 +23,8 @@
   - [testing](./05-library/testing.md)
 - [FFI](./06-ffi/ffi.md)
   - [RustからCを呼ぶ](./06-ffi/c-with-rust.md)
+  - [CからRustを呼ぶ](./06-ffi/rust-with-c.md)
 <!--
-  - [C -> Rust]
   - [ケーススタディ Zephyr]
 - [組込みLinux]
   - [Yocto]
