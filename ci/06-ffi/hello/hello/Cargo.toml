@@ -1,0 +1,13 @@
+[package]
+name = "hello"
+version = "0.1.0"
+authors = ["tomoyuki-nakabayashi <tomo.wait.for.it.yuki@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+cty = "0.2.0"
+zephyr = { path = "../zephyr" }
+
+[lib]
+name = "rustlib"
+crate-type = ["staticlib"]
