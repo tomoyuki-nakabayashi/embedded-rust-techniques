@@ -4,7 +4,7 @@ use zephyr::{print, println};
 
 #[no_mangle]
 pub extern "C" fn rust_main() {
-    println!("Hello Rust");
+    println!("Hello {}", "Rust");
 }
 
 use core::panic::PanicInfo;

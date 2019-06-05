@@ -110,3 +110,9 @@ include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 
 Cのソースコードは、Rust推奨のコーディングスタイルに沿っていないため、関連する警告が出ないようにします。
 加えて、`#[no_std]`アトリビュートを追加します。
+
+#### 出典
+
+- The Embedded Rust Book: [9.1.Rustと少しのC]
+
+[9.1.Rustと少しのC]: https://tomoyuki-nakabayashi.github.io/book/interoperability/c-with-rust.html

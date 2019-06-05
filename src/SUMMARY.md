@@ -24,8 +24,8 @@
 - [FFI](./06-ffi/ffi.md)
   - [RustからCを呼ぶ](./06-ffi/c-with-rust.md)
   - [CからRustを呼ぶ](./06-ffi/rust-with-c.md)
+  - [ケーススタディ Zephyr](./06-ffi/zephyr-bindings.md)
 <!--
-  - [ケーススタディ Zephyr]
 - [組込みLinux]
   - [Yocto]
 - [プログラミングテクニック](./06-programming-techniques)

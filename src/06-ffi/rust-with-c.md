@@ -93,3 +93,9 @@ void call_rust() {
 
 ビルドシステムへの組み込みについては、Cプロジェクトのビルドシステムが何か、に強く依存します。
 Makefileでビルドしている場合、ビルドステップの途中でMakefileから`cargo`を呼び出し、静的ライブラリとしてRustコードをビルドし、リンクします。
+
+#### 出典
+
+- The Embedded Rust Book: [9.2.Cと少しのRust]
+
+[9.2.Cと少しのRust]: https://tomoyuki-nakabayashi.github.io/book/interoperability/rust-with-c.html

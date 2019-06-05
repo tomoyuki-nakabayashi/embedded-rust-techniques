@@ -5,7 +5,7 @@ TARGET_PATH := target/thumbv7m-none-eabi/debug
 RUST_TARGET := librustlib.a
 RUST_LIB := librust.a
 RUST_FILES := $(shell find src/ -type f -name "*.rs") Cargo.toml
-C_BINDINGS := bindings.h
+C_BINDINGS := rustlib.h
 
 all: $(LIB_DIR)/$(RUST_LIB) $(LIB_DIR)/$(C_BINDINGS)
 
