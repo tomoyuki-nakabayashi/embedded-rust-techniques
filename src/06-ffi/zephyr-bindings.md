@@ -35,7 +35,15 @@ Zephyr APIのバインディングは、`bindgen`で自動生成します。
 
 ### 環境
 
-cbindgen, bindgen, Zephyr SDK, QEMUです。
+これから示すインテグレーション例を試すために必要な環境です。
+カッコ内は、著者が試したバージョンです。
+
+- Rust (stable 1.35)
+- cbindgen (0.8.3)
+- bindgen (0.49.0)
+- Zephyr v.1.14
+- Zephyr SDK (0.10.0)
+- qemu-system-arm (2.11.1)
 
 ### CからRustのAPIを呼び出す
 
