@@ -33,6 +33,8 @@ Rustには`println!`マクロを実装します。
 この`println!`マクロは、ZephyrのAPIを利用してコンソールに文字列を出力します。
 Zephyr APIのバインディングは、`bindgen`で自動生成します。
 
+最終的に、C (main) → Rust (rust_main) → C (Zephyr API)というコールグラフになります。
+
 ### 環境
 
 これから示すインテグレーション例を試すために必要な環境です。
@@ -60,6 +62,26 @@ Makefile内で次のコマンドを呼び出します。
 ```
 cbindgen src/lib.rs -l c -o lib/rustlib.h
 ```
+
+これで、次のヘッダファイルが生成されます。
+
+```
+cat hello/lib/rustlib.h
+```
+
+```c
+{{#include ../../ci/06-ffi/hello/hello/lib/rustlib.h:1:6}}
+```
+
+このヘッダファイルをCでインクルードします。
+
+```c
+{{#include ../../ci/06-ffi/hello/src/main.c:2:3}}
+{{#include ../../ci/06-ffi/hello/src/main.c:8:10}}
+```
+
+今回は非常に簡潔です。
+構造体を引数にしたり、ヒープメモリの管理などリソース管理が加わると、より複雑になりますが、本書ではカバーしません。
 
 ### RustからZephyrのAPIを呼び出す
 
