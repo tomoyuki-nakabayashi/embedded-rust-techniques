@@ -24,13 +24,13 @@ impl fmt::Write for DebugWriter {
     }
 }
 
-/// Like the `print!` macro in the standard library, but calls printf
+/// Like the `print!` macro in the standard library, but calls fwrite
 #[macro_export]
 macro_rules! print {
     ($($arg:tt)*) => ($crate::io::print(format_args!($($arg)*)));
 }
 
-/// Like the `println!` macro in the standard library, but calls printf
+/// Like the `println!` macro in the standard library, but calls fwrite
 #[macro_export]
 macro_rules! println {
     ($fmt:expr) => (print!(concat!($fmt, "\n")));

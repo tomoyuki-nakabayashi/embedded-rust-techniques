@@ -4,6 +4,4 @@
 #![allow(non_snake_case)]
 #![allow(dead_code)]
 
-// pub mod bindings;
-
 include!("bindings.rs");
