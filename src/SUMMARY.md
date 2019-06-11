@@ -25,9 +25,10 @@
   - [RustからCを呼ぶ](./06-ffi/c-with-rust.md)
   - [CからRustを呼ぶ](./06-ffi/rust-with-c.md)
   - [ケーススタディ Zephyr](./06-ffi/zephyr-bindings.md)
+- [組込みLinux](./07-linux/embedded-linux.md)
+  - [ビルド/テスト/デバッグ](./07-linux/basic.md)
+  - [Yocto](./07-linux/yocto.md)
 <!--
-- [組込みLinux]
-  - [Yocto]
 - [プログラミングテクニック](./06-programming-techniques)
   - [型状態プログラミング]
   - [ゼロコスト抽象化]

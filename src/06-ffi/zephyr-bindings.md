@@ -289,7 +289,7 @@ Zephyrのビルドプロセス中で外部ビルドシステムを呼び出し�
 
 詳細な説明は省略しますが、`cmake`の`ExternalProject`を用いて、`CMakeLists.txt`を次の通り記述します。
 
-```
+```cmake
 {{#include ../../ci/06-ffi/hello/CMakeLists.txt:22:49}}
 ```
 
