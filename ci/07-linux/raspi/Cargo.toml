@@ -1,0 +1,7 @@
+[package]
+name = "raspi"
+version = "0.1.0"
+authors = ["tomoyuki-nakabayashi <tn@connectfree.co.jp>"]
+edition = "2018"
+
+[dependencies]

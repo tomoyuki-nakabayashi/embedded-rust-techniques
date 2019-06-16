@@ -14,6 +14,6 @@ Yoctoの基礎から説明するスキルが著者にないため、Yoctoを触�
 
 ### meta-rust
 
-
+### meta-rust-bin
 
 ### cargo-bitbake
