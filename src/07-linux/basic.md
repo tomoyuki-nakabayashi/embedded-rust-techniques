@@ -34,6 +34,25 @@ $ qemu-arm -L /usr/arm-linux-gnueabihf target/armv7-unknown-linux-gnueabihf/debu
 Hello, world!
 ```
 
+`.cargo/config`にカスタムランナーを設定することで、`cargo run`でQEMU上で実行することができます。
+
+```
+cat .cargo/config
+```
+
+```toml
+[target.armv7-unknown-linux-gnueabihf]
+linker = "arm-linux-gnueabihf-gcc"
+runner = "qemu-arm -L /usr/arm-linux-gnueabihf"
+```
+
+```
+cargo run --target armv7-unknown-linux-gnueabihf
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+     Running `qemu-arm -L /usr/arm-linux-gnueabihf target/armv7-unknown-linux-gnueabihf/debug/raspi`
+Hello, world!
+```
+
 ## テスト
 
 ```
@@ -63,6 +82,16 @@ test ok ... ok
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 ```
 
-## デバッグ
+カスタムランナーを登録しておけば、`cargo test`でQEMU上でテストを実行可能です。
 
-`gdb remote-extension`
+```
+cargo test --target armv7-unknown-linux-gnueabihf
+   Compiling raspi v0.1.0 (/home/tomoyuki/others/01.rust/embedded-rust-techniques/ci/07-linux/raspi)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.32s
+     Running target/armv7-unknown-linux-gnueabihf/debug/deps/raspi-3f64731a0be9b753
+
+running 1 test
+test ok ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```
