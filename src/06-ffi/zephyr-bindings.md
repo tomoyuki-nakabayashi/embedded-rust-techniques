@@ -316,6 +316,15 @@ cmake -GNinja -DBOARD=qemu_cortex_m3 ..
 ninja run
 ```
 
+実行すると無事に`Hello Rust`が表示されます。
+
+```
+To exit from QEMU enter: 'CTRL+a, x'[QEMU] CPU: cortex-m3
+qemu-system-arm: warning: nic stellaris_enet.0 has no peer
+***** Booting Zephyr OS zephyr-v1.14.0 *****
+Hello Rust
+```
+
 ### 考察
 
 この通り、RTOSのような複雑なCプロジェクトとRustとのインテグレーションには、特有の困難さがあります。
@@ -325,3 +334,22 @@ ninja run
 加えて、RTOSではターゲットシステムごとに、アプリケーションが利用できるAPIが増減します。
 この要素をどのように統一的に扱うか、を解決する必要があります。
 今後のコミュニティの動きに注目しましょう。
+
+## コラム〜マイコン上でRustで書いたWASMアプリケーションが動く！？〜
+
+2019年5月、[WebAssembly Micro Runtime]というマイコン上で動作するWASMランタイムが公開されました。
+このWASMランタイムは、Zephyr上で動かすことができます。
+
+[WebAssembly Micro Runtime]: https://github.com/intel/wasm-micro-runtime
+
+それほど苦労せずに、256KBのRAMが搭載されているマイコン上でRustのアプリケーションを実行できました。
+アプリケーション実行までの簡単な手順を[WebAssembly Micro RuntimeでRustアプリをマイコンで動かす！]で公開しています。
+ランタイムの性能が気になるところですが、WASMが動くようになればターゲットアーキテクチャを気にしなくてもRustアプリケーションが動かせるようになるため、今後もWASM Micro Runtimeに注目しましょう。
+
+[WebAssembly Micro RuntimeでRustアプリをマイコンで動かす！]: https://tomo-wait-for-it-yuki.hatenablog.com/entry/2019/06/16/133344?_ga=2.61433454.350764793.1560857949-1518570932.1554416614
+
+## 参考
+
+[freertos.rs]
+
+[freertos.rs]: https://github.com/hashmismatch/freertos.rs
