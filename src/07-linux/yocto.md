@@ -168,7 +168,32 @@ raspberry pi3を起動して、`rust-hello-world`を実行します。
 Hello, world!
 ```
 
+```
+cat gpio-utils_0.3.0.bb 
+```
+
+```
+inherit cargo
+
+SUMMARY = "GPIO Utilities"
+HOMEPAGE = "git://github.com/rust-embedded/gpio-utils"
+LICENSE = "MIT"
+
+SRC_URI = "git://github.com/rust-embedded/gpio-utils.git;tag=${PV}"
+S = "${WORKDIR}/git"
+
+SRC_URI[md5sum] = "5b02ea682b08cefe74acff86b6e30ffb"
+LIC_FILES_CHKSUM = "file://LICENSE-MIT;md5=935a9b2a57ae70704d8125b9c0e39059"
+```
+
 無事、実行できます。
+
+#### `meta-rust`との比較
+
+ラズパイ3の`core-image-base`に`rust-hello-world`を追加したイメージのフルビルドにかかる時間を計測したろころ、`meta-rust`が約220分、`meta-rust-bin`が約150分でした。
+Yoctoのバージョンが異なるため、完全なベンチマークとは言えませんが、`meta-rust-bin`の方がビルド時間がかなり短いです。
+
+`cargo-bitbake`で自動生成するレシピは、`meta-rust-bin`のclassとは互換性がありません。
 
 ### [cargo-bitbake]
 
