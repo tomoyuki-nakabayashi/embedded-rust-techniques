@@ -89,113 +89,7 @@ Hello, world!
 
 無事、実行できます。
 
-### [meta-rust-bin]
-
-[meta-rust-bin]: https://github.com/rust-embedded/meta-rust-bin
-
-`meta-rust`では、LLVM、Rustコンパイラ、CargoをビルドしてRustツールチェインを構築するため、ビルド時間が大幅に増加します。
-それにも関わらず、Yoctoで作成したクロス開発環境には、このツールチェインが含まれません。
-純粋に、Rustのプロジェクトをビルドするだけであれば、既存のRustツールチェインバイナリを取得する方がよほどお手軽です。
-
-そこで、Rustのツールチェインバイナリを取得して、Rustプロジェクトをビルドする`meta-rust-bin`があります。
-
-`meta-rust`と異なり、こちらは、pokyのバージョンが`sumo`までしか対応されていません (2019/6/22現在)。
-
-```
-mkdir -p rpi-sumo/layers
-cd rpi-sumo/layers
-git clone git://git.yoctoproject.org/poky.git -b sumo
-git clone git://git.yoctoproject.org/meta-raspberrypi -b sumo
-git clone git://git.openembedded.org/meta-openembedded -b sumo
-git clone https://github.com/rust-embedded/meta-rust-bin
-```
-
-環境変数を読み込みます。
-
-```
-source layers/poky/oe-init-build-env build
-```
-
-ビルド対象のレイヤを追加します。
-
-```
-bitbake-layers add-layer ../layers/meta-openembedded/meta-oe
-bitbake-layers add-layer ../layers/meta-openembedded/meta-python
-bitbake-layers add-layer ../layers/meta-openembedded/meta-networking
-bitbake-layers add-layer ../layers/meta-raspberrypi
-bitbake-layers add-layer ../layers/meta-rust-bin
-```
-
-`meta-rust-bin`には、レシピ例が同梱されていないため、サンプルアプリのレシピを作成します。
-`meta-rust`の`rust-hello-world`レシピがそのまま利用できます。
-
-```
-cp -r <path to meta-rust>/recipes-example/rust-hello-world/ ../layers/meta-rust-bin/
-```
-
-`local.conf`を修正します。
-
-ターゲットをraspberry pi3にします。
-
-```
-MACHINE = "raspberrypi3"
-```
-
-Rustのサンプルパッケージをrootfsにインストールするようにします。
-
-```
-IMAGE_INSTALL_append = " rust-hello-world"
-```
-
-ビルドします。
-
-```
-bitbake core-image-base
-```
-
-`dd`コマンドでマイクロSDカードにイメージを書き込みます。
-
-```
-sudo dd if=tmp/deploy/images/raspberrypi3/core-image-base-raspberrypi3.rpi-sdimg of=/dev/sdX bs=100M
-```
-
-`/sdX`は使用している環境に合わせて適宜変更して下さい。
-
-raspberry pi3を起動して、`rust-hello-world`を実行します。
-
-```
-# rust-hello-world
-Hello, world!
-```
-
-```
-cat gpio-utils_0.3.0.bb 
-```
-
-```
-inherit cargo
-
-SUMMARY = "GPIO Utilities"
-HOMEPAGE = "git://github.com/rust-embedded/gpio-utils"
-LICENSE = "MIT"
-
-SRC_URI = "git://github.com/rust-embedded/gpio-utils.git;tag=${PV}"
-S = "${WORKDIR}/git"
-
-SRC_URI[md5sum] = "5b02ea682b08cefe74acff86b6e30ffb"
-LIC_FILES_CHKSUM = "file://LICENSE-MIT;md5=935a9b2a57ae70704d8125b9c0e39059"
-```
-
-無事、実行できます。
-
-#### `meta-rust`との比較
-
-ラズパイ3の`core-image-base`に`rust-hello-world`を追加したイメージのフルビルドにかかる時間を計測したろころ、`meta-rust`が約220分、`meta-rust-bin`が約150分でした。
-Yoctoのバージョンが異なるため、完全なベンチマークとは言えませんが、`meta-rust-bin`の方がビルド時間がかなり短いです。
-
-`cargo-bitbake`で自動生成するレシピは、`meta-rust-bin`のclassとは互換性がありません。
-
-### [cargo-bitbake]
+#### [cargo-bitbake]
 
 [cargo-bitbake]: https://github.com/cardoe/cargo-bitbake
 
@@ -283,7 +177,123 @@ cp <path to ripgrep>/ripgrep_11.0.1.bb ../layers/meta-rust/recipes-example/ripgr
 bitbake ripgrep
 ```
 
-> TODO: `meta-rust-bin`でレシピが利用できるかどうか試す
+これで、`ripgrep`がビルドできます。
+
+### [meta-rust-bin]
+
+[meta-rust-bin]: https://github.com/rust-embedded/meta-rust-bin
+
+`meta-rust`では、LLVM、Rustコンパイラ、CargoをビルドしてRustツールチェインを構築するため、ビルド時間が大幅に増加します。
+それにも関わらず、Yoctoで作成したクロス開発環境には、このツールチェインが含まれません。
+純粋に、Rustのプロジェクトをビルドするだけであれば、既存のRustツールチェインバイナリを取得する方がよほどお手軽です。
+
+そこで、Rustのツールチェインバイナリを取得して、Rustプロジェクトをビルドする`meta-rust-bin`があります。
+
+`meta-rust`と異なり、こちらは、pokyのバージョンが`sumo`までしか対応されていません (2019/6/22現在)。
+
+```
+mkdir -p rpi-sumo/layers
+cd rpi-sumo/layers
+git clone git://git.yoctoproject.org/poky.git -b sumo
+git clone git://git.yoctoproject.org/meta-raspberrypi -b sumo
+git clone git://git.openembedded.org/meta-openembedded -b sumo
+git clone https://github.com/rust-embedded/meta-rust-bin
+```
+
+環境変数を読み込みます。
+
+```
+source layers/poky/oe-init-build-env build
+```
+
+ビルド対象のレイヤを追加します。
+
+```
+bitbake-layers add-layer ../layers/meta-openembedded/meta-oe
+bitbake-layers add-layer ../layers/meta-openembedded/meta-python
+bitbake-layers add-layer ../layers/meta-openembedded/meta-networking
+bitbake-layers add-layer ../layers/meta-raspberrypi
+bitbake-layers add-layer ../layers/meta-rust-bin
+```
+
+`meta-rust-bin`には、レシピ例が同梱されていないため、サンプルアプリのレシピを作成します。
+`meta-rust`の`rust-hello-world`レシピがそのまま利用できます。
+
+```
+cp -r <path to meta-rust>/recipes-example/rust-hello-world/ ../layers/meta-rust-bin/
+```
+
+`local.conf`を修正します。
+
+ターゲットをraspberry pi3にします。
+
+```
+MACHINE = "raspberrypi3"
+```
+
+Rustのサンプルパッケージをrootfsにインストールするようにします。
+
+```
+IMAGE_INSTALL_append = " rust-hello-world"
+```
+
+ビルドします。
+
+```
+bitbake core-image-base
+```
+
+`dd`コマンドでマイクロSDカードにイメージを書き込みます。
+
+```
+sudo dd if=tmp/deploy/images/raspberrypi3/core-image-base-raspberrypi3.rpi-sdimg of=/dev/sdX bs=100M
+```
+
+`/sdX`は使用している環境に合わせて適宜変更して下さい。
+
+raspberry pi3を起動して、`rust-hello-world`を実行します。
+
+```
+# rust-hello-world
+Hello, world!
+```
+
+無事、実行できます。
+
+`meta-rust-bin`でも`ripgrep`をビルドしてみます。
+レシピの用意は簡単です。
+
+```
+inherit cargo
+
+SUMMARY = "ripgrep recursively searches directories for a regex pattern"
+HOMEPAGE = "https://github.com/BurntSushi/ripgrep"
+LICENSE = "MIT"
+
+SRC_URI = "git://github.com/BurntSushi/ripgrep.git;tag=${PV};protocol=https"
+S = "${WORKDIR}/git"
+
+LIC_FILES_CHKSUM = "file://LICENSE-MIT;md5=8d0d0aa488af0ab9aafa3b85a7fc8e12"
+```
+
+```
+bitbake ripgrep
+```
+
+これで、`ripgrep`がビルドできます。
+
+#### `meta-rust`との比較
+
+ラズパイ3の`core-image-base`に`rust-hello-world`を追加したイメージのフルビルドにかかる時間を計測したろころ、`meta-rust`が約220分、`meta-rust-bin`が約75分でした。
+Yoctoのバージョンが異なるため、完全なベンチマークとは言えませんが、`meta-rust-bin`の方がビルド時間がかなり短いです。
+
+`meta-rust-bin`はビルド済みのRustツールチェインを利用するため、Rustコンパイラをカスタマイズしてビルドする、ということができません。
+Rustが公式にサポートしていないアーキテクチャをターゲットにする場合は、`meta-rust`の利用が必要です。
+
+また、ビルド済みのRust標準ライブラリを利用するため、カスタムビルドされた標準ライブラリよりパフォーマンスが低い可能性があります。
+
+`cargo-bitbake`で自動生成するレシピは、`meta-rust-bin`のclassとは互換性がありません。
+`meta-rust-bin`のレシピを用意するのは、それほど難しくないため、大きなデメリットではありません。
 
 ## 参考
 
