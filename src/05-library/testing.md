@@ -9,6 +9,17 @@
 部品をcrateに切り出し、ホスト上でテストする方法です。
 
 テスト時には、`#![no_std]`でビルドしないようにします。
+`lib.rs`でクレートレベルのアトリビュートを次のように指定します。
+
+```rust
+#![cfg_attr(not(test), no_std)]
+```
+
+これで、テスト時には、`#![no_std]`アトリビュートが有効になりません。
+後は、通常通りテストを書くだけです。
+[heapless]クレートのテストが、参考になります。
+
+[heapless]: https://github.com/japaric/heapless
 
 ### custom test framework
 
@@ -18,6 +29,8 @@ unstableな[custom_test_frameworks]フィーチャを利用します。
 [custom_test_frameworks]: https://doc.rust-lang.org/unstable-book/language-features/custom-test-frameworks.html
 
 Rust標準のテストフレームワークと比較すると、パニックすることをテストする`should_panic`などの機能が利用できません。
+
+カスタムテストフレームワークを実装するには、次のコードを`main.rs`に追加します。
 
 ```rust,ignore
 #![feature(custom_test_frameworks)]
@@ -31,6 +44,42 @@ fn test_runner(tests: &[&dyn Fn()]) {
     }
 }
 ```
+
+`test_runner`の引数は`Fn()`トレイトのトレイトオブジェクトのスライスです。
+[custom_test_frameworks]によると、`#[test_case]`アトリビュートのついたアイテムが、`test_runner`アトリビュートで指定した関数に渡されます。
+
+プロダクトコードのエントリポイントに、テストビルド時のみ、テストハーネスの`test_main`を呼び出すコードを追加します。
+
+```rust
+#![reexport_test_harness_main = "test_main"]
+
+#[no_mangle]
+pub extern "C" fn _start() -> ! {
+    println!("Hello World{}", "!");
+
+    #[cfg(test)]
+    test_main();
+
+    loop {}
+}
+```
+
+テストケースを書きます。
+
+```rust
+#[test_case]
+fn trivial_assertion() {
+    print!("trivial assertion... ");
+    assert_eq!(1, 1);
+    println!("[ok]");
+}
+```
+
+後は、テストを実行するだけです。
+
+より詳しい情報は、[Writing an OS in Rust Testing]を参照して下さい。
+
+[Writing an OS in Rust Testing]: https://os.phil-opp.com/testing/
 
 ### uTest
 
@@ -85,5 +134,3 @@ $ cargo run --example binds | diff -u ci/expected/idle.run -
 [compiletest_rs]
 
 [compiletest_rs]: https://github.com/laumann/compiletest-rs
-
-### lint

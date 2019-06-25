@@ -32,7 +32,10 @@ SVDファイルはXMLファイルで、特にペリフェラルのメモリマ�
 `modify()`メソッドは、メモリマップドレジスタのリード・モディファイ・ライトを行うAPIです。
 操作対象のレジスタがクロージャ内でしか操作できないため、別変数を誤って操作するような事故が発生しません。
 
-このアクセス方法は安全ですが、便利かと言われると、個人的には少し疑問があります。
 [Discovery]では、`svd2rust`で生成したPACを利用して、LEDを点灯したり、シリアル通信します。
 
 [Discovery]: https://tomoyuki-nakabayashi.github.io/discovery/
+
+後述する[RTFM for ARM Cortex-M]でも、`svd2rust`で生成したPACを利用します。
+
+[RTFM for ARM Cortex-M]: https://github.com/japaric/cortex-m-rtfm
