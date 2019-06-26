@@ -2,10 +2,12 @@
 
 [Tock]はRust製の組込みOSです。
 Cortex-Mアーキテクチャに対応しています。
+[RISC-Vへの移植]も進められているようです。
 長期に渡り開発が進められており、2018年2月時点でversion 1.0がリリースされています。
 
 [Tock]: https://www.tockos.org/
 [GitHub Tock]: https://github.com/tock
+[RISC-Vへの移植]: https://github.com/tock/tock/issues/1135
 
 ### 主な機能
 

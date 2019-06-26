@@ -4,11 +4,13 @@
 しかし、Rustのテストフレームワークは標準ライブラリに依存しており、`#[no_std]`環境で使うことができません。
 ここでは、組込み / ベアメタルRustのプロジェクトで利用されているテストやCIについて紹介します。
 
-### Dual target
+### デュアルターゲット
 
 部品をcrateに切り出し、ホスト上でテストする方法です。
 
 テスト時には、`#![no_std]`でビルドしないようにします。
+そうすることで、標準ライブラリに依存するRustのテストフレームワークを利用することができます。
+
 `lib.rs`でクレートレベルのアトリビュートを次のように指定します。
 
 ```rust
@@ -81,10 +83,6 @@ fn trivial_assertion() {
 
 [Writing an OS in Rust Testing]: https://os.phil-opp.com/testing/
 
-### uTest
-
-2年ほど更新が停止しています。
-
 ### インテグレーションテスト
 
 `RTFM`では、QEMUでバイナリを実行し、semi-hosting機能で標準出力に表示した文字列と期待値とを比較しています。
@@ -129,8 +127,63 @@ $ cargo run --example binds | diff -u ci/expected/idle.run -
 +foo called 2 times
 ```
 
+このように期待値と実行結果を比較することでインテグレーションテストを実施しています。
+
 ### コンパイルテスト
+
+複雑な (手続き) マクロを利用するクレートでは、様々な利用方法でコンパイルが通るかどうか、をテストします。
 
 [compiletest_rs]
 
 [compiletest_rs]: https://github.com/laumann/compiletest-rs
+
+`RTFM`の`tests`ディレクトリにコンパイルテストのテストケース[compiletest.rs]があります。
+
+[compiletest.rs]: https://github.com/japaric/cortex-m-rtfm/blob/master/tests/compiletest.rs
+
+ここでは、`cfail`ディレクトリにコンパイルが失敗するソースファイルが、`cpass`にコンパイルが成功するソースファイルが置かれています。
+
+```rust
+use std::{fs, path::PathBuf, process::Command};
+
+use compiletest_rs::{common::Mode, Config};
+
+#[test]
+fn cfail() {
+    let mut config = Config::default();
+
+    config.mode = Mode::CompileFail;
+    config.src_base = PathBuf::from("tests/cfail");
+    config.link_deps();
+// 中略
+    compiletest_rs::run_tests(&config);
+}
+```
+
+コンパイルテストようの設定`compiletest_rs::Config`を設定し、`compiletest_rs::run_tests`でテストを実行します。
+これで、`cfail`ディレクトリ内の全てのRustソースファイルのコンパイルに失敗すると、テストがパス、という扱いになります。
+
+一方、コンパイルが成功するテストは、同テストケース内で次のように実装されています。
+
+```rust
+use tempdir::TempDir;
+// ...
+    let td = TempDir::new("rtfm").unwrap();
+    for f in fs::read_dir("tests/cpass").unwrap() {
+        let f = f.unwrap().path();
+        let name = f.file_stem().unwrap().to_str().unwrap();
+
+        assert!(Command::new("rustc")
+            .args(s.split_whitespace())
+            .arg(f.display().to_string())
+            .arg("-o")
+            .arg(td.path().join(name).display().to_string())
+            .arg("-C")
+            .arg("linker=true")
+            .status()
+            .unwrap()
+            .success());
+    }
+```
+
+システムコマンドで`rustc`を呼び出して、終了ステータスが`success`かどうか、をテストしています。
