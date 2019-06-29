@@ -16,7 +16,8 @@ C++と同様に、デフォルトではRustのシンボルは、コンパイラ�
 `#[no_mangle]`は、基本的に、`#[export_name = <item-name>]`のシンタックスシュガーです。
 このことから、`#[no_mangle]`と`[#link_section]`との組み合わせで、任意のシンボルを特定のセクションに配置できます。
 
-次のコードは、`Reset`関数の関数ポインタを、`RESET_VECTOR`というシンボルで、`.vector_table.reset_vector`セクションに配置します。
+次のコードは、ARM Cortex-Mシリーズのリセットベクタを指定セクションに配置する例です。
+`Reset`関数の関数ポインタを、`RESET_VECTOR`というシンボルで、`.vector_table.reset_vector`セクションに配置します。
 もちろん、このセクションはリンカスクリプトで定義されている必要があります。
 
 ```rust,ignore
@@ -40,6 +41,7 @@ Rustからリンカスクリプトのシンボルを参照することも可能�
 ```
 
 これらのリンカスクリプトで作成したシンボルは、Rustで次のように利用できます。
+これは、`.bss`セクションのゼロクリアと、`.data`セクションの初期化を行うコードの例です。
 
 ```rust,ignore
 {{#include ../../ci/03-bare-metal/linker/src/main.rs:5:26}}
@@ -47,14 +49,12 @@ Rustからリンカスクリプトのシンボルを参照することも可能�
 
 リンカスクリプトで作成したシンボルを`u8`の変数として、そのアドレスを利用します。
 
-> 補足：ROMからRAMへ
-
 ### extern
 
-[`extern`]は、Rustのキーワードで、*外部*とのインタフェースに使用されます。
+[extern]は、Rustのキーワードで、*外部*とのインタフェースに使用されます。
 外部クレートとの接続にも使われますが、組込みでの重要な利用方法はFFI (Foreign function interfaces) です。
 
-[`extern`]: https://doc.rust-lang.org/std/keyword.extern.html
+[extern]: https://doc.rust-lang.org/std/keyword.extern.html
 
 他言語の変数や関数を利用する場合、下記の通り`extern`ブロック内でインタフェースを宣言します。
 

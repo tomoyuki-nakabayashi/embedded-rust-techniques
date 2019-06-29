@@ -77,7 +77,8 @@ LLVM (http://llvm.org/):
     xcore      - XCore
 ```
 
-Rustコンパイラで有効になっているアーキテクチャと比較すると、`amdgcn`、`avr`、`xcore`などを追加でサポートしています。
+`amdgcn`、`avr`、`xcore`など、Rustコンパイラではサポートされていないアーキテクチャがあります。
+Rustコンパイラではこれらのアーキテクチャサポートが無効化されて、配布されています。
 
 ### Rustがサポートしていないターゲットのビルド
 
@@ -90,6 +91,9 @@ Rustコンパイラで有効になっているアーキテクチャと比較す�
 
 メインラインのLLVMがターゲットアーキテクチャをサポートしていない場合でも、LLVMのforkが存在しているのであれば、
 `rustc`のビルド前にLLVMを差し替えることが可能です。
+[Rust on the ESP and how to get started]では、LLVMのXtensa forkを使用し、ESPをターゲットにRustのコードをコンパイルする方法が紹介されています。
+
+[Rust on the ESP and how to get started]: https://dentrassi.de/2019/06/16/rust-on-the-esp-and-how-to-get-started/
 
 もしGCCでしかターゲットがサポートされていない場合、[mrustc]を使うことができます。
 これは、非公式のRustコンパイラで、RustプログラムをCコードに変換し、その後、GCCを使ってコンパイルします。
@@ -121,7 +125,7 @@ mips-unknown-linux-uclibc       x86_64-unknown-openbsd
 mips64-unknown-linux-gnuabi64   x86_64-unknown-redox
 ```
 
-次のコマンドを使って、ターゲット仕様を表示できます。
+次のコマンドを使って、ターゲット仕様を表示できます (nightlyコンパイラが必要です)。
 
 ```
 $ rustc +nightly -Z unstable-options --print target-spec-json --target thumbv7m-none-eabi

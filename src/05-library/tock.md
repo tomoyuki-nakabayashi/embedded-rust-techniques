@@ -8,8 +8,6 @@ Cortex-Mアーキテクチャに対応しており、[RISC-Vへの移植]も進�
 [GitHub Tock]: https://github.com/tock
 [RISC-Vへの移植]: https://github.com/tock/tock/issues/1135
 
-Tockのビルドにはnightlyツールチェインが必要です。
-
 ### 主な対応ボード
 
 対応ボードは、既存のRTOSと比較すると多くはありません。
@@ -34,11 +32,11 @@ HiFiveはRISC-Vで、他はARM Cortex-Mが搭載されたボードです。
 TockのKernelはRustで実装されています。
 Kernelは2つの階層に分割されています。
 
-1つは、Core kernelでHAL (Hardware Abstraction Layer) 、スケジューラ、プラットフォーム固有の設定が含まれます。
+1つは、Core kernelでHIL (Hardware Interface Layer) 、スケジューラ、プラットフォーム固有の設定が含まれます。
 
 もう1つは、Capsuleです。
 Capsuleは、マイコンに依存しないkernel機能を拡張するためのコンポーネント、という位置づけで、通信スタックやコンソールなどが該当します。
-Capsuleは、`unsafe`ブロックの使用が禁止されているなど、Rust固有の安全性を保証する設計が選定されています。
+Capsuleは、`unsafe`ブロックの使用が禁止されているなど、Rust固有の安全性を保証する設計がなされています。
 
 Tockでは、Capsuleもユーザプロセスも`Untrusted`という扱いですが、その中でも差が設けられています。
 Capsuleは、kernelのイベントループの中で協調的にスケジューリングされます。
@@ -67,7 +65,3 @@ C言語用のユーザランドライブラリ[libtock-c]には、`newlib`や`li
 [libtock-rs]は、2019年5月現在、`WIP`の状態です。
 
 [libtock-rs]: https://github.com/tock/libtock-rs
-
-### コラム〜TockはRTOSじゃない！？〜
-
-> Tockは現状RTOSではありません。

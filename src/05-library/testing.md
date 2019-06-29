@@ -23,9 +23,9 @@
 
 [heapless]: https://github.com/japaric/heapless
 
-### custom test framework
+### カスタムテストフレームワーク
 
-Writing an OS in Rustで紹介されている方法です。
+[Writing an OS in Rust Testing]で紹介されている方法です。
 unstableな[custom_test_frameworks]フィーチャを利用します。
 
 [custom_test_frameworks]: https://doc.rust-lang.org/unstable-book/language-features/custom-test-frameworks.html
@@ -85,6 +85,7 @@ fn trivial_assertion() {
 
 ### インテグレーションテスト
 
+QEMUを利用して、特定デバイスのペリフェラルに依存しない試験を実施することができます。
 `RTFM`では、QEMUでバイナリを実行し、semi-hosting機能で標準出力に表示した文字列と期待値とを比較しています。
 
 ```
@@ -109,31 +110,12 @@ foo called 2 times
 $ cargo run --example binds | diff -u ci/expected/binds.run -
 ```
 
-差分は出力されません。
-わざと差分のあるファイルと比較してみます。
-
-```
-$ cat ci/expected/idle.run 
-init
-idle
-```
-
-```
-$ cargo run --example binds | diff -u ci/expected/idle.run -
-@@ -1,2 +1,4 @@
- init
-+foo called 1 time
- idle
-+foo called 2 times
-```
-
-このように期待値と実行結果を比較することでインテグレーションテストを実施しています。
+期待通りの動作結果の場合、差分は出力されません。
+テストの実行結果、差分が出力されるかどうかを検証することで、インテグレーションテストを実施しています。
 
 ### コンパイルテスト
 
 複雑な (手続き) マクロを利用するクレートでは、様々な利用方法でコンパイルが通るかどうか、をテストします。
-
-[compiletest_rs]
 
 [compiletest_rs]: https://github.com/laumann/compiletest-rs
 
@@ -160,7 +142,7 @@ fn cfail() {
 }
 ```
 
-コンパイルテストようの設定`compiletest_rs::Config`を設定し、`compiletest_rs::run_tests`でテストを実行します。
+コンパイルテストの設定`compiletest_rs::Config`を作成し、`compiletest_rs::run_tests`でテストを実行します。
 これで、`cfail`ディレクトリ内の全てのRustソースファイルのコンパイルに失敗すると、テストがパス、という扱いになります。
 
 一方、コンパイルが成功するテストは、同テストケース内で次のように実装されています。

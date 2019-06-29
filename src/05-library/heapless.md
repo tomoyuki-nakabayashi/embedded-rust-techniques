@@ -1,6 +1,6 @@
 ## heaplessクレート
 
-通常、[メモリアロケータ]で説明しているように、コレクション利用には、グローバルメモリアロケータの実装が必須です。
+通常、コレクション利用には、グローバルメモリアロケータの実装が必須です ([メモリアロケータ]参照)。
 [heapless]クレートは、グローバルメモリアロケータがなくても利用できるコレクションです。
 
 [メモリアロケータ]: ../03-bare-metal/allocator.md
@@ -51,3 +51,20 @@ v.0.4.4現在、`heapless`は次のコレクションを提供しています。
 - spsc::Queue: single producer single consumer lock-free queue
 - String
 - Vec
+
+### heaplessの利点
+
+固定容量のコレクションだけを使用して、そのほとんどを`static`変数に格納し、コールスタックの最大サイズを設定すると、
+リンカは、物理的に利用可能なメモリより大きな容量を使おうとしたかどうか検出します。
+
+その上、スタックに割り当てられた固定容量のコレクションは、[-Z emit-stack-sizes]フラグによって報告されます。
+このフラグは、（[stack-sizes]のような）スタック使用量を解析するツールがスタック使用量を解析することを意味します。
+
+[-Z emit-stack-sizes]: https://doc.rust-lang.org/beta/unstable-book/compiler-flags/emit-stack-sizes.html
+[stack-sizes]: https://crates.io/crates/stack-sizes
+
+#### 出典
+
+- The Embedded Rust Book: [コレクション]
+
+[コレクション]: https://tomoyuki-nakabayashi.github.io/book/collections/index.html

@@ -38,11 +38,11 @@ extern crate panic_halt;
 
 use cortex_m_rt::entry;
 
-// use `main` as the entry point of this application
-// `main` is not allowed to return
+// `main`をこのアプリケーションのエントリポイントであるかのように利用できます。
+// `main`は戻れません
 #[entry]
 fn main() -> ! {
-    // do something here
+    // ここに処理を書きます
     loop { }
 }
 ```
@@ -74,6 +74,8 @@ fn main() -> ! {
 [lazy_static]: https://crates.io/crates/lazy_static
 
 例えば、[Writing an OS in RustのVGA Text mode Lazy Statics]では、VGAにテキストを描画するグローバルインタフェース`WRITER`の実装で使用しています。
+
+[Writing an OS in RustのVGA Text mode Lazy Statics]: https://os.phil-opp.com/vga-text-mode/#lazy-statics
 
 ```rust
 use lazy_static::lazy_static;

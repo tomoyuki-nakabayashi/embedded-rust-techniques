@@ -6,20 +6,21 @@
 そのため、デフォルトでは、`no_std`な環境では、これらのコレクションを利用できません。
 しかし、`no_std`なRustでも、メモリアロケータを実装することで、コレクションを利用することができます。
 
-メモリアロケータを実装**せず**にコレクションを利用する方法は、[`heapless`]で説明します。
+メモリアロケータを実装**せず**にコレクションを利用する方法は、[heapless]で説明します。
 
-[`heapless`]: ../05-library/heapless.md
+[heapless]: ../05-library/heapless.md
 
-ただ、(執筆時点のRust 1.34.1では) 残念なことに**nightly必須です**。
-ベアメタルでメモリアロケータを実装するには、[`alloc`]と[`alloc_error_handler`]のフィーチャが必要です。
+ただ、(執筆時点のRust 1.35.0では) 残念なことに**nightly必須です**。
+ベアメタルでメモリアロケータを実装するには、[alloc]と[alloc_error_handler]のフィーチャが必要です。
 `alloc`は、Rust 1.36でstableになるため、本書が世に出回っている時点では、stableになっています。
 一方、`alloc_error_handler`については、まだ安定化の目途が立っていないようです。
 今しばらく、メモリアロケータの実装はnightly専用になりそうです。
 
-[`alloc`]: https://doc.rust-lang.org/alloc/index.html
-[`alloc_error_handler`]: https://github.com/rust-lang/rust/issues/51540
+[alloc]: https://doc.rust-lang.org/alloc/index.html
+[alloc_error_handler]: https://github.com/rust-lang/rust/issues/51540
 
 一時的にツールチェインをnightlyに切り替えます。
+Cortex-M3を例に解説します。
 nightlyのツールチェインにCortex-M3用のターゲットを追加します。
 
 ```
@@ -35,17 +36,17 @@ $ rustup target add thumbv7m-none-eabi
 {{#include ../../ci/03-bare-metal/allocator/src/main.rs:24:24}}
 ```
 
-`println!`マクロの実装方法については、[`print!マクロ`]で説明しています。
+`println!`マクロの実装方法については、[print!マクロ]で説明しています。
 
-[`print!マクロ`]: print.md
+[print!マクロ]: print.md
 
 ### グローバルアロケータ
 
 `Vec`や`String`といったコレクションは、デフォルトでは**グローバルアロケータ**を使ってヒープメモリ領域を確保します。
 グローバルアロケータとは、`#[global_allocator]`アトリビュートが指定されたアロケータのことです。
-このアトリビュートで指定するオブジェクトは、[`GlobalAlloc`]トレイトを実装しなければなりません。
+このアトリビュートで指定するオブジェクトは、[GlobalAlloc]トレイトを実装しなければなりません。
 
-[`GlobalAlloc`]: https://doc.rust-lang.org/1.29.2/core/alloc/trait.GlobalAlloc.html
+[GlobalAlloc]: https://doc.rust-lang.org/1.29.2/core/alloc/trait.GlobalAlloc.html
 
 ```rust,ignore
 {{#include ../../ci/03-bare-metal/allocator/src/main.rs:55:62}}
@@ -80,6 +81,7 @@ $ rustup target add thumbv7m-none-eabi
 
 まず、このアロケータは、割り当て可能なメモリ領域の先頭を示す`head`と、末尾を示す`end`を持ちます。
 `head`が`UnsafeCell`になっている理由は、`&self`を引数に取る`alloc`メソッドの中で`head`の値を書き換えるためです。
+`alloc`メソッドのシグネチャは、`GlobalAlloc`トレイトで定義されているため、引数を`&mut self`に変更することができません。
 
 ```rust,ignore
 {{#include ../../ci/03-bare-metal/allocator/src/main.rs:32:32}}
@@ -111,6 +113,8 @@ $ rustup target add thumbv7m-none-eabi
 ```rust,ignore
 {{#include ../../ci/03-bare-metal/allocator/src/main.rs:64:67}}
 ```
+
+今回は、単純に無限ループに陥るだけの実装です。
 
 ### 動作確認
 

@@ -4,9 +4,11 @@ Rust Embedded devices WGでもRTOSとRustとのインテグレーションは[is
 
 [issue #62]: https://github.com/rust-embedded/book/issues/62
 
-ここでは、Cで作られたRTOSであるZephyrをターゲットに、RTOSとのインテグレーションを実験してみます。
+ここでは、Cで作られたRTOSである[Zephyr]をターゲットに、RTOSとのインテグレーションを実験してみます。
 ZephyrのAPIを利用して、Rustから`println!`マクロを使って、コンソールに文字を出力します。
 また、RTOSのような複雑なCプロジェクトとのインテグレーションが困難な理由を考察します。
+
+[Zephyr]: https://www.zephyrproject.org/
 
 そのために、次のことができるようにします。
 
@@ -84,7 +86,6 @@ cat hello/lib/rustlib.h
 
 今回は非常に簡潔です。
 構造体を引数にしたり、ヒープメモリの管理などリソース管理が加わると、より複雑になります。
-しかし、既存のC APIのバインディングを作成するほどは、困難を伴わないことが多いでしょう。
 
 ### RustからZephyrのAPIを呼び出す
 
@@ -219,7 +220,7 @@ Rustとしてはあくまでの`no_std`な環境となるため、`#![no_std]`�
 ベースは、[print!マクロ]で実装したマクロと同じです。
 異なる点は、`fmt::Write`トレイトの`write_str`メソッドの実装で、Zephyrの`fwrite`を呼び出す点です。
 
-[printマクロ]: ../03-bare-metal/print.md
+[print!マクロ]: ../03-bare-metal/print.md
 
 ```rust,ignore
 {{#include ../../ci/06-ffi/hello/zephyr/src/io.rs:12:25}}

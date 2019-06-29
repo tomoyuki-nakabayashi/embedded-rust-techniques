@@ -14,7 +14,7 @@ Cargoは、Rustのパッケージマネージャですが、それ以上のこ�
 
 [Cargo: 3.3 Configuration]: https://doc.rust-lang.org/cargo/reference/config.html
 
-Cargoの設定ファイルTOML形式で記述し、プロジェクトの`.cargo/config`に作成することが多いです。
+Cargo設定ファイルはTOML形式で記述し、プロジェクトの`.cargo/config`に作成することが多いです。
 実際は、階層的な作りになっています。どのような階層構造になっているか、は[Cargo: 3.3 Configuration 階層構造]を参照して下さい。
 
 [Cargo: 3.3 Configuration 階層構造]: https://doc.rust-lang.org/cargo/reference/config.html#hierarchical-structure
@@ -75,7 +75,7 @@ target = "thumbv7m-none-eabi"
 
 組込み / ベアメタルの開発において、バイナリを調査することは、息をするより自然なことです。
 バイナリの調査を行う際、`objdump`、`size`、`readelf`、`nm`などのツールを利用します。
-GNUのbinutilsを使用しても良いのですが、LLVMのものを利用すると、rustcがサポートするターゲットアーキテクチャに対応しており、便利です。
+GNUのbinutilsを使用しても良いのですが、LLVMのものを利用すると、rustcがサポートするターゲットアーキテクチャ全てに対応しており、便利です。
 
 Cargoのサブコマンドである[cargo binutils]が提供されており、Cargoから`objdump`や`size`コマンドを利用できます。
 

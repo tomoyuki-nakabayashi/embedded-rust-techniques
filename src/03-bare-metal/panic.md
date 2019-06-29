@@ -21,8 +21,8 @@ OSにホストされている環境では、panicハンドラの処理が完了�
 このプロセスの強制終了も、**定義された動作**です。
 
 Rustのpanicについては、[簡潔なQ Rustのパニック機構]が詳しいです。
-こちらの解説にある通り、panicの主な処理は、`std`クレート ([`std::panic`]に公開API、[`std::panicking`]にpanic処理の本体) にあります。
-そのため、`#![no_std]`なプログラムでは、panicハンドラが未定義のままになっています。
+こちらの解説にある通り、panicの主な処理は、`std`クレート ([std::panic]に公開API、[std::panicking.rs]にpanic処理の本体) にあります。
+そのため、`std`クレートをリンクしない`#![no_std]`なプログラムでは、panicハンドラが未定義のままになっています。
 
 [簡潔なQ Rustのパニック機構]: https://qnighy.hatenablog.com/entry/2018/02/18/223000
 [std::panic]: https://doc.rust-lang.org/std/macro.panic.html
@@ -84,15 +84,15 @@ pub fn panic(info: &PanicInfo) -> ! {
 
 `no_std`環境で利用可能なpanicハンドラを提供するクレートも存在しています。
 
-- [`panic-abort`]は、パニックが発生すると、アボート命令を実行します。
-- [`panic-halt`]は、パニックが発生すると、無限ループに入ります。
-- [`panic-itm`]は、ARM Cortex-Mがターゲットの時に利用できるクレートで、パニック発生時のメッセージをITM経由でログを出力します。
-- [`panic-semihosting`]は、ARM Cortex-Mがターゲットの時に利用できるクレートで、パニック発生時のメッセージを、セミホスティング機能を使ってログ出力します。
+- [panic-abort]は、パニックが発生すると、アボート命令を実行します。
+- [panic-halt]は、パニックが発生すると、無限ループに入ります。
+- [panic-itm]は、ARM Cortex-Mがターゲットの時に利用できるクレートで、パニック発生時のメッセージをITM経由でログを出力します。
+- [panic-semihosting]は、ARM Cortex-Mがターゲットの時に利用できるクレートで、パニック発生時のメッセージを、セミホスティング機能を使ってログ出力します。
 
-[`panic-abort`]: https://crates.io/crates/panic-abort
-[`panic-halt`]: https://crates.io/crates/panic-halt
-[`panic-itm`]: https://crates.io/crates/panic-itm
-[`panic-semihosting`]: https://crates.io/crates/panic-semihosting
+[panic-abort]: https://crates.io/crates/panic-abort
+[panic-halt]: https://crates.io/crates/panic-halt
+[panic-itm]: https://crates.io/crates/panic-itm
+[panic-semihosting]: https://crates.io/crates/panic-semihosting
 
 [`panic-abort`の実装]を見ると、30行しかありません。
 わざわざクレートにする理由はあるのでしょうか？

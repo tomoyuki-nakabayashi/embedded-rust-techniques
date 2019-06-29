@@ -57,7 +57,7 @@ Rustで作ったAPIをCから呼べるように、Cヘッダファイルを作�
 pub extern "C" fn rust_function() { ... }
 ```
 
-先程作ったRust APIは次のようになります。
+上のRust APIはCヘッダファイルでは、次のようになります。
 
 ```c
 void rust_function();
