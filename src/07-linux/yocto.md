@@ -14,7 +14,7 @@ Yoctoは、組込みLinuxディストリビューションを作成するため�
 
 Yoctoの基礎から説明するスキルが著者にないため、Yoctoを触ったことある方向けの情報になります。ご了承下さい。
 
-ターゲット環境はraspberry pi3です。
+ターゲット環境はRaspberry Pi3で、Yoctoのバージョンは`thud`です。
 
 ### [meta-rust]
 
@@ -54,7 +54,7 @@ bitbake-layers add-layer ../layers/meta-rust
 
 `local.conf`を修正します。
 
-ターゲットをraspberry pi3にします。
+ターゲットをRaspberry Pi3にします。
 
 ```
 MACHINE = "raspberrypi3"
@@ -225,7 +225,7 @@ cp -r <path to meta-rust>/recipes-example/rust-hello-world/ ../layers/meta-rust-
 
 `local.conf`を修正します。
 
-ターゲットをraspberry pi3にします。
+ターゲットをRaspberry Pi3にします。
 
 ```
 MACHINE = "raspberrypi3"
