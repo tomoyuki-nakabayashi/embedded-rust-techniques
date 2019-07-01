@@ -135,7 +135,28 @@ body {
 
 
 /*===Headings===*/
+body {
+    counter-reset: chapter;
+}
+h1 {
+  counter-reset: sub-chapter;
+}
+h2 {
+  counter-reset: section;
+}
 
+h1::before {
+  counter-increment: chapter;
+  content: counter(chapter) ". ";
+}
+h2::before {
+  counter-increment: sub-chapter;
+  content: counter(chapter) "-" counter(sub-chapter) ". ";
+}
+h3::before {
+  counter-increment: section;
+  content: counter(chapter) "-" counter(sub-chapter) "-"counter(section) ". ";
+}
 
 /* After page breaks, eReaders sometimes do not render margins above the content. Adjusting padding-top can help */
 
@@ -290,13 +311,13 @@ p.toctext2 {
 /*==LISTS==*/
 
 ul {
-    margin: 1em 0 0 2em;
+    margin: 1em 0 1em 2em;
     text-align: left;
     font-size: 12px;
 }
 
 ol {
-    margin: 1em 0 0 2em;
+    margin: 1em 0 1em 2em;
     text-align: left;
     font-size: 12px;
 }
@@ -445,7 +466,7 @@ margin: 0.5em;
 }
 
 code {
-color: #000000;
+color: #222222;
 background-color: #EEEEEE;
-font-size: 1.0em;
+font-size: 12px;
 }
