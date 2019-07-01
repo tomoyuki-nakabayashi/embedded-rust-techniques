@@ -1,21 +1,16 @@
 ## Cargo
 
-Rustでの開発に[Cargo]は欠かせません。
-Cargoは、Rustのパッケージマネージャですが、それ以上のことができます。
-3rd party製のサブコマンド拡張をインストールすることで、Cargoの機能を拡張できます。
-ここでは、組込み / ベアメタルでのRust開発をより便利にするCargoに機能やサブコマンド拡張について紹介します。
+Rustでの開発に[Cargo]は欠かせません。Cargoは、Rustのパッケージマネージャですが、それ以上のことができます。3rd party製のサブコマンド拡張をインストールすることで、Cargoの機能を拡張できます。ここでは、組込み / ベアメタルでのRust開発をより便利にするCargoに機能やサブコマンド拡張について紹介します。
 
 [Cargo]: https://doc.rust-lang.org/cargo/index.html
 
 ### 設定ファイル
 
-まず、欠かせないのが、設定ファイルです。
-どのような設定項目が書けるか、は[Cargo: 3.3 Configuration]に掲載されています。
+まず、欠かせないのが、設定ファイルです。どのような設定項目が書けるか、は[Cargo: 3.3 Configuration]に掲載されています。
 
 [Cargo: 3.3 Configuration]: https://doc.rust-lang.org/cargo/reference/config.html
 
-Cargo設定ファイルはTOML形式で記述し、プロジェクトの`.cargo/config`に作成することが多いです。
-実際は、階層的な作りになっています。どのような階層構造になっているか、は[Cargo: 3.3 Configuration 階層構造]を参照して下さい。
+Cargo設定ファイルはTOML形式で記述し、プロジェクトの`.cargo/config`に作成することが多いです。実際は、階層的な作りになっています。どのような階層構造になっているか、は[Cargo: 3.3 Configuration 階層構造]を参照して下さい。
 
 [Cargo: 3.3 Configuration 階層構造]: https://doc.rust-lang.org/cargo/reference/config.html#hierarchical-structure
 
@@ -23,10 +18,7 @@ Cargo設定ファイルはTOML形式で記述し、プロジェクトの`.cargo/
 
 #### target.$triple
 
-`target.$triple`はターゲットトリプルごとに、カスタムする内容を設定します。
-`$triple`の部分に、有効なターゲットトリプルを指定します。
-カスタムランナーの設定やコンパイルオプションの指定などに使います。
-例えば、Cortex-M3ターゲットの時は`qemu-system-arm`で、RISC-Vターゲットの時は`qmue-system-riscv32`を、それぞれカスタムランナーにしたい場合、次のように設定ファイルを記述します。
+`target.$triple`はターゲットトリプルごとに、カスタムする内容を設定します。`$triple`の部分に、有効なターゲットトリプルを指定します。カスタムランナーの設定やコンパイルオプションの指定などに使います。例えば、Cortex-M3ターゲットの時は`qemu-system-arm`で、RISC-Vターゲットの時は`qmue-system-riscv32`を、それぞれカスタムランナーにしたい場合、次のように設定ファイルを記述します。
 
 ```toml
 [target.thumbv7m-none-eabi]
@@ -47,8 +39,7 @@ runner = "qemu-system-riscv32 -nographic -machine sifive_u -kernel"
 
 #### target.'cfg
 
-`target.$triple`は、ターゲットトリプルを完全に指定する方法です。
-一方、`target.'cfg`は、条件を複数指定して、カスタマイズできます。
+`target.$triple`は、ターゲットトリプルを完全に指定する方法です。一方、`target.'cfg`は、条件を複数指定して、カスタマイズできます。
 
 下記の例は、ターゲットアーキテクチャが32bitのARMで、OSなしのターゲットトリプル全てに適用されます。
 
@@ -61,8 +52,7 @@ rustflags = [
 
 #### build
 
-デフォルトのターゲットシステムが固定の場合、`cargo run --target thumbv7m-none-eabi`という長いコマンドを毎回入力するのは面倒です。
-そこで、`build`設定でデフォルトターゲットシステムを指定できます。
+デフォルトのターゲットシステムが固定の場合、`cargo run --target thumbv7m-none-eabi`という長いコマンドを毎回入力するのは面倒です。そこで、`build`設定でデフォルトターゲットシステムを指定できます。
 
 ```toml
 [build]
@@ -73,9 +63,7 @@ target = "thumbv7m-none-eabi"
 
 ### binutils
 
-組込み / ベアメタルの開発において、バイナリを調査することは、息をするより自然なことです。
-バイナリの調査を行う際、`objdump`、`size`、`readelf`、`nm`などのツールを利用します。
-GNUのbinutilsを使用しても良いのですが、LLVMのものを利用すると、rustcがサポートするターゲットアーキテクチャ全てに対応しており、便利です。
+組込み / ベアメタルの開発において、バイナリを調査することは、息をするより自然なことです。バイナリの調査を行う際、`objdump`、`size`、`readelf`、`nm`などのツールを利用します。GNUのbinutilsを使用しても良いのですが、LLVMのものを利用すると、rustcがサポートするターゲットアーキテクチャ全てに対応しており、便利です。
 
 Cargoのサブコマンドである[cargo binutils]が提供されており、Cargoから`objdump`や`size`コマンドを利用できます。
 

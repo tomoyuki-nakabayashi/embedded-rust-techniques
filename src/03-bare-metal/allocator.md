@@ -1,27 +1,17 @@
 ## メモリアロケータ
 
-ベアメタルプログラミングでも開発が進むと動的なコレクションが使いたくなります。
-`std`が使える通常のRustでは、`Vec`や`String`といった一般的なコレクションが利用できます。
-このようなコレクションは、ヒープメモリを利用します。
-そのため、デフォルトでは、`no_std`な環境では、これらのコレクションを利用できません。
-しかし、`no_std`なRustでも、メモリアロケータを実装することで、コレクションを利用することができます。
+ベアメタルプログラミングでも開発が進むと動的なコレクションが使いたくなります。`std`が使える通常のRustでは、`Vec`や`String`といった一般的なコレクションが利用できます。このようなコレクションは、ヒープメモリを利用します。そのため、デフォルトでは、`no_std`な環境では、これらのコレクションを利用できません。しかし、`no_std`なRustでも、メモリアロケータを実装することで、コレクションを利用することができます。
 
 メモリアロケータを実装**せず**にコレクションを利用する方法は、[heapless]で説明します。
 
 [heapless]: ../05-library/heapless.md
 
-ただ、(執筆時点のRust 1.35.0では) 残念なことに**nightly必須です**。
-ベアメタルでメモリアロケータを実装するには、[alloc]と[alloc_error_handler]のフィーチャが必要です。
-`alloc`は、Rust 1.36でstableになるため、本書が世に出回っている時点では、stableになっています。
-一方、`alloc_error_handler`については、まだ安定化の目途が立っていないようです。
-今しばらく、メモリアロケータの実装はnightly専用になりそうです。
+ただ、(執筆時点のRust 1.35.0では) 残念なことに**nightly必須です**。ベアメタルでメモリアロケータを実装するには、[alloc]と[alloc_error_handler]のフィーチャが必要です。`alloc`は、Rust 1.36でstableになるため、本書が世に出回っている時点では、stableになっています。一方、`alloc_error_handler`については、まだ安定化の目途が立っていないようです。今しばらく、メモリアロケータの実装はnightly専用になりそうです。
 
 [alloc]: https://doc.rust-lang.org/alloc/index.html
 [alloc_error_handler]: https://github.com/rust-lang/rust/issues/51540
 
-一時的にツールチェインをnightlyに切り替えます。
-Cortex-M3を例に解説します。
-nightlyのツールチェインにCortex-M3用のターゲットを追加します。
+一時的にツールチェインをnightlyに切り替えます。Cortex-M3を例に解説します。nightlyのツールチェインにCortex-M3用のターゲットを追加します。
 
 ```
 $ rustup override set nightly
@@ -42,9 +32,7 @@ $ rustup target add thumbv7m-none-eabi
 
 ### グローバルアロケータ
 
-`Vec`や`String`といったコレクションは、デフォルトでは**グローバルアロケータ**を使ってヒープメモリ領域を確保します。
-グローバルアロケータとは、`#[global_allocator]`アトリビュートが指定されたアロケータのことです。
-このアトリビュートで指定するオブジェクトは、[GlobalAlloc]トレイトを実装しなければなりません。
+`Vec`や`String`といったコレクションは、デフォルトでは**グローバルアロケータ**を使ってヒープメモリ領域を確保します。グローバルアロケータとは、`#[global_allocator]`アトリビュートが指定されたアロケータのことです。このアトリビュートで指定するオブジェクトは、[GlobalAlloc]トレイトを実装しなければなりません。
 
 [GlobalAlloc]: https://doc.rust-lang.org/1.29.2/core/alloc/trait.GlobalAlloc.html
 
@@ -56,16 +44,14 @@ $ rustup target add thumbv7m-none-eabi
 
 ### BumpPointerAlloc
 
-これから、`BumpPointerAlloc`という最も単純なアロケータを実装します。
-このアロケータは、次のようにヒープメモリを管理します。
+これから、`BumpPointerAlloc`という最も単純なアロケータを実装します。このアロケータは、次のようにヒープメモリを管理します。
 
 - 初期化時に、ヒープメモリ領域の開始アドレスと終了アドレスを受け取ります
 - 割り当て可能なメモリ領域の先頭ポインタを1つだけ保持します
 - メモリを新しく割り当てると、割り当てた分だけ単純に先頭ポインタを増加します
 - 一度割り当てたメモリは、解放しません
 
-上述した通り、このアロケータは、`GlobalAlloc`トレイトを実装します。
-全体を示します。
+上述した通り、このアロケータは、`GlobalAlloc`トレイトを実装します。全体を示します。
 
 ```rust,ignore
 {{#include ../../ci/03-bare-metal/allocator/src/main.rs:6:8}}
@@ -79,27 +65,21 @@ $ rustup target add thumbv7m-none-eabi
 {{#include ../../ci/03-bare-metal/allocator/src/main.rs:27:30}}
 ```
 
-まず、このアロケータは、割り当て可能なメモリ領域の先頭を示す`head`と、末尾を示す`end`を持ちます。
-`head`が`UnsafeCell`になっている理由は、`&self`を引数に取る`alloc`メソッドの中で`head`の値を書き換えるためです。
-`alloc`メソッドのシグネチャは、`GlobalAlloc`トレイトで定義されているため、引数を`&mut self`に変更することができません。
+まず、このアロケータは、割り当て可能なメモリ領域の先頭を示す`head`と、末尾を示す`end`を持ちます。`head`が`UnsafeCell`になっている理由は、`&self`を引数に取る`alloc`メソッドの中で`head`の値を書き換えるためです。`alloc`メソッドのシグネチャは、`GlobalAlloc`トレイトで定義されているため、引数を`&mut self`に変更することができません。
 
 ```rust,ignore
 {{#include ../../ci/03-bare-metal/allocator/src/main.rs:32:32}}
 ```
 
-次に`Sync`トレイトを実装します。
-これは、グローバルアロケータのオブジェクトが`static`変数になるため、スレッド間で安全に共有できることをコンパイラに伝えるためです。
+次に`Sync`トレイトを実装します。これは、グローバルアロケータのオブジェクトが`static`変数になるため、スレッド間で安全に共有できることをコンパイラに伝えるためです。
 
-`GlobalAlloc`トレイトの実装で求められるメソッドは、`alloc`と`dealloc`のみです。
-`dealloc`はメモリを解放しないため、何もしません。
+`GlobalAlloc`トレイトの実装で求められるメソッドは、`alloc`と`dealloc`のみです。`dealloc`はメモリを解放しないため、何もしません。
 
 ```rust,ignore
 {{#include ../../ci/03-bare-metal/allocator/src/main.rs:35:48}}
 ```
 
-引数`layout` ([`Layout`]) は、要求されているメモリブロックです。
-`align()`で、アライメントを考慮して、確保しなければならないメモリブロックサイズを返します。
-`head`のアドレスが`end`に到達するまで、単純にポインタを増加しながら、メモリを割り当てます。
+引数`layout` ([`Layout`]) は、要求されているメモリブロックです。`align()`で、アライメントを考慮して、確保しなければならないメモリブロックサイズを返します。`head`のアドレスが`end`に到達するまで、単純にポインタを増加しながら、メモリを割り当てます。
 
 [`Layout`]: https://doc.rust-lang.org/core/alloc/struct.Layout.html
 
@@ -107,8 +87,7 @@ $ rustup target add thumbv7m-none-eabi
 
 ### alloc_error_handler
 
-最後の要素が、アロケーションエラー発生時のハンドラです。
-これは、`#[alloc_error_handler]`アトリビュートを指定します。
+最後の要素が、アロケーションエラー発生時のハンドラです。これは、`#[alloc_error_handler]`アトリビュートを指定します。
 
 ```rust,ignore
 {{#include ../../ci/03-bare-metal/allocator/src/main.rs:64:67}}
@@ -118,8 +97,7 @@ $ rustup target add thumbv7m-none-eabi
 
 ### 動作確認
 
-`03-bare-metal/allocator`ディレクトリに、Cortex-M3をターゲットにした場合のサンプルコードがあります。
-ディレクトリに移動し、次のコマンドで実行結果が確認できます。
+`03-bare-metal/allocator`ディレクトリに、Cortex-M3をターゲットにした場合のサンプルコードがあります。ディレクトリに移動し、次のコマンドで実行結果が確認できます。
 
 ```
 $ cargo run
@@ -135,21 +113,18 @@ $ cargo run
 
 ### メモリアロケータ実装例
 
-ここで紹介した`BumpPointerAlloc`は実用に耐えないものです。
-いくつか、より洗練されたメモリアロケータの実装例を紹介します。
+ここで紹介した`BumpPointerAlloc`は実用に耐えないものです。いくつか、より洗練されたメモリアロケータの実装例を紹介します。
 
 #### [linked-list-allocator]
 
-BlogOSの著者が公開しているlinked-listを使ったアロケータです。
-Writing an OS in Rust (First Edition) [Kernel Heap]に少し解説があります。
+BlogOSの著者が公開しているlinked-listを使ったアロケータです。Writing an OS in Rust (First Edition) [Kernel Heap]に少し解説があります。
 
 [linked-list-allocator]: https://github.com/phil-opp/linked-list-allocator
 [Kernel Heap]: https://os.phil-opp.com/kernel-heap/
 
 #### [Redox Slab allocator]
 
-RustでOSを作るプロジェクト「Redox」のメモリアロケータです。
-僭越ながら、簡単な解説を[Redox Slab Allocatorで学ぶRustベアメタル環境のヒープアロケータ]に書いています。
+RustでOSを作るプロジェクト「Redox」のメモリアロケータです。僭越ながら、簡単な解説を[Redox Slab Allocatorで学ぶRustベアメタル環境のヒープアロケータ]に書いています。
 
 [Redox Slab allocator]: https://gitlab.redox-os.org/redox-os/slab_allocator
 [Redox Slab Allocatorで学ぶRustベアメタル環境のヒープアロケータ]: https://qiita.com/tomoyuki-nakabayashi/items/e0bd16e9105163cecafb
@@ -162,8 +137,7 @@ linked-list-allocatorを、Cortex-MのMutexを使ってラッピングしたメ�
 
 #### [kernel-roulette]
 
-RustでLinux kernelのdriverを書くプロジェクトです。
-このプロジェクトでは、`kmalloc`や`kfree`をFFIで呼び出し、Linux kernelの機能を用いてRustのメモリアロケータを実装します。
+RustでLinux kernelのdriverを書くプロジェクトです。このプロジェクトでは、`kmalloc`や`kfree`をFFIで呼び出し、Linux kernelの機能を用いてRustのメモリアロケータを実装します。
 
 [kernel-roulette]: https://github.com/souvik1997/kernel-roulette
 

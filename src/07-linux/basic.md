@@ -1,10 +1,8 @@
 ## ビルド
 
-32ビットの`ARMv7`と、64ビットの`AArch64`とでビルドできる手順をそれぞれ示します。
-Raspbianを使用している場合は、32ビットの`ARMv7`をターゲットにして下さい。
+32ビットの`ARMv7`と、64ビットの`AArch64`とでビルドできる手順をそれぞれ示します。Raspbianを使用している場合は、32ビットの`ARMv7`をターゲットにして下さい。
 
-`Ubuntu 18.04`で動作するコマンドを掲載しています。
-他のOSをご利用の方は、お手数ですが読み替えをお願いします。
+`Ubuntu 18.04`で動作するコマンドを掲載しています。他のOSをご利用の方は、お手数ですが読み替えをお願いします。
 
 ### 環境構築
 
@@ -17,8 +15,7 @@ rustup target add armv7-unknown-linux-gnueabihf
 rustup target add aarch64-unknown-linux-gnu
 ```
 
-Rustコンパイラでは、ネイティブ用のリンカしか配布していないため、リンカは別途用意します。
-Yoctoなどでツールチェインを構築している場合、そのツールチェインを利用できます。
+Rustコンパイラでは、ネイティブ用のリンカしか配布していないため、リンカは別途用意します。Yoctoなどでツールチェインを構築している場合、そのツールチェインを利用できます。
 
 ```
 # ARMv7
@@ -48,8 +45,7 @@ cargo build --target=armv7-unknown-linux-gnueabihf
 cargo build --target=aarch64-linux-gnu-gcc
 ```
 
-生成されたバイナリ (`target/armv7-unknown-linux-gnueabihf/debug/`または`target/aarch64-unknown-linux-gnu/debug/`にあります) をRaspberry Pi3にコピーするだけで、実行できます。
-ターゲットシステム上のライブラリに依存する場合は、ライブラリパスなどを別途、指定する必要があります。
+生成されたバイナリ (`target/armv7-unknown-linux-gnueabihf/debug/`または`target/aarch64-unknown-linux-gnu/debug/`にあります) をRaspberry Pi3にコピーするだけで、実行できます。ターゲットシステム上のライブラリに依存する場合は、ライブラリパスなどを別途、指定する必要があります。
 
 QEMUのユーザーモードエミュレーションを使って、動作確認してみましょう。
 
@@ -68,8 +64,7 @@ qemu-aarch64 -L /usr/aarch64-linux-gnu/ target/aarch64-unknown-linux-gnu/debug/r
 Hello, world!
 ```
 
-`.cargo/config`にカスタムランナーを設定することで、`cargo run`でQEMU上やRaspberry Pi3上で実行することができます。
-まず、QEMU上で実行する設定です。
+`.cargo/config`にカスタムランナーを設定することで、`cargo run`でQEMU上やRaspberry Pi3上で実行することができます。まず、QEMU上で実行する設定です。
 
 ```
 cat .cargo/config
@@ -101,14 +96,9 @@ cargo run --target aarch64-unknown-linux-gnu
 Hello, world!
 ```
 
-バイナリサイズを気にしない場合、`musl`のターゲットを利用すると、ターゲット環境のlibcに依存しないバイナリを生成することができます。
-その場合、`armv7-unknown-linux-musleabihf`もしくは`aarch64-unknown-linux-musl`を指定します。
-`Hello World`プログラムで、`armv7-unknown-linux-gnueabihf`は約1.5 MB、`armv7-unknown-linux-musleabihf`は約1.8 MBになります。
+バイナリサイズを気にしない場合、`musl`のターゲットを利用すると、ターゲット環境のlibcに依存しないバイナリを生成することができます。その場合、`armv7-unknown-linux-musleabihf`もしくは`aarch64-unknown-linux-musl`を指定します。`Hello World`プログラムで、`armv7-unknown-linux-gnueabihf`は約1.5 MB、`armv7-unknown-linux-musleabihf`は約1.8 MBになります。
 
-続いて、カスタムランナーを設定して、リモートのRaspberry Pi3でバイナリを実行する例を示します。
-以降では、パスワード認証方式でsshすることを想定しています。
-Raspberry Pi3にsshするための設定は、事前に済ませて下さい。
-公開鍵認証方式を使用してもかまいませんし、開発期間の間はパスワードなしでssh可能にしても良いです。
+続いて、カスタムランナーを設定して、リモートのRaspberry Pi3でバイナリを実行する例を示します。以降では、パスワード認証方式でsshすることを想定しています。Raspberry Pi3にsshするための設定は、事前に済ませて下さい。公開鍵認証方式を使用してもかまいませんし、開発期間の間はパスワードなしでssh可能にしても良いです。
 
 shell script内でパスワードを入力するため`expect`をインストールします。
 
@@ -142,8 +132,7 @@ exit 0
 "
 ```
 
-shell script実行時の第一引数を、`/home/pi/`に`raspi`としてコピーします。
-次に、Raspberry Pi3上の`raspi`バイナリを実行します。
+shell script実行時の第一引数を、`/home/pi/`に`raspi`としてコピーします。次に、Raspberry Pi3上の`raspi`バイナリを実行します。
 
 これをプロジェクトのルートディレクトリ (Cargo.tomlのあるディレクトリ) に置いて、カスタムランナーに指定します。
 

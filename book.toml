@@ -6,3 +6,5 @@ title = "Embedded Rust Techniques"
 
 [output.html.playpen]
 editable = true
+
+[output.epub]

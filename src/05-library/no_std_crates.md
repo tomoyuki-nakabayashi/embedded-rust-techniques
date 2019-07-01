@@ -1,8 +1,6 @@
 ## no_stdクレート
 
-no_stdや組込みで利用可能なクレートを紹介します。
-Rustのクレートが登録されている`crates.io`には、[crates.io No standard library]カテゴリがあります。
-2019/5/16現在、840ものクレートが登録されています。
+no_stdや組込みで利用可能なクレートを紹介します。Rustのクレートが登録されている`crates.io`には、[crates.io No standard library]カテゴリがあります。2019/5/16現在、840ものクレートが登録されています。
 
 [crates.io No standard library]: https://crates.io/categories/no-std
 
@@ -12,8 +10,7 @@ Rustのクレートが登録されている`crates.io`には、[crates.io No sta
 
 ### rt (runtime) クレート
 
-rtクレートは、ターゲットアーキテクチャ用の最小限のスタートアップ / ランタイムを提供するクレートです。
-[cortex-m-rt]、[msp430-rt]、[riscv-rt]の3つのターゲットアーキテクチャに対して実装が存在しています。
+rtクレートは、ターゲットアーキテクチャ用の最小限のスタートアップ / ランタイムを提供するクレートです。[cortex-m-rt]、[msp430-rt]、[riscv-rt]の3つのターゲットアーキテクチャに対して実装が存在しています。
 
 [cortex-m-rt]: https://github.com/rust-embedded/cortex-m-rt
 [msp430-rt]: https://github.com/rust-embedded/msp430-rt
@@ -53,23 +50,17 @@ fn main() -> ! {
 
 ### [embedded HAL]
 
-組込みRustで共通して利用できる`trait`を定義しているクレートです。
-例えば、SPIやシリアル、といったトレイトが定義されています。
+組込みRustで共通して利用できる`trait`を定義しているクレートです。例えば、SPIやシリアル、といったトレイトが定義されています。
 
 [embedded HAL]: https://github.com/rust-embedded/embedded-hal
 
-このクレートの抽象を利用して、デバイスドライバを書くことで、アプリケーションの再利用性が向上します。
-組込みRustの多くのプロジェクトが、このembedded HALを利用しています。
+このクレートの抽象を利用して、デバイスドライバを書くことで、アプリケーションの再利用性が向上します。組込みRustの多くのプロジェクトが、このembedded HALを利用しています。
 
 ### その他
 
 #### [lazy_static]
 
-[lazy_static]は、実行時にしか初期化できない (`new()`関数でのみオブジェクトが構築できる) ような、
-複雑なオブジェクトの`static`変数を作るために使います。
-通常、`new()`関数でオブジェクトを作るような構造体は、コンパイル時に値が計算できないため、`static`変数の初期化には使えません。
-また、`lazy_static`は、`static`変数を1度だけ初期化する機能も提供します。
-`lazy_static`マクロで作られた`static`変数は、その変数が実行時に最初に使用される時に、初期化されます。
+[lazy_static]は、実行時にしか初期化できない (`new()`関数でのみオブジェクトが構築できる) ような、複雑なオブジェクトの`static`変数を作るために使います。通常、`new()`関数でオブジェクトを作るような構造体は、コンパイル時に値が計算できないため、`static`変数の初期化には使えません。また、`lazy_static`は、`static`変数を1度だけ初期化する機能も提供します。`lazy_static`マクロで作られた`static`変数は、その変数が実行時に最初に使用される時に、初期化されます。
 
 [lazy_static]: https://crates.io/crates/lazy_static
 
@@ -90,14 +81,11 @@ lazy_static! {
 }
 ```
 
-`Mutex<Writer>`という初期化が非常に複雑なオブジェクトの参照が`static`変数になっていることがわかります。
-このように実行時にしか構築できない値も`static`変数にできる上、どこで初期化するかに悩まなくて済みます。
+`Mutex<Writer>`という初期化が非常に複雑なオブジェクトの参照が`static`変数になっていることがわかります。このように実行時にしか構築できない値も`static`変数にできる上、どこで初期化するかに悩まなくて済みます。
 
 #### [bitflags]
 
-**型安全**なビットマスクフラグを提供するクレートです。
-型安全であることがポイントで、誤ったビット操作を起こしにくいです。
-AndやOrのオペレータも実装されており、`bits()`メソッドで生の値を取り出すことができます。
+**型安全**なビットマスクフラグを提供するクレートです。型安全であることがポイントで、誤ったビット操作を起こしにくいです。AndやOrのオペレータも実装されており、`bits()`メソッドで生の値を取り出すことができます。
 
 [bitflags]: https://crates.io/crates/bitflags
 
@@ -127,8 +115,7 @@ fn main() {
 
 #### [bit_field]
 
-ビットフィールドへのアクセスを簡単にするためのクレートです。
-`BitField`トレイトを提供しており、`i8`, `u8`, `usize`などの整数型が、トレイトを実装しています。
+ビットフィールドへのアクセスを簡単にするためのクレートです。`BitField`トレイトを提供しており、`i8`, `u8`, `usize`などの整数型が、トレイトを実装しています。
 
 [bit_field]: https://crates.io/crates/bit_field
 
@@ -150,8 +137,7 @@ assert_eq!(value, 0b110100);
 
 #### [bitfield]
 
-ビットフィールドを定義するマクロを提供するクレートです。
-`bit_field`とクレート名が似ていますが、別物です。
+ビットフィールドを定義するマクロを提供するクレートです。`bit_field`とクレート名が似ていますが、別物です。
 
 [bitfield]: https://docs.rs/bitfield/0.13.1/bitfield/
 
@@ -179,22 +165,19 @@ fn main() {
 
 #### [micromath]
 
-軽量な数値計算ライブラリです。三角関数などがあります。
-加速度計など、センサドライバでの計算に利用できます。
+軽量な数値計算ライブラリです。三角関数などがあります。加速度計など、センサドライバでの計算に利用できます。
 
 [micromath]: https://crates.io/crates/micromath
 
 #### [register-rs]
 
-Rust製のRTOSである`Tock`で利用されているMMIO / CPUレジスタインタフェースです。
-読み書き可能、読み込み専用、書き込み専用、を表現するジェネリック構造体を提供します。
+Rust製のRTOSである`Tock`で利用されているMMIO / CPUレジスタインタフェースです。読み書き可能、読み込み専用、書き込み専用、を表現するジェネリック構造体を提供します。
 
 [register-rs]: https://crates.io/crates/register
 
 #### [volatile_register]
 
-メモリマップドレジスタへのvolatileアクセスを提供します。
-[register-rs]の簡易版、と言った印象です。
+メモリマップドレジスタへのvolatileアクセスを提供します。[register-rs]の簡易版、と言った印象です。
 
 [volatile_register]: https://docs.rs/volatile-register/0.2.0/volatile_register/
 
@@ -222,8 +205,7 @@ unsafe { (*nvic).iser[0].write(1) }
 
 #### [embedded-graphics]
 
-2Dグラフィックを簡単に描画するためのクレートです。
-次の機能を提供します。
+2Dグラフィックを簡単に描画するためのクレートです。次の機能を提供します。
 
 - 1ビット / ピクセルの画像
 - 8ビット / ピクセルの画像

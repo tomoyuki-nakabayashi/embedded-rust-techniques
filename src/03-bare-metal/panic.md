@@ -1,7 +1,6 @@
 ## panic
 
-Rustのpanicは、プログラムの異常終了処理を安全に行うための機構です。
-例えば、下記のようなスライスの境界外アクセスは、panicを発生させます。
+Rustのpanicは、プログラムの異常終了処理を安全に行うための機構です。例えば、下記のようなスライスの境界外アクセスは、panicを発生させます。
 
 ```rust
 fn main() {
@@ -16,20 +15,15 @@ fn main() {
 thread 'main' panicked at 'index out of bounds: the len is 4 but the index is 100', src/main.rs:3:20
 ```
 
-C言語の未定義動作と異なり、Rustでは**定義されたpanicハンドラ**でプログラミングエラーに対処します。
-OSにホストされている環境では、panicハンドラの処理が完了すると、プロセスを強制終了します。
-このプロセスの強制終了も、**定義された動作**です。
+C言語の未定義動作と異なり、Rustでは**定義されたpanicハンドラ**でプログラミングエラーに対処します。OSにホストされている環境では、panicハンドラの処理が完了すると、プロセスを強制終了します。このプロセスの強制終了も、**定義された動作**です。
 
-Rustのpanicについては、[簡潔なQ Rustのパニック機構]が詳しいです。
-こちらの解説にある通り、panicの主な処理は、`std`クレート ([std::panic]に公開API、[std::panicking.rs]にpanic処理の本体) にあります。
-そのため、`std`クレートをリンクしない`#![no_std]`なプログラムでは、panicハンドラが未定義のままになっています。
+Rustのpanicについては、[簡潔なQ Rustのパニック機構]が詳しいです。こちらの解説にある通り、panicの主な処理は、`std`クレート ([std::panic]に公開API、[std::panicking.rs]にpanic処理の本体) にあります。そのため、`std`クレートをリンクしない`#![no_std]`なプログラムでは、panicハンドラが未定義のままになっています。
 
 [簡潔なQ Rustのパニック機構]: https://qnighy.hatenablog.com/entry/2018/02/18/223000
 [std::panic]: https://doc.rust-lang.org/std/macro.panic.html
 [std::panicking.rs]: https://github.com/rust-lang/rust/blob/stable/src/libstd/panicking.rs
 
-そこで、`#[panic_handler]`アトリビュートを使って、panicハンドラを定義します。
-最小限の`#![no_std]`プログラムは、次のようになります。
+そこで、`#[panic_handler]`アトリビュートを使って、panicハンドラを定義します。最小限の`#![no_std]`プログラムは、次のようになります。
 
 ```rust,ignore
 #![no_main]
@@ -43,9 +37,7 @@ fn panic(_panic: &PanicInfo<'_>) -> ! {
 }
 ```
 
-この`PanicInfo`は、panicに関する情報を提供します。
-Rust 1.26からは、`Display`トレイトが実装されているため、フォーマットが使える環境を作ることで、panic発生時の情報を容易に得ることができます。
-まず、`std`クレートを使い、簡単に実験できるサンプルコードをお見せします。
+この`PanicInfo`は、panicに関する情報を提供します。Rust 1.26からは、`Display`トレイトが実装されているため、フォーマットが使える環境を作ることで、panic発生時の情報を容易に得ることができます。まず、`std`クレートを使い、簡単に実験できるサンプルコードをお見せします。
 
 ```rust
 #![allow(unused)]
@@ -66,8 +58,7 @@ fn main() {
 panicked at 'Normal panic', src/main.rs:9:1
 ```
 
-このことは、`no_std`環境でも同じように使うことができます。
-`no_std`環境での`print!`マクロ実装方法は、[print!マクロ]で紹介します。
+このことは、`no_std`環境でも同じように使うことができます。`no_std`環境での`print!`マクロ実装方法は、[print!マクロ]で紹介します。
 
 [print!マクロ]: print.md
 
@@ -94,8 +85,7 @@ pub fn panic(info: &PanicInfo) -> ! {
 [panic-itm]: https://crates.io/crates/panic-itm
 [panic-semihosting]: https://crates.io/crates/panic-semihosting
 
-[`panic-abort`の実装]を見ると、30行しかありません。
-わざわざクレートにする理由はあるのでしょうか？
+[`panic-abort`の実装]を見ると、30行しかありません。わざわざクレートにする理由はあるのでしょうか？
 
 [`panic-abort`の実装]: https://github.com/japaric/panic-abort/blob/master/src/lib.rs
 

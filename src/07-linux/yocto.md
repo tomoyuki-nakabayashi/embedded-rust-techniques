@@ -1,16 +1,12 @@
 ## Yocto
 
-Yoctoは、組込みLinuxディストリビューションを作成するためのプロジェクトです。
-製品固有のLinuxディストリビューションを作成、管理できるため、組込みLinux開発で広く用いられています。
-ここで言うLinuxディストリビューションは、Linux kernel、ライブラリ、アプリケーションを全て含みます。
+Yoctoは、組込みLinuxディストリビューションを作成するためのプロジェクトです。製品固有のLinuxディストリビューションを作成、管理できるため、組込みLinux開発で広く用いられています。ここで言うLinuxディストリビューションは、Linux kernel、ライブラリ、アプリケーションを全て含みます。
 
-日本語のまとまった書籍は、2019年現在ありませんが、雑誌インタフェースなどで、Raspberry Piの独自環境構築や、FPGAボードZynqの環境構築方法が紹介されています。
-[みつきんのメモ]は、Yocto関連のノウハウが多く掲載されており、普段からお世話になっています。
+日本語のまとまった書籍は、2019年現在ありませんが、雑誌インタフェースなどで、Raspberry Piの独自環境構築や、FPGAボードZynqの環境構築方法が紹介されています。[みつきんのメモ]は、Yocto関連のノウハウが多く掲載されており、普段からお世話になっています。
 
 [みつきんのメモ]: http://mickey-happygolucky.hatenablog.com/
 
-ここでは、RustプロジェクトをYoctoビルド環境にインテグレーションする方法を紹介します。
-想定する利用方法は、ホスト上のRustツールチェインで一通り開発、デバッグを行った上で、distributionに取り込んで配布する、というものです。
+ここでは、RustプロジェクトをYoctoビルド環境にインテグレーションする方法を紹介します。想定する利用方法は、ホスト上のRustツールチェインで一通り開発、デバッグを行った上で、distributionに取り込んで配布する、というものです。
 
 Yoctoの基礎から説明するスキルが著者にないため、Yoctoを触ったことある方向けの情報になります。ご了承下さい。
 
@@ -145,8 +141,7 @@ file://Unlicense OR MIT;md5=generateme \
 "
 ```
 
-`ripgrep`では、`COPYING`ファイルにライセンス情報が記載されています。
-`md5sum`コマンドでチェックサムを計算して、レシピを修正します。
+`ripgrep`では、`COPYING`ファイルにライセンス情報が記載されています。`md5sum`コマンドでチェックサムを計算して、レシピを修正します。
 
 ```
 md5sum COPYING
@@ -183,9 +178,7 @@ bitbake ripgrep
 
 [meta-rust-bin]: https://github.com/rust-embedded/meta-rust-bin
 
-`meta-rust`では、LLVM、Rustコンパイラ、CargoをビルドしてRustツールチェインを構築するため、ビルド時間が大幅に増加します。
-それにも関わらず、Yoctoで作成したクロス開発環境には、このツールチェインが含まれません。
-純粋に、Rustのプロジェクトをビルドするだけであれば、既存のRustツールチェインバイナリを取得する方がよほどお手軽です。
+`meta-rust`では、LLVM、Rustコンパイラ、CargoをビルドしてRustツールチェインを構築するため、ビルド時間が大幅に増加します。それにも関わらず、Yoctoで作成したクロス開発環境には、このツールチェインが含まれません。純粋に、Rustのプロジェクトをビルドするだけであれば、既存のRustツールチェインバイナリを取得する方がよほどお手軽です。
 
 そこで、Rustのツールチェインバイナリを取得して、Rustプロジェクトをビルドする`meta-rust-bin`があります。
 
@@ -216,8 +209,7 @@ bitbake-layers add-layer ../layers/meta-raspberrypi
 bitbake-layers add-layer ../layers/meta-rust-bin
 ```
 
-`meta-rust-bin`には、レシピ例が同梱されていないため、サンプルアプリのレシピを作成します。
-`meta-rust`の`rust-hello-world`レシピがそのまま利用できます。
+`meta-rust-bin`には、レシピ例が同梱されていないため、サンプルアプリのレシピを作成します。`meta-rust`の`rust-hello-world`レシピがそのまま利用できます。
 
 ```
 cp -r <path to meta-rust>/recipes-example/rust-hello-world/ ../layers/meta-rust-bin/
@@ -260,8 +252,7 @@ Hello, world!
 
 無事、実行できます。
 
-`meta-rust-bin`でも`ripgrep`をビルドしてみます。
-レシピの用意は簡単です。
+`meta-rust-bin`でも`ripgrep`をビルドしてみます。レシピの用意は簡単です。
 
 ```
 inherit cargo
@@ -284,16 +275,13 @@ bitbake ripgrep
 
 #### `meta-rust`との比較
 
-ラズパイ3の`core-image-base`に`rust-hello-world`を追加したイメージのフルビルドにかかる時間を計測したろころ、`meta-rust`が約220分、`meta-rust-bin`が約75分でした。
-Yoctoのバージョンが異なるため、完全なベンチマークとは言えませんが、`meta-rust-bin`の方がビルド時間がかなり短いです。
+ラズパイ3の`core-image-base`に`rust-hello-world`を追加したイメージのフルビルドにかかる時間を計測したろころ、`meta-rust`が約220分、`meta-rust-bin`が約75分でした。Yoctoのバージョンが異なるため、完全なベンチマークとは言えませんが、`meta-rust-bin`の方がビルド時間がかなり短いです。
 
-`meta-rust-bin`はビルド済みのRustツールチェインを利用するため、Rustコンパイラをカスタマイズしてビルドする、ということができません。
-Rustが公式にサポートしていないアーキテクチャをターゲットにする場合は、`meta-rust`の利用が必要です。
+`meta-rust-bin`はビルド済みのRustツールチェインを利用するため、Rustコンパイラをカスタマイズしてビルドする、ということができません。Rustが公式にサポートしていないアーキテクチャをターゲットにする場合は、`meta-rust`の利用が必要です。
 
 また、ビルド済みのRust標準ライブラリを利用するため、カスタムビルドされた標準ライブラリよりパフォーマンスが低い可能性があります。
 
-`cargo-bitbake`で自動生成するレシピは、`meta-rust-bin`のclassとは互換性がありません。
-`meta-rust-bin`のレシピを用意するのは、それほど難しくないため、大きなデメリットではありません。
+`cargo-bitbake`で自動生成するレシピは、`meta-rust-bin`のclassとは互換性がありません。`meta-rust-bin`のレシピを用意するのは、それほど難しくないため、大きなデメリットではありません。
 
 ## 参考
 
