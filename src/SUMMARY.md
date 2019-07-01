@@ -3,7 +3,7 @@
 - [はじめに](./01-introduction/introduction.md)
 - [環境構築](./02-setup/setup.md)
 - [ベアメタルテクニック](./03-bare-metal/bare-metal.md)
-  - [`#![no_std]`](./03-bare-metal/no_std.md)
+  - [no_std](./03-bare-metal/no_std.md)
   - [panic](./03-bare-metal/panic.md)
   - [print!マクロ](./03-bare-metal/print.md)
   - [リンカ](./03-bare-metal/linker.md)

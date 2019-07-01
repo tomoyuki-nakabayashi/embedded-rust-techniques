@@ -115,29 +115,29 @@ $ cargo run
 
 ここで紹介した`BumpPointerAlloc`は実用に耐えないものです。いくつか、より洗練されたメモリアロケータの実装例を紹介します。
 
-#### [linked-list-allocator]
+#### linked-list-allocator
 
-BlogOSの著者が公開しているlinked-listを使ったアロケータです。Writing an OS in Rust (First Edition) [Kernel Heap]に少し解説があります。
+[linked-list-allocator]は、BlogOSの著者が公開しているlinked-listを使ったアロケータです。Writing an OS in Rust (First Edition) [Kernel Heap]に少し解説があります。
 
 [linked-list-allocator]: https://github.com/phil-opp/linked-list-allocator
 [Kernel Heap]: https://os.phil-opp.com/kernel-heap/
 
-#### [Redox Slab allocator]
+#### Redox Slab allocator
 
-RustでOSを作るプロジェクト「Redox」のメモリアロケータです。僭越ながら、簡単な解説を[Redox Slab Allocatorで学ぶRustベアメタル環境のヒープアロケータ]に書いています。
+[Redox Slab allocator]は、RustでOSを作るプロジェクト「Redox」のメモリアロケータです。僭越ながら、簡単な解説を[Redox Slab Allocatorで学ぶRustベアメタル環境のヒープアロケータ]に書いています。
 
 [Redox Slab allocator]: https://gitlab.redox-os.org/redox-os/slab_allocator
 [Redox Slab Allocatorで学ぶRustベアメタル環境のヒープアロケータ]: https://qiita.com/tomoyuki-nakabayashi/items/e0bd16e9105163cecafb
 
-#### [alloc-cortex-m]
+#### alloc-cortex-m
 
-linked-list-allocatorを、Cortex-MのMutexを使ってラッピングしたメモリアロケータです。
+[alloc-cortex-m]は、linked-list-allocatorを、Cortex-MのMutexを使ってラッピングしたメモリアロケータです。
 
 [alloc-cortex-m]: https://github.com/rust-embedded/alloc-cortex-m/
 
-#### [kernel-roulette]
+#### kernel-roulette
 
-RustでLinux kernelのdriverを書くプロジェクトです。このプロジェクトでは、`kmalloc`や`kfree`をFFIで呼び出し、Linux kernelの機能を用いてRustのメモリアロケータを実装します。
+[kernel-roulette]は、RustでLinux kernelのdriverを書くプロジェクトです。このプロジェクトでは、`kmalloc`や`kfree`をFFIで呼び出し、Linux kernelの機能を用いてRustのメモリアロケータを実装します。
 
 [kernel-roulette]: https://github.com/souvik1997/kernel-roulette
 

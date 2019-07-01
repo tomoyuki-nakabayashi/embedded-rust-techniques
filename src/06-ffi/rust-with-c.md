@@ -31,11 +31,11 @@ pub extern "C" fn rust_function() {
 }
 ```
 
-#### `#[no_mangle]`
+#### no_mangle
 
 Rustコンパイラは、シンボル名をマングルします。そのため、Cから呼び出すRustの関数は、マングルしないように`#[no_mangle]`アトリビュートを付けます。
 
-#### `extern "C"`
+#### extern "C"
 
 デフォルトでは、Rustの関数はRustのABIを使用します。そこで、CのABIを仕様するように、コンパイラに指示します。プラットフォーム固有のABI指定については、[External Blocks ABI]にドキュメントがあります。
 

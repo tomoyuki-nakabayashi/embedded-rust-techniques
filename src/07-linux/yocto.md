@@ -12,7 +12,9 @@ Yoctoの基礎から説明するスキルが著者にないため、Yoctoを触�
 
 ターゲット環境はRaspberry Pi3で、Yoctoのバージョンは`thud`です。
 
-### [meta-rust]
+### meta-rust
+
+[meta-rust]は、既存のRustプロジェクトをYoctoでビルドできるようにするための、Yoctoのレイヤです。
 
 [meta-rust]: https://github.com/meta-rust/meta-rust
 
@@ -85,11 +87,11 @@ Hello, world!
 
 無事、実行できます。
 
-#### [cargo-bitbake]
+#### cargo-bitbake
 
 [cargo-bitbake]: https://github.com/cardoe/cargo-bitbake
 
-既存のCargoプロジェクトから`meta-rust`のYoctoレシピを作成してくれるCargoの拡張機能です。
+[cargo-bitbake]は、既存のCargoプロジェクトから`meta-rust`のYoctoレシピを作成してくれるCargoの拡張機能です。
 
 `cargo-bitbake`は`libssl-dev`を使用するため、インストールします。
 
@@ -174,13 +176,13 @@ bitbake ripgrep
 
 これで、`ripgrep`がビルドできます。
 
-### [meta-rust-bin]
+### meta-rust-bin
 
 [meta-rust-bin]: https://github.com/rust-embedded/meta-rust-bin
 
 `meta-rust`では、LLVM、Rustコンパイラ、CargoをビルドしてRustツールチェインを構築するため、ビルド時間が大幅に増加します。それにも関わらず、Yoctoで作成したクロス開発環境には、このツールチェインが含まれません。純粋に、Rustのプロジェクトをビルドするだけであれば、既存のRustツールチェインバイナリを取得する方がよほどお手軽です。
 
-そこで、Rustのツールチェインバイナリを取得して、Rustプロジェクトをビルドする`meta-rust-bin`があります。
+そこで、Rustのツールチェインバイナリを取得して、Rustプロジェクトをビルドする[meta-rust-bin]があります。
 
 `meta-rust`と異なり、こちらは、pokyのバージョンが`sumo`までしか対応されていません (2019/6/22現在)。
 
@@ -273,7 +275,7 @@ bitbake ripgrep
 
 これで、`ripgrep`がビルドできます。
 
-#### `meta-rust`との比較
+#### meta-rustとの比較
 
 ラズパイ3の`core-image-base`に`rust-hello-world`を追加したイメージのフルビルドにかかる時間を計測したろころ、`meta-rust`が約220分、`meta-rust-bin`が約75分でした。Yoctoのバージョンが異なるため、完全なベンチマークとは言えませんが、`meta-rust-bin`の方がビルド時間がかなり短いです。
 
