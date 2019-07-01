@@ -8,7 +8,7 @@
 上記の1.については、[cbindgen]で自動生成できます。2.は、Cのプロジェクトやビルドシステムに強く依存するため、一般的な方法はありません。[ケーススタディ Zephyr bindings]では、cmakeプロジェクトに組み込む一例を示します。
 
 [cbindgen]: https://github.com/eqrion/cbindgen
-[ケーススタディ Zephyr bindings]: ./zephyr-bindings.md
+[ケーススタディ Zephyr bindings]: ./zephyr-bindings.html
 
 ### ライブラリプロジェクトの作成
 

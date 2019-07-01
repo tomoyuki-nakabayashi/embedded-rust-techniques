@@ -60,7 +60,7 @@ panicked at 'Normal panic', src/main.rs:9:1
 
 このことは、`no_std`環境でも同じように使うことができます。`no_std`環境での`print!`マクロ実装方法は、[print!マクロ]で紹介します。
 
-[print!マクロ]: print.md
+[print!マクロ]: print.html
 
 ```rust,ignore
 use core::panic::PanicInfo;

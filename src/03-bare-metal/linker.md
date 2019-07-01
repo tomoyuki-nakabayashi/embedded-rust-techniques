@@ -93,7 +93,7 @@ pub unsafe extern "C" fn Reset() -> ! {
 
 [linkage feature]: https://github.com/rust-lang/rust/issues/29603
 
-### 出典
+#### 出典
 
 - Embedonomicon
   - [メモリレイアウト]

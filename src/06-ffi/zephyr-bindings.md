@@ -190,7 +190,7 @@ Rustとしてはあくまでの`no_std`な環境となるため、`#![no_std]`�
 
 ここでは、Zephyrの`newlib` APIを使って、アプリケーションから安全に利用できる`println!`マクロを作ります。ベースは、[print!マクロ]で実装したマクロと同じです。異なる点は、`fmt::Write`トレイトの`write_str`メソッドの実装で、Zephyrの`fwrite`を呼び出す点です。
 
-[print!マクロ]: ../03-bare-metal/print.md
+[print!マクロ]: ../03-bare-metal/print.html
 
 ```rust,ignore
 {{#include ../../ci/06-ffi/hello/zephyr/src/io.rs:12:25}}
@@ -302,7 +302,7 @@ Hello Rust
 
 [WebAssembly Micro RuntimeでRustアプリをマイコンで動かす！]: https://tomo-wait-for-it-yuki.hatenablog.com/entry/2019/06/16/133344?_ga=2.61433454.350764793.1560857949-1518570932.1554416614
 
-## 参考
+#### 参考
 
 [freertos.rs]
 

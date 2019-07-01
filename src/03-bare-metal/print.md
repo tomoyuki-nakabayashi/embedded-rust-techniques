@@ -74,7 +74,7 @@ Hello Rust
 
 また、[panic]で紹介した通り、panic時の情報を表示する際も便利です。
 
-[panic]: panic.md
+[panic]: panic.html
 
 ```rust,ignore
 {{#include ../../ci/03-bare-metal/print/src/main.rs:7:7}}

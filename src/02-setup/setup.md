@@ -37,7 +37,7 @@ $ rustc --print target-list
 
 次に、ターゲットシステムがサポートされていない場合ですが、ターゲットの`specification`をJSON形式のファイルで用意します。
 
-[コンパイラサポート]: ../04-tools/compiler.md
+[コンパイラサポート]: ../04-tools/compiler.html
 
 ## GDB
 

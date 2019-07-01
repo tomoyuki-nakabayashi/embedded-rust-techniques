@@ -285,7 +285,7 @@ bitbake ripgrep
 
 `cargo-bitbake`で自動生成するレシピは、`meta-rust-bin`のclassとは互換性がありません。`meta-rust-bin`のレシピを用意するのは、それほど難しくないため、大きなデメリットではありません。
 
-## 参考
+#### 参考
 
 - [yoctoでもRust]
 

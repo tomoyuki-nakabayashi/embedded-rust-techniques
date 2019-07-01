@@ -2,7 +2,7 @@
 
 通常、コレクション利用には、グローバルメモリアロケータの実装が必須です ([メモリアロケータ]参照)。[heapless]クレートは、グローバルメモリアロケータがなくても利用できるコレクションです。
 
-[メモリアロケータ]: ../03-bare-metal/allocator.md
+[メモリアロケータ]: ../03-bare-metal/allocator.html
 [heapless]: https://github.com/japaric/heapless
 
 > `heapless`クレートは、Rust 1.36からstableで利用可能になります。

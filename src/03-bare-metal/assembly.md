@@ -134,7 +134,7 @@ $ cat asm.s
 global_asm!(include_str!("asm.s"));
 ```
 
-### 出典
+#### 出典
 
 - Embedonomicon: [stableでのアセンブリ]
 

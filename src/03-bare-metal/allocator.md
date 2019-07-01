@@ -4,7 +4,7 @@
 
 メモリアロケータを実装**せず**にコレクションを利用する方法は、[heapless]で説明します。
 
-[heapless]: ../05-library/heapless.md
+[heapless]: ../05-library/heapless.html
 
 ただ、(執筆時点のRust 1.35.0では) 残念なことに**nightly必須です**。ベアメタルでメモリアロケータを実装するには、[alloc]と[alloc_error_handler]のフィーチャが必要です。`alloc`は、Rust 1.36でstableになるため、本書が世に出回っている時点では、stableになっています。一方、`alloc_error_handler`については、まだ安定化の目途が立っていないようです。今しばらく、メモリアロケータの実装はnightly専用になりそうです。
 
@@ -28,7 +28,7 @@ $ rustup target add thumbv7m-none-eabi
 
 `println!`マクロの実装方法については、[print!マクロ]で説明しています。
 
-[print!マクロ]: print.md
+[print!マクロ]: print.html
 
 ### グローバルアロケータ
 

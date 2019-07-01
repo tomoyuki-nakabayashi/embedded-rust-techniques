@@ -53,7 +53,7 @@ pub extern "C" fn my_function(...);
 
 上述の通り、手動でインタフェースを作成することもできますが、これは単純作業です。そこで、インタフェースを自動生成してくれる`bindgen`を利用します。ここでは、一般的な手順を説明し、具体的な例は、[ケーススタディ Zephyr bindings]で紹介します。
 
-[ケーススタディ Zephyr bindings]: ./zephyr-bindings.md
+[ケーススタディ Zephyr bindings]: ./zephyr-bindings.html
 
 標準ライブラリが使える環境と、ベアメタル環境とで共通する手順は、次の通りです。
 
