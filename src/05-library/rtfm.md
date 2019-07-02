@@ -1,4 +1,4 @@
-## RTFM (Real Time For the Masses)
+## 5-4. RTFM (Real Time For the Masses)
 
 [RTFM for ARM Cortex-M]は、リアルタイムシステムを構築するための並行処理フレームワークです。[Real-time for the masses, step 1: Programming API and static priority SRP kernel primitives.]というリアルタイムシステム構築の論文を、Rustで実装しています。RTOSほどの機能はありませんが、小規模なリアルタイムシステム構築に向いています。
 

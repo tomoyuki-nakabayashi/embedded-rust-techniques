@@ -1,4 +1,4 @@
-## no_stdクレート
+## 5-2. no_stdクレート
 
 no_stdや組込みで利用可能なクレートを紹介します。Rustのクレートが登録されている`crates.io`には、[crates.io No standard library]カテゴリがあります。2019/5/16現在、840ものクレートが登録されています。
 

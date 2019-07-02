@@ -1,4 +1,4 @@
-# FFI (Foreign Function Interface)
+# 6. FFI (Foreign Function Interface)
 
 組込みRustは急速に環境が整備されつつありますが、まだまだ不足しているものがたくさんあります。そこで、C言語の資産活用が重要になります。本章では、ベアメタル環境でのC言語とのFFIについて説明します。
 

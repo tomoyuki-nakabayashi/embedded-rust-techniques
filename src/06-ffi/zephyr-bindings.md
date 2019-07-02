@@ -1,4 +1,4 @@
-## ケーススタディ Zephyr binding
+## 6-3. ケーススタディ Zephyr binding
 
 Rust Embedded devices WGでもRTOSとRustとのインテグレーションは[issue #62]で議論中です。
 

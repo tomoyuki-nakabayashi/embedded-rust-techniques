@@ -1,4 +1,4 @@
-# 環境構築
+# 2. 環境構築
 
 組込み開発では、ホストPCとは異なるアーキテクチャのバイナリを生成しなければならないため、いくつかのツールが必要になります。また、バイナリを解析したり、逆アセンブリを行ってデバッグを行う際に、便利なツールも用意しておくと良いでしょう。
 
@@ -16,7 +16,7 @@ Cortex-Mをターゲットとするこれらのインストール手順は、[Th
 
 [The Embedded Rust Bookのインストール]: https://tomoyuki-nakabayashi.github.io/book/intro/install.html
 
-## Rust
+## 2-1. Rust
 
 Rustはクロスコンパイルが簡単な言語ですが、デフォルトのインストールでは、ホストマシンのネイティブコンパイルのみをサポートしています。そのため、ターゲットとするクロスコンパイラを追加するために、`rustup`でターゲットを追加します。例えば、ARMのCortex-M0であれば、次の通りです。
 
@@ -39,11 +39,11 @@ $ rustc --print target-list
 
 [コンパイラサポート]: ../04-tools/compiler.html
 
-## GDB
+## 2-2. GDB
 
 読者の中には、LLDBに慣れ親しんだ方も居るかと思います。通常のデバッグに関して、LLDBはGDBと同水準の機能があります。しかし、ターゲットハードウェアにプログラムをアップロードするGDBの`load`コマンド相当のものが、LLDBにはありません。そのため、マイクロコントローラのファームウェア開発に限っては、GDBの利用をおすすめします。
 
-## デバッグフレームワーク
+## 2-3. デバッグフレームワーク
 
 マイクロコントローラ上で動作するプログラムをGDBでデバッグするためには、SWD (Serial Wire Debug) やJTAGプロトコルを使って、*GDBサーバー*のサービスを提供するソフトウェアが必要になります。
 
@@ -52,7 +52,7 @@ $ rustc --print target-list
 
 [Discovery環境構築]: https://tomoyuki-nakabayashi.github.io/discovery/03-setup/index.html
 
-## cargo-binutils
+## 2-4. cargo-binutils
 
 [cargo-binutils]は、LLVM binary utilitiesを簡単に利用するためのCargoサブコマンドです。`llvm-objdump`や`llvm-size`などをCargoから呼び出すことができます。
 
@@ -60,7 +60,7 @@ $ rustc --print target-list
 
 ターゲットアーキテクチャ用のGNU binutilsがインストールされており、そのコマンドに慣れている場合、無理に使う必要はありません。しかし、Rustでバイナリハックする上で、ターゲットアーキテクチャに依存せず、同じコマンドで利用できる、というのは大きなメリットです。
 
-## QEMU
+## 2-5. QEMU
 
 [QEMU]は、有名なエミュレータです。実際のハードウェアで開発を行う前に、実験を行う場合に重宝します。本書内でも動作確認目的で、何度か利用します。
 

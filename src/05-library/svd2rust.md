@@ -1,4 +1,4 @@
-## svd2rust
+## 5-3. svd2rust
 
 [SVD] (System View Description) ファイルからRustの`struct`を自動生成するツールです。SVDファイルはXMLファイルで、特にペリフェラルのメモリマップドレジスタの記述を形式化したものです。
 
