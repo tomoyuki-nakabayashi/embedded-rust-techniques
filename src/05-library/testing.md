@@ -6,15 +6,15 @@
 
 部品をcrateに切り出し、ホスト上でテストする方法です。
 
-テスト時には、`#![no_std]`でビルドしないようにします。そうすることで、標準ライブラリに依存するRustのテストフレームワークを利用することができます。
+テスト時には、「#![no_std]」でビルドしないようにします。そうすることで、標準ライブラリに依存するRustのテストフレームワークを利用することができます。
 
-`lib.rs`でクレートレベルのアトリビュートを次のように指定します。
+**lib.rs**でクレートレベルのアトリビュートを次のように指定します。
 
 ```rust
 #![cfg_attr(not(test), no_std)]
 ```
 
-これで、テスト時には、`#![no_std]`アトリビュートが有効になりません。後は、通常通りテストを書くだけです。[heapless]クレートのテストが、参考になります。
+これで、テスト時には、「#![no_std]」アトリビュートが有効になりません。後は、通常通りテストを書くだけです。[heapless]クレートのテストが、参考になります。
 
 [heapless]: https://github.com/japaric/heapless
 
@@ -24,9 +24,9 @@
 
 [custom_test_frameworks]: https://doc.rust-lang.org/unstable-book/language-features/custom-test-frameworks.html
 
-Rust標準のテストフレームワークと比較すると、パニックすることをテストする`should_panic`などの機能が利用できません。
+Rust標準のテストフレームワークと比較すると、パニックすることをテストする**should_panic**などの機能が利用できません。
 
-カスタムテストフレームワークを実装するには、次のコードを`main.rs`に追加します。
+カスタムテストフレームワークを実装するには、次のコードを**main.rs**に追加します。
 
 ```rust,ignore
 #![feature(custom_test_frameworks)]
@@ -41,9 +41,9 @@ fn test_runner(tests: &[&dyn Fn()]) {
 }
 ```
 
-`test_runner`の引数は`Fn()`トレイトのトレイトオブジェクトのスライスです。[custom_test_frameworks]によると、`#[test_case]`アトリビュートのついたアイテムが、`test_runner`アトリビュートで指定した関数に渡されます。
+**test_runner**の引数は**Fn()**トレイトのトレイトオブジェクトのスライスです。[custom_test_frameworks]によると、「#[test_case]」アトリビュートのついたアイテムが、**test_runner**アトリビュートで指定した関数に渡されます。
 
-プロダクトコードのエントリポイントに、テストビルド時のみ、テストハーネスの`test_main`を呼び出すコードを追加します。
+プロダクトコードのエントリポイントに、テストビルド時のみ、テストハーネスの**test_main**を呼び出すコードを追加します。
 
 ```rust
 #![reexport_test_harness_main = "test_main"]
@@ -78,7 +78,7 @@ fn trivial_assertion() {
 
 ### インテグレーションテスト
 
-QEMUを利用して、特定デバイスのペリフェラルに依存しない試験を実施することができます。`RTFM`では、QEMUでバイナリを実行し、semi-hosting機能で標準出力に表示した文字列と期待値とを比較しています。
+QEMUを利用して、特定デバイスのペリフェラルに依存しない試験を実施することができます。**RTFM**では、QEMUでバイナリを実行し、semi-hosting機能で標準出力に表示した文字列と期待値とを比較しています。
 
 ```
 $ cargo run --example binds
@@ -110,11 +110,11 @@ $ cargo run --example binds | diff -u ci/expected/binds.run -
 
 [compiletest_rs]: https://github.com/laumann/compiletest-rs
 
-`RTFM`の`tests`ディレクトリにコンパイルテストのテストケース[compiletest.rs]があります。
+**RTFM**の**tests**ディレクトリにコンパイルテストのテストケース[compiletest.rs]があります。
 
 [compiletest.rs]: https://github.com/japaric/cortex-m-rtfm/blob/master/tests/compiletest.rs
 
-ここでは、`cfail`ディレクトリにコンパイルが失敗するソースファイルが、`cpass`にコンパイルが成功するソースファイルが置かれています。
+ここでは、**cfail**ディレクトリにコンパイルが失敗するソースファイルが、**cpass**にコンパイルが成功するソースファイルが置かれています。
 
 ```rust
 use std::{fs, path::PathBuf, process::Command};
@@ -133,7 +133,7 @@ fn cfail() {
 }
 ```
 
-コンパイルテストの設定`compiletest_rs::Config`を作成し、`compiletest_rs::run_tests`でテストを実行します。これで、`cfail`ディレクトリ内の全てのRustソースファイルのコンパイルに失敗すると、テストがパス、という扱いになります。
+コンパイルテストの設定**compiletest_rs::Config**を作成し、**compiletest_rs::run_tests**でテストを実行します。これで、**cfail**ディレクトリ内の全てのRustソースファイルのコンパイルに失敗すると、テストがパス、という扱いになります。
 
 一方、コンパイルが成功するテストは、同テストケース内で次のように実装されています。
 
@@ -158,4 +158,4 @@ use tempdir::TempDir;
     }
 ```
 
-システムコマンドで`rustc`を呼び出して、終了ステータスが`success`かどうか、をテストしています。
+システムコマンドで**rustc**を呼び出して、終了ステータスが**success**かどうか、をテストしています。

@@ -1,6 +1,6 @@
 ## 5-2. no_stdクレート
 
-no_stdや組込みで利用可能なクレートを紹介します。Rustのクレートが登録されている`crates.io`には、[crates.io No standard library]カテゴリがあります。2019/5/16現在、840ものクレートが登録されています。
+no_stdや組込みで利用可能なクレートを紹介します。Rustのクレートが登録されている**crates.io**には、[crates.io No standard library]カテゴリがあります。2019/5/16現在、840ものクレートが登録されています。
 
 [crates.io No standard library]: https://crates.io/categories/no-std
 
@@ -18,12 +18,12 @@ rtクレートは、ターゲットアーキテクチャ用の最小限のスタ
 
 これらのクレートは、以下の機能を提供します。
 
-- `.bss`と`.data`セクションの初期化
+- 「.bss」と「.data」セクションの初期化
 - FPUの初期化
-- プログラムのエントリポイントを指定するための`#[entry]`アトリビュート
-- `static`変数が初期化される前に呼ばれるコードを指定するための`#[pre_init]`アトリビュート
+- プログラムのエントリポイントを指定するための「#[entry]」アトリビュート
+- **static**変数が初期化される前に呼ばれるコードを指定するための「#[pre_init]」アトリビュート
 - 一般的なターゲットアーキテクチャ用のリンカスクリプト
-- ヒープ領域の開始アドレスを表す`_sheap`シンボル
+- ヒープ領域の開始アドレスを表す**_sheap**シンボル
 
 このクレートを使用することで、次のようにアプリケーションのmainコードからプログラムを記述することができます。
 
@@ -44,13 +44,13 @@ fn main() -> ! {
 }
 ```
 
-[Embedonomicon]は、このような`rt`クレートの実装方法を解説しています。
+[Embedonomicon]は、このような**rt**クレートの実装方法を解説しています。
 
 [Embedonomicon]: https://tomoyuki-nakabayashi.github.io/embedonomicon/
 
 ### embedded HAL
 
-[embedded HAL]は、組込みRustで共通して利用できる`trait`を定義しているクレートです。例えば、SPIやシリアル、といったトレイトが定義されています。
+[embedded HAL]は、組込みRustで共通して利用できる**trait**を定義しているクレートです。例えば、SPIやシリアル、といったトレイトが定義されています。
 
 [embedded HAL]: https://github.com/rust-embedded/embedded-hal
 
@@ -60,11 +60,11 @@ fn main() -> ! {
 
 #### lazy_static
 
-[lazy_static]は、実行時にしか初期化できない (`new()`関数でのみオブジェクトが構築できる) ような、複雑なオブジェクトの`static`変数を作るために使います。通常、`new()`関数でオブジェクトを作るような構造体は、コンパイル時に値が計算できないため、`static`変数の初期化には使えません。また、`lazy_static`は、`static`変数を1度だけ初期化する機能も提供します。`lazy_static`マクロで作られた`static`変数は、その変数が実行時に最初に使用される時に、初期化されます。
+[lazy_static]は、実行時にしか初期化できない (**new()**関数でのみオブジェクトが構築できる) ような、複雑なオブジェクトの**static**変数を作るために使います。通常、**new()**関数でオブジェクトを作るような構造体は、コンパイル時に値が計算できないため、**static**変数の初期化には使えません。また、**lazy_static**は、**static**変数を1度だけ初期化する機能も提供します。**lazy_static**マクロで作られた**static**変数は、その変数が実行時に最初に使用される時に、初期化されます。
 
 [lazy_static]: https://crates.io/crates/lazy_static
 
-例えば、[Writing an OS in RustのVGA Text mode Lazy Statics]では、VGAにテキストを描画するグローバルインタフェース`WRITER`の実装で使用しています。
+例えば、[Writing an OS in RustのVGA Text mode Lazy Statics]では、VGAにテキストを描画するグローバルインタフェース**WRITER**の実装で使用しています。
 
 [Writing an OS in RustのVGA Text mode Lazy Statics]: https://os.phil-opp.com/vga-text-mode/#lazy-statics
 
@@ -81,11 +81,11 @@ lazy_static! {
 }
 ```
 
-`Mutex<Writer>`という初期化が非常に複雑なオブジェクトの参照が`static`変数になっていることがわかります。このように実行時にしか構築できない値も`static`変数にできる上、どこで初期化するかに悩まなくて済みます。
+**Mutex<Writer>**という初期化が非常に複雑なオブジェクトの参照が**static**変数になっていることがわかります。このように実行時にしか構築できない値も**static**変数にできる上、どこで初期化するかに悩まなくて済みます。
 
 #### bitflags
 
-[bitflags]は、**型安全**なビットマスクフラグを提供するクレートです。型安全であることがポイントで、誤ったビット操作を起こしにくいです。AndやOrのオペレータも実装されており、`bits()`メソッドで生の値を取り出すことができます。
+[bitflags]は、*型安全*なビットマスクフラグを提供するクレートです。型安全であることがポイントで、誤ったビット操作を起こしにくいです。AndやOrのオペレータも実装されており、**bits()**メソッドで生の値を取り出すことができます。
 
 [bitflags]: https://crates.io/crates/bitflags
 
@@ -115,7 +115,7 @@ fn main() {
 
 #### bit_field
 
-[bit_field]は、ビットフィールドへのアクセスを簡単にするためのクレートです。`BitField`トレイトを提供しており、`i8`, `u8`, `usize`などの整数型が、トレイトを実装しています。
+[bit_field]は、ビットフィールドへのアクセスを簡単にするためのクレートです。**BitField**トレイトを提供しており、**i8**, **u8**, **usize**などの整数型が、トレイトを実装しています。
 
 [bit_field]: https://crates.io/crates/bit_field
 
@@ -137,7 +137,7 @@ assert_eq!(value, 0b110100);
 
 #### bitfield
 
-[bitfield]は、ビットフィールドを定義するマクロを提供するクレートです。`bit_field`とクレート名が似ていますが、別物です。
+[bitfield]は、ビットフィールドを定義するマクロを提供するクレートです。**bit_field**とクレート名が似ていますが、別物です。
 
 [bitfield]: https://docs.rs/bitfield/0.13.1/bitfield/
 
@@ -171,7 +171,7 @@ fn main() {
 
 #### register-rs
 
-[register-rs]は、Rust製のRTOSである`Tock`で利用されているMMIO / CPUレジスタインタフェースです。読み書き可能、読み込み専用、書き込み専用、を表現するジェネリック構造体を提供します。
+[register-rs]は、Rust製のRTOSである**Tock**で利用されているMMIO / CPUレジスタインタフェースです。読み書き可能、読み込み専用、書き込み専用、を表現するジェネリック構造体を提供します。
 
 [register-rs]: https://crates.io/crates/register
 

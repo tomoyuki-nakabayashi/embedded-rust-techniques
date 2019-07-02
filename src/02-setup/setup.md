@@ -18,7 +18,7 @@ Cortex-Mをターゲットとするこれらのインストール手順は、[Th
 
 ## 2-1. Rust
 
-Rustはクロスコンパイルが簡単な言語ですが、デフォルトのインストールでは、ホストマシンのネイティブコンパイルのみをサポートしています。そのため、ターゲットとするクロスコンパイラを追加するために、`rustup`でターゲットを追加します。例えば、ARMのCortex-M0であれば、次の通りです。
+Rustはクロスコンパイルが簡単な言語ですが、デフォルトのインストールでは、ホストマシンのネイティブコンパイルのみをサポートしています。そのため、ターゲットとするクロスコンパイラを追加するために、**rustup**でターゲットを追加します。例えば、ARMのCortex-M0であれば、次の通りです。
 
 ```
 $ rustup target add thumbv6m-none-eabi 
@@ -35,13 +35,13 @@ $ rustup target add thumbv6m-none-eabi
 $ rustc --print target-list
 ```
 
-次に、ターゲットシステムがサポートされていない場合ですが、ターゲットの`specification`をJSON形式のファイルで用意します。
+次に、ターゲットシステムがサポートされていない場合ですが、ターゲットの**specification**をJSON形式のファイルで用意します。
 
 [コンパイラサポート]: ../04-tools/compiler.html
 
 ## 2-2. GDB
 
-読者の中には、LLDBに慣れ親しんだ方も居るかと思います。通常のデバッグに関して、LLDBはGDBと同水準の機能があります。しかし、ターゲットハードウェアにプログラムをアップロードするGDBの`load`コマンド相当のものが、LLDBにはありません。そのため、マイクロコントローラのファームウェア開発に限っては、GDBの利用をおすすめします。
+読者の中には、LLDBに慣れ親しんだ方も居るかと思います。通常のデバッグに関して、LLDBはGDBと同水準の機能があります。しかし、ターゲットハードウェアにプログラムをアップロードするGDBの**load**コマンド相当のものが、LLDBにはありません。そのため、マイクロコントローラのファームウェア開発に限っては、GDBの利用をおすすめします。
 
 ## 2-3. デバッグフレームワーク
 
@@ -54,7 +54,7 @@ $ rustc --print target-list
 
 ## 2-4. cargo-binutils
 
-[cargo-binutils]は、LLVM binary utilitiesを簡単に利用するためのCargoサブコマンドです。`llvm-objdump`や`llvm-size`などをCargoから呼び出すことができます。
+[cargo-binutils]は、LLVM binary utilitiesを簡単に利用するためのCargoサブコマンドです。**llvm-objdump**や**llvm-size**などをCargoから呼び出すことができます。
 
 [cargo-binutils]: https://github.com/rust-embedded/cargo-binutils
 
