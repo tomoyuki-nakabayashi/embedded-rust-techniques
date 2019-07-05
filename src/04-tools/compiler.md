@@ -10,7 +10,7 @@ Rustがサポートしているプラットフォーム一覧は、[Rust Platfor
 
 ここでは、ターゲットシステムを、Tier1からTier3に分類しています。Tier1は「ビルドでき、かつ、動作することが保証されている」ものです。Tier2は「ビルドできることが保証されている」ものです。Tier3は「サポートされているが、ビルドできる保証がない」ものです。
 
-あるアーキテクチャに対して、Rustが提供する最低レベルのサポートは、*有効化されているLLVMバックエンドがある*ことです。次のコマンドにより、Rustコンパイラが使用するLLVMでサポートが有効になっているアーキテクチャを確認できます。
+あるアーキテクチャに対して、Rustが提供する最低レベルのサポートは、**有効化されているLLVMバックエンドがある**ことです。次のコマンドにより、Rustコンパイラが使用するLLVMでサポートが有効になっているアーキテクチャを確認できます。
 
 ```
 $ cargo objdump -- -version
@@ -71,17 +71,17 @@ LLVM (http://llvm.org/):
     xcore      - XCore
 ```
 
-**amdgcn**、**avr**、**xcore**など、Rustコンパイラではサポートされていないアーキテクチャがあります。Rustコンパイラではこれらのアーキテクチャサポートが無効化されて、配布されています。
+`amdgcn`、`avr`、`xcore`など、Rustコンパイラではサポートされていないアーキテクチャがあります。Rustコンパイラではこれらのアーキテクチャサポートが無効化されて、配布されています。
 
 ### Rustがサポートしていないターゲットのビルド
 
 ここから先は、著者が試したことがないため、参考情報となります。
 
-もし使用したいターゲットが、Rustコンパイラで無効化されている場合 (上述の**amdcgn**や**avr**) 、Rustのソースコードを修正しなければなりません。[rust-lang/rust#52787]の最初の2つのコミットがヒントになります。
+もし使用したいターゲットが、Rustコンパイラで無効化されている場合 (上述の`amdcgn`や`avr`) 、Rustのソースコードを修正しなければなりません。[rust-lang/rust#52787]の最初の2つのコミットがヒントになります。
 
 [rust-lang/rust#52787]: https://github.com/rust-lang/rust/pull/52787
 
-メインラインのLLVMがターゲットアーキテクチャをサポートしていない場合でも、LLVMのforkが存在しているのであれば、**rustc**のビルド前にLLVMを差し替えることが可能です。[Rust on the ESP and how to get started]では、LLVMのXtensa forkを使用し、ESPをターゲットにRustのコードをコンパイルする方法が紹介されています。
+メインラインのLLVMがターゲットアーキテクチャをサポートしていない場合でも、LLVMのforkが存在しているのであれば、`rustc`のビルド前にLLVMを差し替えることが可能です。[Rust on the ESP and how to get started]では、LLVMのXtensa forkを使用し、ESPをターゲットにRustのコードをコンパイルする方法が紹介されています。
 
 [Rust on the ESP and how to get started]: https://dentrassi.de/2019/06/16/rust-on-the-esp-and-how-to-get-started/
 

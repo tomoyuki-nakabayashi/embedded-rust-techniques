@@ -10,7 +10,7 @@ Yoctoは、組込みLinuxディストリビューションを作成するため�
 
 Yoctoの基礎から説明するスキルが著者にないため、Yoctoを触ったことある方向けの情報になります。ご了承下さい。
 
-ターゲット環境はRaspberry Pi3で、Yoctoのバージョンは**thud**です。
+ターゲット環境はRaspberry Pi3で、Yoctoのバージョンは`thud`です。
 
 ### meta-rust
 
@@ -28,7 +28,7 @@ git clone git://git.yoctoproject.org/meta-raspberrypi -b thud
 git clone git://git.openembedded.org/meta-openembedded -b thud
 ```
 
-次に、Rustのパッケージを含んでいる**meta-rust**をcloneします。
+次に、Rustのパッケージを含んでいる`meta-rust`をcloneします。
 
 ```
 git clone https://github.com/meta-rust/meta-rust.git
@@ -50,7 +50,7 @@ bitbake-layers add-layer ../layers/meta-raspberrypi
 bitbake-layers add-layer ../layers/meta-rust
 ```
 
-**local.conf**を修正します。
+`local.conf`を修正します。
 
 ターゲットをRaspberry Pi3にします。
 
@@ -70,15 +70,15 @@ IMAGE_INSTALL_append = " rust-hello-world"
 bitbake core-image-base
 ```
 
-**dd**コマンドでマイクロSDカードにイメージを書き込みます。
+`dd`コマンドでマイクロSDカードにイメージを書き込みます。
 
 ```
 sudo dd if=tmp/deploy/images/raspberrypi3/core-image-base-raspberrypi3.rpi-sdimg of=/dev/sdX bs=100M
 ```
 
-**/sdX**は使用している環境に合わせて適宜変更して下さい。
+`/sdX`は使用している環境に合わせて適宜変更して下さい。
 
-raspberry pi3を起動して、**rust-hello-world**を実行します。
+raspberry pi3を起動して、`rust-hello-world`を実行します。
 
 ```
 # rust-hello-world
@@ -91,15 +91,15 @@ Hello, world!
 
 [cargo-bitbake]: https://github.com/cardoe/cargo-bitbake
 
-[cargo-bitbake]は、既存のCargoプロジェクトから**meta-rust**のYoctoレシピを作成してくれるCargoの拡張機能です。
+[cargo-bitbake]は、既存のCargoプロジェクトから`meta-rust`のYoctoレシピを作成してくれるCargoの拡張機能です。
 
-**cargo-bitbake**は**libssl-dev**を使用するため、インストールします。
+`cargo-bitbake`は`libssl-dev`を使用するため、インストールします。
 
 ```
 sudo apt install libssl-dev
 ```
 
-**cargo-bitbake**をインストールします。
+`cargo-bitbake`をインストールします。
 
 ```
 cargo install cargo-bitbake
@@ -134,7 +134,7 @@ inherit cargo
 SRC_URI += "git://github.com/BurntSushi/ripgrep.git;protocol=https"
 ```
 
-**LIC_FILES_CHKSUM**だけは、手動で変更する必要があります。
+`LIC_FILES_CHKSUM`だけは、手動で変更する必要があります。
 
 ```
 # FIXME: update generateme with the real MD5 of the license file
@@ -143,7 +143,7 @@ file://Unlicense OR MIT;md5=generateme \
 "
 ```
 
-**ripgrep**では、**COPYING**ファイルにライセンス情報が記載されています。**md5sum**コマンドでチェックサムを計算して、レシピを修正します。
+`ripgrep`では、`COPYING`ファイルにライセンス情報が記載されています。`md5sum`コマンドでチェックサムを計算して、レシピを修正します。
 
 ```
 md5sum COPYING
@@ -161,7 +161,7 @@ file://COPYING;md5=034e2d49ef70c35b64be514bef39415a \
 "
 ```
 
-**layers/meta-rust/recipes-example/ripgrep/**ディレクトリを作成し、自動生成されたレシピファイルをコピーします。
+`layers/meta-rust/recipes-example/ripgrep/`ディレクトリを作成し、自動生成されたレシピファイルをコピーします。
 
 ```
 mkdir ../layers/meta-rust/recipes-example/ripgrep/
@@ -174,17 +174,17 @@ cp <path to ripgrep>/ripgrep_11.0.1.bb ../layers/meta-rust/recipes-example/ripgr
 bitbake ripgrep
 ```
 
-これで、**ripgrep**がビルドできます。
+これで、`ripgrep`がビルドできます。
 
 ### meta-rust-bin
 
 [meta-rust-bin]: https://github.com/rust-embedded/meta-rust-bin
 
-**meta-rust**では、LLVM、Rustコンパイラ、CargoをビルドしてRustツールチェインを構築するため、ビルド時間が大幅に増加します。それにも関わらず、Yoctoで作成したクロス開発環境には、このツールチェインが含まれません。純粋に、Rustのプロジェクトをビルドするだけであれば、既存のRustツールチェインバイナリを取得する方がよほどお手軽です。
+`meta-rust`では、LLVM、Rustコンパイラ、CargoをビルドしてRustツールチェインを構築するため、ビルド時間が大幅に増加します。それにも関わらず、Yoctoで作成したクロス開発環境には、このツールチェインが含まれません。純粋に、Rustのプロジェクトをビルドするだけであれば、既存のRustツールチェインバイナリを取得する方がよほどお手軽です。
 
 そこで、Rustのツールチェインバイナリを取得して、Rustプロジェクトをビルドする[meta-rust-bin]があります。
 
-**meta-rust**と異なり、こちらは、pokyのバージョンが**sumo**までしか対応されていません (2019/6/22現在)。
+`meta-rust`と異なり、こちらは、pokyのバージョンが`sumo`までしか対応されていません (2019/6/22現在)。
 
 ```
 mkdir -p rpi-sumo/layers
@@ -211,13 +211,13 @@ bitbake-layers add-layer ../layers/meta-raspberrypi
 bitbake-layers add-layer ../layers/meta-rust-bin
 ```
 
-**meta-rust-bin**には、レシピ例が同梱されていないため、サンプルアプリのレシピを作成します。**meta-rust**の**rust-hello-world**レシピがそのまま利用できます。
+`meta-rust-bin`には、レシピ例が同梱されていないため、サンプルアプリのレシピを作成します。`meta-rust`の`rust-hello-world`レシピがそのまま利用できます。
 
 ```
 cp -r <path to meta-rust>/recipes-example/rust-hello-world/ ../layers/meta-rust-bin/
 ```
 
-**local.conf**を修正します。
+`local.conf`を修正します。
 
 ターゲットをRaspberry Pi3にします。
 
@@ -237,15 +237,15 @@ IMAGE_INSTALL_append = " rust-hello-world"
 bitbake core-image-base
 ```
 
-**dd**コマンドでマイクロSDカードにイメージを書き込みます。
+`dd`コマンドでマイクロSDカードにイメージを書き込みます。
 
 ```
 sudo dd if=tmp/deploy/images/raspberrypi3/core-image-base-raspberrypi3.rpi-sdimg of=/dev/sdX bs=100M
 ```
 
-**/sdX**は使用している環境に合わせて適宜変更して下さい。
+`/sdX`は使用している環境に合わせて適宜変更して下さい。
 
-raspberry pi3を起動して、**rust-hello-world**を実行します。
+raspberry pi3を起動して、`rust-hello-world`を実行します。
 
 ```
 # rust-hello-world
@@ -254,7 +254,7 @@ Hello, world!
 
 無事、実行できます。
 
-**meta-rust-bin**でも**ripgrep**をビルドしてみます。レシピの用意は簡単です。
+`meta-rust-bin`でも`ripgrep`をビルドしてみます。レシピの用意は簡単です。
 
 ```
 inherit cargo
@@ -273,17 +273,17 @@ LIC_FILES_CHKSUM = "file://LICENSE-MIT;md5=8d0d0aa488af0ab9aafa3b85a7fc8e12"
 bitbake ripgrep
 ```
 
-これで、**ripgrep**がビルドできます。
+これで、`ripgrep`がビルドできます。
 
 #### meta-rustとの比較
 
-ラズパイ3の**core-image-base**に**rust-hello-world**を追加したイメージのフルビルドにかかる時間を計測したろころ、**meta-rust**が約220分、**meta-rust-bin**が約75分でした。Yoctoのバージョンが異なるため、完全なベンチマークとは言えませんが、**meta-rust-bin**の方がビルド時間がかなり短いです。
+ラズパイ3の`core-image-base`に`rust-hello-world`を追加したイメージのフルビルドにかかる時間を計測したろころ、`meta-rust`が約220分、`meta-rust-bin`が約75分でした。Yoctoのバージョンが異なるため、完全なベンチマークとは言えませんが、`meta-rust-bin`の方がビルド時間がかなり短いです。
 
-**meta-rust-bin**はビルド済みのRustツールチェインを利用するため、Rustコンパイラをカスタマイズしてビルドする、ということができません。Rustが公式にサポートしていないアーキテクチャをターゲットにする場合は、**meta-rust**の利用が必要です。
+`meta-rust-bin`はビルド済みのRustツールチェインを利用するため、Rustコンパイラをカスタマイズしてビルドする、ということができません。Rustが公式にサポートしていないアーキテクチャをターゲットにする場合は、`meta-rust`の利用が必要です。
 
 また、ビルド済みのRust標準ライブラリを利用するため、カスタムビルドされた標準ライブラリよりパフォーマンスが低い可能性があります。
 
-**cargo-bitbake**で自動生成するレシピは、**meta-rust-bin**のclassとは互換性がありません。**meta-rust-bin**のレシピを用意するのは、それほど難しくないため、大きなデメリットではありません。
+`cargo-bitbake`で自動生成するレシピは、`meta-rust-bin`のclassとは互換性がありません。`meta-rust-bin`のレシピを用意するのは、それほど難しくないため、大きなデメリットではありません。
 
 #### 参考
 
