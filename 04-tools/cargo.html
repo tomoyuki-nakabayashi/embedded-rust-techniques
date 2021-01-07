@@ -1,0 +1,296 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Cargo - Embedded Rust Techniques</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../01-introduction/introduction.html"><strong aria-hidden="true">1.</strong> はじめに</a></li><li class="chapter-item expanded "><a href="../02-setup/setup.html"><strong aria-hidden="true">2.</strong> 環境構築</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/bare-metal.html"><strong aria-hidden="true">3.</strong> ベアメタルテクニック</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../03-bare-metal/no_std.html"><strong aria-hidden="true">3.1.</strong> no_std</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/panic.html"><strong aria-hidden="true">3.2.</strong> panic</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/print.html"><strong aria-hidden="true">3.3.</strong> print!マクロ</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/linker.html"><strong aria-hidden="true">3.4.</strong> リンカ</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/assembly.html"><strong aria-hidden="true">3.5.</strong> アセンブリ</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/allocator.html"><strong aria-hidden="true">3.6.</strong> メモリアロケータ</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/entry.html"><strong aria-hidden="true">3.7.</strong> entryポイント</a></li></ol></li><li class="chapter-item expanded "><a href="../04-tools/tools.html"><strong aria-hidden="true">4.</strong> ツール</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../04-tools/cargo.html" class="active"><strong aria-hidden="true">4.1.</strong> Cargo</a></li><li class="chapter-item expanded "><a href="../04-tools/compiler.html"><strong aria-hidden="true">4.2.</strong> コンパイラサポート</a></li><li class="chapter-item expanded "><a href="../04-tools/rustc.html"><strong aria-hidden="true">4.3.</strong> rustc</a></li></ol></li><li class="chapter-item expanded "><a href="../05-library/library.html"><strong aria-hidden="true">5.</strong> ライブラリ / フレームワーク</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../05-library/heapless.html"><strong aria-hidden="true">5.1.</strong> heapless</a></li><li class="chapter-item expanded "><a href="../05-library/no_std_crates.html"><strong aria-hidden="true">5.2.</strong> no_stdクレート</a></li><li class="chapter-item expanded "><a href="../05-library/svd2rust.html"><strong aria-hidden="true">5.3.</strong> svd2rust</a></li><li class="chapter-item expanded "><a href="../05-library/rtfm.html"><strong aria-hidden="true">5.4.</strong> RTFM</a></li><li class="chapter-item expanded "><a href="../05-library/tock.html"><strong aria-hidden="true">5.5.</strong> Tock</a></li><li class="chapter-item expanded "><a href="../05-library/testing.html"><strong aria-hidden="true">5.6.</strong> testing</a></li></ol></li><li class="chapter-item expanded "><a href="../06-ffi/ffi.html"><strong aria-hidden="true">6.</strong> FFI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../06-ffi/c-with-rust.html"><strong aria-hidden="true">6.1.</strong> RustからCを呼ぶ</a></li><li class="chapter-item expanded "><a href="../06-ffi/rust-with-c.html"><strong aria-hidden="true">6.2.</strong> CからRustを呼ぶ</a></li><li class="chapter-item expanded "><a href="../06-ffi/zephyr-bindings.html"><strong aria-hidden="true">6.3.</strong> ケーススタディ Zephyr</a></li></ol></li><li class="chapter-item expanded "><a href="../07-linux/embedded-linux.html"><strong aria-hidden="true">7.</strong> 組込みLinux</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../07-linux/basic.html"><strong aria-hidden="true">7.1.</strong> ビルド/テスト</a></li><li class="chapter-item expanded "><a href="../07-linux/yocto.html"><strong aria-hidden="true">7.2.</strong> Yocto</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Embedded Rust Techniques</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2><a class="header" href="#3-1-cargo" id="3-1-cargo">3-1. Cargo</a></h2>
+<p>Rustでの開発に<a href="https://doc.rust-lang.org/cargo/index.html">Cargo</a>は欠かせません。Cargoは、Rustのパッケージマネージャですが、それ以上のことができます。3rd party製のサブコマンド拡張をインストールすることで、Cargoの機能を拡張できます。ここでは、組込み / ベアメタルでのRust開発をより便利にするCargoに機能やサブコマンド拡張について紹介します。</p>
+<h3><a class="header" href="#設定ファイル" id="設定ファイル">設定ファイル</a></h3>
+<p>まず、欠かせないのが、設定ファイルです。どのような設定項目が書けるか、は<a href="https://doc.rust-lang.org/cargo/reference/config.html">Cargo: 3.3 Configuration</a>に掲載されています。</p>
+<p>Cargo設定ファイルはTOML形式で記述し、プロジェクトの<code>.cargo/config</code>に作成することが多いです。実際は、階層的な作りになっています。どのような階層構造になっているか、は<a href="https://doc.rust-lang.org/cargo/reference/config.html#hierarchical-structure">Cargo: 3.3 Configuration 階層構造</a>を参照して下さい。</p>
+<p>組込み / ベアメタルでよく使う設定項目は、<code>target</code>と<code>build</code>です。</p>
+<h4><a class="header" href="#targettriple" id="targettriple">target.$triple</a></h4>
+<p><code>target.$triple</code>はターゲットトリプルごとに、カスタムする内容を設定します。<code>$triple</code>の部分に、有効なターゲットトリプルを指定します。カスタムランナーの設定やコンパイルオプションの指定などに使います。例えば、Cortex-M3ターゲットの時は<code>qemu-system-arm</code>で、RISC-Vターゲットの時は<code>qmue-system-riscv32</code>を、それぞれカスタムランナーにしたい場合、次のように設定ファイルを記述します。</p>
+<pre><code class="language-toml">[target.thumbv7m-none-eabi]
+runner = &quot;qemu-system-arm -machine lm3s6965evb -nographic -kernel&quot;
+
+[target.riscv32imac-unknown-none-elf]
+runner = &quot;qemu-system-riscv32 -nographic -machine sifive_u -kernel&quot;
+</code></pre>
+<p>これで、<code>cargo run --target thumbv7m-none-eabi</code>や<code>cargo run --target riscv32imac-unknown-none-elf</code>というコマンドを実行すると、QEMUでビルドしたバイナリを実行します。</p>
+<p>次の4項目が設定できます。</p>
+<ul>
+<li>linker = &quot;..&quot;</li>
+<li>ar = &quot;..&quot;</li>
+<li>runner = &quot;..&quot;</li>
+<li>rustflags = [&quot;..&quot;, &quot;..&quot;]</li>
+</ul>
+<h4><a class="header" href="#targetcfg" id="targetcfg">target.'cfg</a></h4>
+<p><code>target.$triple</code>は、ターゲットトリプルを完全に指定する方法です。一方、<code>target.'cfg</code>は、条件を複数指定して、カスタマイズできます。</p>
+<p>下記の例は、ターゲットアーキテクチャが32bitのARMで、OSなしのターゲットトリプル全てに適用されます。</p>
+<pre><code class="language-toml">[target.'cfg(all(target_arch = &quot;arm&quot;, target_os = &quot;none&quot;))']
+rustflags = [
+  &quot;-C&quot;, &quot;link-arg=-Tlink.x&quot;,
+]
+</code></pre>
+<h4><a class="header" href="#build" id="build">build</a></h4>
+<p>デフォルトのターゲットシステムが固定の場合、<code>cargo run --target thumbv7m-none-eabi</code>という長いコマンドを毎回入力するのは面倒です。そこで、<code>build</code>設定でデフォルトターゲットシステムを指定できます。</p>
+<pre><code class="language-toml">[build]
+target = &quot;thumbv7m-none-eabi&quot;
+</code></pre>
+<p><code>cargo run</code>で、<code>cargo run --target thumbv7m-none-eabi</code>と等価になります。</p>
+<h3><a class="header" href="#binutils" id="binutils">binutils</a></h3>
+<p>組込み / ベアメタルの開発において、バイナリを調査することは、息をするより自然なことです。バイナリの調査を行う際、<code>objdump</code>、<code>size</code>、<code>readelf</code>、<code>nm</code>などのツールを利用します。GNUのbinutilsを使用しても良いのですが、LLVMのものを利用すると、rustcがサポートするターゲットアーキテクチャ全てに対応しており、便利です。</p>
+<p>Cargoのサブコマンドである<a href="https://github.com/rust-embedded/cargo-binutils">cargo binutils</a>が提供されており、Cargoから<code>objdump</code>や<code>size</code>コマンドを利用できます。</p>
+<p>インストールも非常に簡単です。</p>
+<pre><code>$ cargo install cargo-binutils
+$ rustup component add llvm-tools-preview
+</code></pre>
+<p>プロジェクトバイナリ名が<code>app</code>の場合、次のように使用します。</p>
+<pre><code>$ cargo size --target thumbv7m-none-eabi --bin app
+</code></pre>
+<p>Cargo設定ファイルで、buildターゲットを指定している場合、次のコマンドで同じことができます。</p>
+<pre><code>$ cargo size --bin app
+</code></pre>
+<p>リリースビルドしたバイナリを調査する場合、<code>--release</code>を追加します。</p>
+<pre><code>$ cargo size --bin app --release
+</code></pre>
+<p>LLVMツール自体のオプションを使用する場合、空の<code>--</code>を入力した後にLLVMのオプションを指定します。</p>
+<pre><code>$ cargo objdump --bin app -- -d -no-show-raw-insn
+#                         ^^^^^^^^^^^^^^^^^^^^^^^
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../04-tools/tools.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../04-tools/compiler.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../04-tools/tools.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../04-tools/compiler.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

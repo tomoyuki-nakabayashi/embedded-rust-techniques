@@ -1,0 +1,394 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>no_stdクレート - Embedded Rust Techniques</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../01-introduction/introduction.html"><strong aria-hidden="true">1.</strong> はじめに</a></li><li class="chapter-item expanded "><a href="../02-setup/setup.html"><strong aria-hidden="true">2.</strong> 環境構築</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/bare-metal.html"><strong aria-hidden="true">3.</strong> ベアメタルテクニック</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../03-bare-metal/no_std.html"><strong aria-hidden="true">3.1.</strong> no_std</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/panic.html"><strong aria-hidden="true">3.2.</strong> panic</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/print.html"><strong aria-hidden="true">3.3.</strong> print!マクロ</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/linker.html"><strong aria-hidden="true">3.4.</strong> リンカ</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/assembly.html"><strong aria-hidden="true">3.5.</strong> アセンブリ</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/allocator.html"><strong aria-hidden="true">3.6.</strong> メモリアロケータ</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/entry.html"><strong aria-hidden="true">3.7.</strong> entryポイント</a></li></ol></li><li class="chapter-item expanded "><a href="../04-tools/tools.html"><strong aria-hidden="true">4.</strong> ツール</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../04-tools/cargo.html"><strong aria-hidden="true">4.1.</strong> Cargo</a></li><li class="chapter-item expanded "><a href="../04-tools/compiler.html"><strong aria-hidden="true">4.2.</strong> コンパイラサポート</a></li><li class="chapter-item expanded "><a href="../04-tools/rustc.html"><strong aria-hidden="true">4.3.</strong> rustc</a></li></ol></li><li class="chapter-item expanded "><a href="../05-library/library.html"><strong aria-hidden="true">5.</strong> ライブラリ / フレームワーク</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../05-library/heapless.html"><strong aria-hidden="true">5.1.</strong> heapless</a></li><li class="chapter-item expanded "><a href="../05-library/no_std_crates.html" class="active"><strong aria-hidden="true">5.2.</strong> no_stdクレート</a></li><li class="chapter-item expanded "><a href="../05-library/svd2rust.html"><strong aria-hidden="true">5.3.</strong> svd2rust</a></li><li class="chapter-item expanded "><a href="../05-library/rtfm.html"><strong aria-hidden="true">5.4.</strong> RTFM</a></li><li class="chapter-item expanded "><a href="../05-library/tock.html"><strong aria-hidden="true">5.5.</strong> Tock</a></li><li class="chapter-item expanded "><a href="../05-library/testing.html"><strong aria-hidden="true">5.6.</strong> testing</a></li></ol></li><li class="chapter-item expanded "><a href="../06-ffi/ffi.html"><strong aria-hidden="true">6.</strong> FFI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../06-ffi/c-with-rust.html"><strong aria-hidden="true">6.1.</strong> RustからCを呼ぶ</a></li><li class="chapter-item expanded "><a href="../06-ffi/rust-with-c.html"><strong aria-hidden="true">6.2.</strong> CからRustを呼ぶ</a></li><li class="chapter-item expanded "><a href="../06-ffi/zephyr-bindings.html"><strong aria-hidden="true">6.3.</strong> ケーススタディ Zephyr</a></li></ol></li><li class="chapter-item expanded "><a href="../07-linux/embedded-linux.html"><strong aria-hidden="true">7.</strong> 組込みLinux</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../07-linux/basic.html"><strong aria-hidden="true">7.1.</strong> ビルド/テスト</a></li><li class="chapter-item expanded "><a href="../07-linux/yocto.html"><strong aria-hidden="true">7.2.</strong> Yocto</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Embedded Rust Techniques</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2><a class="header" href="#5-2-no_stdクレート" id="5-2-no_stdクレート">5-2. no_stdクレート</a></h2>
+<p>no_stdや組込みで利用可能なクレートを紹介します。Rustのクレートが登録されている<code>crates.io</code>には、<a href="https://crates.io/categories/no-std">crates.io No standard library</a>カテゴリがあります。2019/5/16現在、840ものクレートが登録されています。</p>
+<p>組込みに関連するものは、<a href="https://github.com/rust-embedded/awesome-embedded-rust">awesome-embedded-rust</a>に主要なものがまとめられています。</p>
+<h3><a class="header" href="#rt-runtime-クレート" id="rt-runtime-クレート">rt (runtime) クレート</a></h3>
+<p>rtクレートは、ターゲットアーキテクチャ用の最小限のスタートアップ / ランタイムを提供するクレートです。<a href="https://github.com/rust-embedded/cortex-m-rt">cortex-m-rt</a>、<a href="https://github.com/rust-embedded/msp430-rt">msp430-rt</a>、<a href="https://github.com/rust-embedded/riscv-rt">riscv-rt</a>の3つのターゲットアーキテクチャに対して実装が存在しています。</p>
+<p>これらのクレートは、以下の機能を提供します。</p>
+<ul>
+<li><code>.bss</code>と<code>.data</code>セクションの初期化</li>
+<li>FPUの初期化</li>
+<li>プログラムのエントリポイントを指定するための<code>#[entry]</code>アトリビュート</li>
+<li><code>static</code>変数が初期化される前に呼ばれるコードを指定するための<code>#[pre_init]</code>アトリビュート</li>
+<li>一般的なターゲットアーキテクチャ用のリンカスクリプト</li>
+<li>ヒープ領域の開始アドレスを表す<code>_sheap</code>シンボル</li>
+</ul>
+<p>このクレートを使用することで、次のようにアプリケーションのmainコードからプログラムを記述することができます。</p>
+<pre><code class="language-rust ignore">#![no_std]
+#![no_main]
+
+extern crate panic_halt;
+
+use cortex_m_rt::entry;
+
+// `main`をこのアプリケーションのエントリポイントであるかのように利用できます。
+// `main`は戻れません
+#[entry]
+fn main() -&gt; ! {
+    // ここに処理を書きます
+    loop { }
+}
+</code></pre>
+<p><a href="https://tomoyuki-nakabayashi.github.io/embedonomicon/">Embedonomicon</a>は、このような<code>rt</code>クレートの実装方法を解説しています。</p>
+<h3><a class="header" href="#embedded-hal" id="embedded-hal">embedded HAL</a></h3>
+<p><a href="https://github.com/rust-embedded/embedded-hal">embedded HAL</a>は、組込みRustで共通して利用できる<code>trait</code>を定義しているクレートです。例えば、SPIやシリアル、といったトレイトが定義されています。</p>
+<p>このクレートの抽象を利用して、デバイスドライバを書くことで、アプリケーションの再利用性が向上します。組込みRustの多くのプロジェクトが、このembedded HALを利用しています。</p>
+<h3><a class="header" href="#その他" id="その他">その他</a></h3>
+<h4><a class="header" href="#lazy_static" id="lazy_static">lazy_static</a></h4>
+<p><a href="https://crates.io/crates/lazy_static">lazy_static</a>は、実行時にしか初期化できない (<code>new()</code>関数でのみオブジェクトが構築できる) ような、複雑なオブジェクトの<code>static</code>変数を作るために使います。通常、<code>new()</code>関数でオブジェクトを作るような構造体は、コンパイル時に値が計算できないため、<code>static</code>変数の初期化には使えません。また、<code>lazy_static</code>は、<code>static</code>変数を1度だけ初期化する機能も提供します。<code>lazy_static</code>マクロで作られた<code>static</code>変数は、その変数が実行時に最初に使用される時に、初期化されます。</p>
+<p>例えば、<a href="https://os.phil-opp.com/vga-text-mode/#lazy-statics">Writing an OS in RustのVGA Text mode Lazy Statics</a>では、VGAにテキストを描画するグローバルインタフェース<code>WRITER</code>の実装で使用しています。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use lazy_static::lazy_static;
+use spin::Mutex;
+
+lazy_static! {
+    pub static ref WRITER: Mutex&lt;Writer&gt; = Mutex::new(Writer {
+        column_position: 0,
+        color_code: ColorCode::new(Color::Yellow, Color::Black),
+        buffer: unsafe { &amp;mut *(0xb8000 as *mut Buffer) },
+    });
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>Mutex&lt;Writer&gt;</code>という初期化が非常に複雑なオブジェクトの参照が<code>static</code>変数になっていることがわかります。このように実行時にしか構築できない値も<code>static</code>変数にできる上、どこで初期化するかに悩まなくて済みます。</p>
+<h4><a class="header" href="#bitflags" id="bitflags">bitflags</a></h4>
+<p><a href="https://crates.io/crates/bitflags">bitflags</a>は、<strong>型安全</strong>なビットマスクフラグを提供するクレートです。型安全であることがポイントで、誤ったビット操作を起こしにくいです。AndやOrのオペレータも実装されており、<code>bits()</code>メソッドで生の値を取り出すことができます。</p>
+<pre><pre class="playground"><code class="language-rust">#[macro_use]
+extern crate bitflags;
+
+bitflags! {
+    struct Flags: u32 {
+        const A = 0b00000001;
+        const B = 0b00000010;
+        const C = 0b00000100;
+        const ABC = Self::A.bits | Self::B.bits | Self::C.bits;
+    }
+}
+
+fn main() {
+    let e1 = Flags::A | Flags::C;
+    let e2 = Flags::B | Flags::C;
+    assert_eq!((e1 | e2), Flags::ABC);   // union
+    assert_eq!((e1 &amp; e2), Flags::C);     // intersection
+    assert_eq!((e1 - e2), Flags::A);     // set difference
+    assert_eq!(!e2, Flags::A);           // set complement
+    assert_eq!(e1.bits(), 5u32);         // get raw value
+}
+</code></pre></pre>
+<h4><a class="header" href="#bit_field" id="bit_field">bit_field</a></h4>
+<p><a href="https://crates.io/crates/bit_field">bit_field</a>は、ビットフィールドへのアクセスを簡単にするためのクレートです。<code>BitField</code>トレイトを提供しており、<code>i8</code>, <code>u8</code>, <code>usize</code>などの整数型が、トレイトを実装しています。</p>
+<p>ビットフィールドへのアクセスは、次のように書けます。</p>
+<pre><code class="language-rust ignore">let mut value: u32 = 0b110101;
+
+assert_eq!(value.get_bit(1), false);
+assert_eq!(value.get_bit(2), true);
+assert_eq!(value.get_bits(2..6), 0b1101);
+
+value.set_bit(2, true);
+assert_eq!(value, 0b110111);
+
+value.set_bits(0..2, 0b00);
+assert_eq!(value, 0b110100);
+</code></pre>
+<h4><a class="header" href="#bitfield" id="bitfield">bitfield</a></h4>
+<p><a href="https://docs.rs/bitfield/0.13.1/bitfield/">bitfield</a>は、ビットフィールドを定義するマクロを提供するクレートです。<code>bit_field</code>とクレート名が似ていますが、別物です。</p>
+<p>下のように、ビットフィールドを定義します。</p>
+<pre><code class="language-rust ignore">bitfield! {
+    #[derive(Clone, Copy, Debug)]
+    pub struct PinSelect(u32);
+    pub connected, set_connected: 31;
+    reserved, _: 30, 6;
+    pub port, set_port: 5;
+    pub pin, set_pin: 4, 0;
+};
+
+fn main() {
+    let mut reg = PinSelect(0);
+
+    reg.set_pin(5);
+    reg.set_port(0);
+    reg.set_connected(1);
+    assert_eq!(0x1000_0005, reg.all_bits());
+}
+</code></pre>
+<h4><a class="header" href="#micromath" id="micromath">micromath</a></h4>
+<p><a href="https://crates.io/crates/micromath">micromath</a>は、軽量な数値計算ライブラリです。三角関数などがあります。加速度計など、センサドライバでの計算に利用できます。</p>
+<h4><a class="header" href="#register-rs" id="register-rs">register-rs</a></h4>
+<p><a href="https://crates.io/crates/register">register-rs</a>は、Rust製のRTOSである<code>Tock</code>で利用されているMMIO / CPUレジスタインタフェースです。読み書き可能、読み込み専用、書き込み専用、を表現するジェネリック構造体を提供します。</p>
+<h4><a class="header" href="#volatile_register" id="volatile_register">volatile_register</a></h4>
+<p><a href="https://docs.rs/volatile-register/0.2.0/volatile_register/">volatile_register</a>は、メモリマップドレジスタへのvolatileアクセスを提供します。<a href="https://crates.io/crates/register">register-rs</a>の簡易版、と言った印象です。</p>
+<pre><code class="language-rust ignore">use volatile_register::RW;
+
+// メモリマップドレジスタブロックを表現するstructを作ります
+/// Nested Vector Interrupt Controller
+#[repr(C)]
+pub struct Nvic {
+    /// Interrupt Set-Enable
+    pub iser: [RW&lt;u32&gt;; 8],
+    reserved0: [u32; 24],
+    /// Interrupt Clear-Enable
+    pub icer: [RW&lt;u32&gt;; 8],
+    reserved1: [u32; 24],
+    // .. more registers ..
+}
+
+// ベースアドレスをキャストしてアクセスします
+let nvic = 0xE000_E100 as *const Nvic;
+// unsafeブロックが必要です
+unsafe { (*nvic).iser[0].write(1) }
+</code></pre>
+<h4><a class="header" href="#embedded-graphics" id="embedded-graphics">embedded-graphics</a></h4>
+<p><a href="https://crates.io/crates/embedded-graphics">embedded-graphics</a>は、2Dグラフィックを簡単に描画するためのクレートです。次の機能を提供します。</p>
+<ul>
+<li>1ビット / ピクセルの画像</li>
+<li>8ビット / ピクセルの画像</li>
+<li>16ビット / ピクセル画像</li>
+<li>プリミティブ
+<ul>
+<li>行、四角、丸、三角</li>
+</ul>
+</li>
+<li>テキスト</li>
+</ul>
+<p>このクレートは、メモリアロケータも事前の巨大なメモリ領域確保も必要としません。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../05-library/heapless.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../05-library/svd2rust.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../05-library/heapless.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../05-library/svd2rust.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

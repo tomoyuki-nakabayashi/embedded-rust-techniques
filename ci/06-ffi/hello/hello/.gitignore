@@ -1,6 +1,0 @@
-build
-.vscode
-echo/target
-echo/lib/bindings.h
-echo/lib/librust.a
-

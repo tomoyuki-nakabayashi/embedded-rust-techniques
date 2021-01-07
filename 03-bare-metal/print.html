@@ -1,0 +1,346 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>print!マクロ - Embedded Rust Techniques</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../01-introduction/introduction.html"><strong aria-hidden="true">1.</strong> はじめに</a></li><li class="chapter-item expanded "><a href="../02-setup/setup.html"><strong aria-hidden="true">2.</strong> 環境構築</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/bare-metal.html"><strong aria-hidden="true">3.</strong> ベアメタルテクニック</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../03-bare-metal/no_std.html"><strong aria-hidden="true">3.1.</strong> no_std</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/panic.html"><strong aria-hidden="true">3.2.</strong> panic</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/print.html" class="active"><strong aria-hidden="true">3.3.</strong> print!マクロ</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/linker.html"><strong aria-hidden="true">3.4.</strong> リンカ</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/assembly.html"><strong aria-hidden="true">3.5.</strong> アセンブリ</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/allocator.html"><strong aria-hidden="true">3.6.</strong> メモリアロケータ</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/entry.html"><strong aria-hidden="true">3.7.</strong> entryポイント</a></li></ol></li><li class="chapter-item expanded "><a href="../04-tools/tools.html"><strong aria-hidden="true">4.</strong> ツール</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../04-tools/cargo.html"><strong aria-hidden="true">4.1.</strong> Cargo</a></li><li class="chapter-item expanded "><a href="../04-tools/compiler.html"><strong aria-hidden="true">4.2.</strong> コンパイラサポート</a></li><li class="chapter-item expanded "><a href="../04-tools/rustc.html"><strong aria-hidden="true">4.3.</strong> rustc</a></li></ol></li><li class="chapter-item expanded "><a href="../05-library/library.html"><strong aria-hidden="true">5.</strong> ライブラリ / フレームワーク</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../05-library/heapless.html"><strong aria-hidden="true">5.1.</strong> heapless</a></li><li class="chapter-item expanded "><a href="../05-library/no_std_crates.html"><strong aria-hidden="true">5.2.</strong> no_stdクレート</a></li><li class="chapter-item expanded "><a href="../05-library/svd2rust.html"><strong aria-hidden="true">5.3.</strong> svd2rust</a></li><li class="chapter-item expanded "><a href="../05-library/rtfm.html"><strong aria-hidden="true">5.4.</strong> RTFM</a></li><li class="chapter-item expanded "><a href="../05-library/tock.html"><strong aria-hidden="true">5.5.</strong> Tock</a></li><li class="chapter-item expanded "><a href="../05-library/testing.html"><strong aria-hidden="true">5.6.</strong> testing</a></li></ol></li><li class="chapter-item expanded "><a href="../06-ffi/ffi.html"><strong aria-hidden="true">6.</strong> FFI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../06-ffi/c-with-rust.html"><strong aria-hidden="true">6.1.</strong> RustからCを呼ぶ</a></li><li class="chapter-item expanded "><a href="../06-ffi/rust-with-c.html"><strong aria-hidden="true">6.2.</strong> CからRustを呼ぶ</a></li><li class="chapter-item expanded "><a href="../06-ffi/zephyr-bindings.html"><strong aria-hidden="true">6.3.</strong> ケーススタディ Zephyr</a></li></ol></li><li class="chapter-item expanded "><a href="../07-linux/embedded-linux.html"><strong aria-hidden="true">7.</strong> 組込みLinux</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../07-linux/basic.html"><strong aria-hidden="true">7.1.</strong> ビルド/テスト</a></li><li class="chapter-item expanded "><a href="../07-linux/yocto.html"><strong aria-hidden="true">7.2.</strong> Yocto</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Embedded Rust Techniques</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2><a class="header" href="#3-3-printマクロ" id="3-3-printマクロ">3-3. print!マクロ</a></h2>
+<p>ベアメタル環境でデバッグする上で、自在にテキストを表示できることは、非常に重要です。Rustでは、<code>print!</code>や<code>println!</code>マクロを使うことで、数値や文字列、構造体までフォーマットして、テキストで表示することができます。</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    println!(&quot;{}, {:?}&quot;, 1, vec!(1, 2, 3));
+}
+</code></pre></pre>
+<p>マイクロコントローラでは、文字出力はUARTで行うことが多いです。例えば、今、次のような関数を使って、1文字のASCII文字を表示できるとします。土台としては、これだけあればRustの文字列フォーマッタを利用可能です。(UARTペリフェラルの初期化がが必要な点や、TXバッファに空きがあるかどうか調べなければならない点は、一旦目を瞑って下さい)</p>
+<pre><code class="language-rust ignore">fn write_byte(c: u8) {
+    unsafe {
+        *UART0_TX = c;
+    }
+}
+</code></pre>
+<p>この状態で数値や文字列、構造体をテキストで表示しようとすると、まず文字列に変換しなければなりません。これを、自前で実装するのは、容易ではありません。読者の中には、C言語で<code>printf()</code>関数を (部分的に) 自作した経験がある方が、多数いらっしゃるかと思います。あれはあれで貴重な経験ではありますが、Rustではより簡単に、<strong>型安全</strong>なテキスト表示マクロを実装できます。</p>
+<p>では、上記関数を使って、<code>std</code>環境と同じように利用できる<code>print!</code> / <code>println!</code>マクロを実装しましょう。</p>
+<p>まず、全貌をお見せします。</p>
+<pre><code class="language-rust ignore">use core::fmt::{self, Write};
+
+#[macro_export]
+macro_rules! print {
+    ($($arg:tt)*) =&gt; ($crate::_print(format_args!($($arg)*)));
+}
+
+#[macro_export]
+macro_rules! println {
+    ($fmt:expr) =&gt; (print!(concat!($fmt, &quot;\n&quot;)));
+    ($fmt:expr, $($arg:tt)*) =&gt; (print!(concat!($fmt, &quot;\n&quot;), $($arg)*));
+}
+
+pub fn _print(args: fmt::Arguments) {
+    let mut writer = UartWriter {};
+    writer.write_fmt(args).unwrap();
+}
+
+struct UartWriter;
+
+impl Write for UartWriter {
+    fn write_str(&amp;mut self, s: &amp;str) -&gt; fmt::Result {
+        for c in s.bytes() {
+            write_byte(c);
+        }
+        Ok(())
+    }
+}
+</code></pre>
+<p>これで全てです。この30行にも満たないコードを追加するだけで、<code>std</code>環境と同じように<code>println!</code>が使えます。順番に解説していきます。</p>
+<p>まず、<code>print!</code>マクロの実装です。</p>
+<pre><code class="language-rust ignore">#[macro_export]
+macro_rules! print {
+    ($($arg:tt)*) =&gt; ($crate::_print(format_args!($($arg)*)));
+}
+</code></pre>
+<p>最も重要な部分は、<code>format_args!</code>マクロの呼び出しです。<code>format_args!</code>マクロは、コンパイラ組込みの手続きマクロで、文字列フォーマットの中心を担うAPIです。このマクロは、与えられたフォーマット文字列と引数群から、<code>core::fmt::Arguments</code>を構築するコードを生成します。この辺りの話については、<a href="https://ubnt-intrepid.github.io/blog/2017/10/11/rust-format-args/">Rustの文字列フォーマット回り (改訂版)</a>で非常に詳しく解説されています。ここでは詳細を割愛します。</p>
+<p><code>$crate::_print()</code>は、<code>format_args!</code>マクロの出力である<code>core::fmt::Arguments</code>を引数に取るラッパー関数です。</p>
+<pre><code class="language-rust ignore">pub fn _print(args: fmt::Arguments) {
+    let mut writer = UartWriter {};
+    writer.write_fmt(args).unwrap();
+}
+</code></pre>
+<p>フォーマット文字列をUARTに出力する<code>UartWriter</code>構造体のオブジェクトを作成し、<code>core::fmt::Write</code>トレイトの<code>write_fmt</code>メソッドを呼び出します。<code>UartWriter</code>は、ここではかなり実装を簡略化しており、中身のない空の構造体です。ハードウェアの排他制御などは、今回は考慮に入れていません。</p>
+<pre><code class="language-rust ignore">struct UartWriter;
+
+impl Write for UartWriter {
+    fn write_str(&amp;mut self, s: &amp;str) -&gt; fmt::Result {
+        for c in s.bytes() {
+            write_byte(c);
+        }
+        Ok(())
+    }
+}
+</code></pre>
+<p>フォーマット文字列を取り扱うために、<code>UartWriter</code>は<code>core::fmt::Write</code>トレイトを実装します。<code>write_fmt</code>メソッドは、デフォルトメソッドなので、<code>write_str</code>だけ実装すれば良いです。<code>write_str</code>メソッドの関数シグネチャは、<code>fn (&amp;mut self, &amp;str) -&gt; fmt::Result</code>となっており、<code>&amp;str</code>の形で渡されるフォーマット済み文字列をどのように出力するか、を実装します。上記コードでは、イテレータで1バイトずつ取得し、<code>write_byte</code>関数でUARTに1バイトずつ送信します。</p>
+<p>それでは、実行してみましょう。<code>03-bare-metal/print</code>ディレクトリに、QEMUで動作するサンプルがあります。リセットベクタ内で、<code>println!</code>マクロを呼び出します。</p>
+<pre><code class="language-rust ignore">#[no_mangle]
+pub unsafe extern &quot;C&quot; fn Reset() -&gt; ! {
+    println!(&quot;Hello {}&quot;, &quot;Rust&quot;);
+    // 中略
+}
+</code></pre>
+<p>次のコマンドで実行できます (<code>thumbv7m-none-eabi</code>のクロスコンパイラとqemu-system-armが必要です) 。</p>
+<pre><code>$ cargo run
+</code></pre>
+<pre><code>     Running `qemu-system-arm -cpu cortex-m3 -machine lm3s6965evb -nographic -semihosting-config enable=on,target=native -kernel target/thumbv7m-none-eabi/debug/print`
+Hello Rust
+</code></pre>
+<blockquote>
+<p>注意：このサンプルはQEMUでしか動作しません。QEMUのUARTは初期設定不要で雑に使えるため、非常に便利です。</p>
+</blockquote>
+<p>また、<a href="panic.html">panic</a>で紹介した通り、panic時の情報を表示する際も便利です。</p>
+<pre><code class="language-rust ignore">pub unsafe extern &quot;C&quot; fn Reset() -&gt; ! {
+    panic!(&quot;explicit panic!&quot;);
+}
+
+#[panic_handler]
+fn panic(panic: &amp;PanicInfo) -&gt; ! {
+    println!(&quot;{}&quot;, panic);
+    loop {}
+}
+</code></pre>
+<p>実行すると、panicを発生させたソースコードの位置と、メッセージを表示します。</p>
+<pre><code>panicked at 'explicit panic!', src/main.rs:10:5
+</code></pre>
+<h4><a class="header" href="#出典" id="出典">出典</a></h4>
+<ul>
+<li>Discovery: <a href="https://tomoyuki-nakabayashi.github.io/discovery/11-usart/uprintln.html">urpintln!</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../03-bare-metal/panic.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../03-bare-metal/linker.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../03-bare-metal/panic.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../03-bare-metal/linker.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

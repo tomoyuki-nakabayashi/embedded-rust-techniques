@@ -1,0 +1,2452 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Embedded Rust Techniques</title>
+        
+        <meta name="robots" content="noindex" />
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="01-introduction/introduction.html"><strong aria-hidden="true">1.</strong> はじめに</a></li><li class="chapter-item expanded "><a href="02-setup/setup.html"><strong aria-hidden="true">2.</strong> 環境構築</a></li><li class="chapter-item expanded "><a href="03-bare-metal/bare-metal.html"><strong aria-hidden="true">3.</strong> ベアメタルテクニック</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="03-bare-metal/no_std.html"><strong aria-hidden="true">3.1.</strong> no_std</a></li><li class="chapter-item expanded "><a href="03-bare-metal/panic.html"><strong aria-hidden="true">3.2.</strong> panic</a></li><li class="chapter-item expanded "><a href="03-bare-metal/print.html"><strong aria-hidden="true">3.3.</strong> print!マクロ</a></li><li class="chapter-item expanded "><a href="03-bare-metal/linker.html"><strong aria-hidden="true">3.4.</strong> リンカ</a></li><li class="chapter-item expanded "><a href="03-bare-metal/assembly.html"><strong aria-hidden="true">3.5.</strong> アセンブリ</a></li><li class="chapter-item expanded "><a href="03-bare-metal/allocator.html"><strong aria-hidden="true">3.6.</strong> メモリアロケータ</a></li><li class="chapter-item expanded "><a href="03-bare-metal/entry.html"><strong aria-hidden="true">3.7.</strong> entryポイント</a></li></ol></li><li class="chapter-item expanded "><a href="04-tools/tools.html"><strong aria-hidden="true">4.</strong> ツール</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="04-tools/cargo.html"><strong aria-hidden="true">4.1.</strong> Cargo</a></li><li class="chapter-item expanded "><a href="04-tools/compiler.html"><strong aria-hidden="true">4.2.</strong> コンパイラサポート</a></li><li class="chapter-item expanded "><a href="04-tools/rustc.html"><strong aria-hidden="true">4.3.</strong> rustc</a></li></ol></li><li class="chapter-item expanded "><a href="05-library/library.html"><strong aria-hidden="true">5.</strong> ライブラリ / フレームワーク</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="05-library/heapless.html"><strong aria-hidden="true">5.1.</strong> heapless</a></li><li class="chapter-item expanded "><a href="05-library/no_std_crates.html"><strong aria-hidden="true">5.2.</strong> no_stdクレート</a></li><li class="chapter-item expanded "><a href="05-library/svd2rust.html"><strong aria-hidden="true">5.3.</strong> svd2rust</a></li><li class="chapter-item expanded "><a href="05-library/rtfm.html"><strong aria-hidden="true">5.4.</strong> RTFM</a></li><li class="chapter-item expanded "><a href="05-library/tock.html"><strong aria-hidden="true">5.5.</strong> Tock</a></li><li class="chapter-item expanded "><a href="05-library/testing.html"><strong aria-hidden="true">5.6.</strong> testing</a></li></ol></li><li class="chapter-item expanded "><a href="06-ffi/ffi.html"><strong aria-hidden="true">6.</strong> FFI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="06-ffi/c-with-rust.html"><strong aria-hidden="true">6.1.</strong> RustからCを呼ぶ</a></li><li class="chapter-item expanded "><a href="06-ffi/rust-with-c.html"><strong aria-hidden="true">6.2.</strong> CからRustを呼ぶ</a></li><li class="chapter-item expanded "><a href="06-ffi/zephyr-bindings.html"><strong aria-hidden="true">6.3.</strong> ケーススタディ Zephyr</a></li></ol></li><li class="chapter-item expanded "><a href="07-linux/embedded-linux.html"><strong aria-hidden="true">7.</strong> 組込みLinux</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="07-linux/basic.html"><strong aria-hidden="true">7.1.</strong> ビルド/テスト</a></li><li class="chapter-item expanded "><a href="07-linux/yocto.html"><strong aria-hidden="true">7.2.</strong> Yocto</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Embedded Rust Techniques</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#1-はじめに" id="1-はじめに">1. はじめに</a></h1>
+<p>この本は、Rustで組込み / ベアメタルプログラミングするための小技を集めたものです。OSにホストされた環境でプログラミングするだけでも、Rustには特有の複雑さがあります。その複雑さは、コンパイル時に型安全性、メモリ安全性、スレッド安全性を保証するための対価です。私は (そして多くのRustaceanが) 、その対価を妥当なものと考え、Rustでのプログラミングを楽しんでいます。</p>
+<p>Rustを組込み / ベアメタル環境で使おうとすると、上述した複雑さに加えて、<em>特別な知識</em>が求められます。この本は、私が知る限りの<em>特別な知識</em>を詰め込んだクックブックです。</p>
+<p>この本の内容は、<a href="https://github.com/rust-embedded/wg">Rust Embedded devices Working Group</a>が発行している<a href="https://docs.rust-embedded.org/">組込みRustドキュメント</a>の内容を数多く含んでいます。本書に含まれる内容の多くは、私が独自に考えたものではなく、Web上に公開されているドキュメントをテクニック集としてまとめ直したものです。WGは多くのドキュメントを公開してくれています。この本で不足する内容は、ぜひWGのドキュメントを探して見て下さい。</p>
+<p>本書内で出典を表す際、和訳文書がある場合は、和訳文書へのリンクを示しています。これは日本人の読者を想定しているからであり、本家文書を軽視しているわけではないことを、ご了承下さい。</p>
+<p>本書は、クックブックとして、各項目を独立して読めるようにしています。前から順番に読む、というよりは、必要や興味に応じて、辞書のようにお使い下さい。また、本書内では同じ情報がやや重複して書かれている部分もあります。これは、手抜きという一面もありますが、欲しいところに必要な情報が記載されているようにするためです。</p>
+<h2><a class="header" href="#1-1-紙媒体で読んでいる方へ" id="1-1-紙媒体で読んでいる方へ">1-1. 紙媒体で読んでいる方へ</a></h2>
+<p>この本は、Rust製のドキュメントビルダー<a href="https://rust-lang-nursery.github.io/mdBook/">mdbook</a>で作成しています。mdbookは、htmlが一番読みやすい形式ですので、ぜひhtml形式でも読んでみて下さい。紙媒体を購入された方は、html形式の本書をダウンロードできます。参考文献へのリンクは、html形式の媒体から簡単にアクセスできます。そのため、本文内でのURL掲載は省略しています。</p>
+<h2><a class="header" href="#1-2-サンプルコードの実行" id="1-2-サンプルコードの実行">1-2. サンプルコードの実行</a></h2>
+<p>html形式で本書を読んでいる場合、掲載しているいくつかのコードは、<em>実行して、結果を確認することができます</em>。<a href="https://play.rust-lang.org/">Rust Playpen</a>にコードを送信して実行しますので、インターネット接続が必要です。下記コードのコードブロック右上に見えている実行ボタン (▶) をクリックすると、コンソール出力結果が確認可能です。</p>
+<pre><pre class="playground"><code class="language-rust editable">fn main() {
+    println!(&quot;{}&quot;, &quot;hello&quot;);
+}
+</code></pre></pre>
+<p>また、コードブロック右上に、時計マークの<strong>Undo changes</strong>アイコンがある場合は、コードを編集して実行することができます。上記コードの<strong>hello</strong>を、<strong>hello world</strong>に変更して、実行してみて下さい。</p>
+<h2><a class="header" href="#1-3-スコープ" id="1-3-スコープ">1-3. スコープ</a></h2>
+<p>本書には、次のトピックが含まれます。</p>
+<ul>
+<li>組込みRust環境構築</li>
+<li>ベアメタル固有のプログラミングテクニック</li>
+<li>ツール</li>
+<li>ライブラリ / フレームワーク</li>
+<li>FFI (C言語との相互呼び出し)</li>
+<li>組込みLinux</li>
+</ul>
+<p>提供するシステムコマンドは、<strong>Ubuntu 18.04</strong>を想定しています。他のOSをご利用の方は、お手数ですが読み替えをお願いします。</p>
+<h2><a class="header" href="#1-4-想定読者" id="1-4-想定読者">1-4. 想定読者</a></h2>
+<p>下記トピックに興味があり、いずれかの項目について、<em>ある程度</em>開発経験がある方を想定しています。</p>
+<ul>
+<li>Rust</li>
+<li>組込み / マイクロコントローラ</li>
+<li>低レイヤ / ベアメタルプログラミング</li>
+</ul>
+<h2><a class="header" href="#1-5-本書に含まれない内容" id="1-5-本書に含まれない内容">1-5. 本書に含まれない内容</a></h2>
+<ul>
+<li>なぜRustで組込みなのか？</li>
+<li>Rustの基礎的な文法 / イディオム</li>
+<li>リンカスクリプトなど低レイヤ知識の基礎事項</li>
+<li>クロスコンパイルの概念</li>
+<li>メモリマップ方式のペリフェラル制御</li>
+</ul>
+<p>なぜRustで組込みなのか？は、詳しくは書きません。実行速度が速く、バイナリも小さく、安全で、生産性が高い、というのが簡単な回答です。</p>
+<h2><a class="header" href="#1-6-参考文献" id="1-6-参考文献">1-6. 参考文献</a></h2>
+<p>本書に含まれない内容について学習したい場合に、参考となる書籍を紹介します。</p>
+<ul>
+<li>The Rust Programming Language (TRPL)</li>
+<li>プログラミングRust</li>
+<li>実践Rust入門</li>
+<li>プログラミング言語Rust 公式ガイド</li>
+<li><a href="https://doc.rust-jp.rs/">Rustの日本語ドキュメント</a></li>
+</ul>
+<h1><a class="header" href="#2-環境構築" id="2-環境構築">2. 環境構築</a></h1>
+<p>組込み開発では、ホストPCとは異なるアーキテクチャのバイナリを生成しなければならないため、いくつかのツールが必要になります。また、バイナリを解析したり、逆アセンブリを行ってデバッグを行う際に、便利なツールも用意しておくと良いでしょう。</p>
+<p>ターゲットにできるアーキテクチャは多岐に渡りますし、読者が開発を行う環境もLinux / Mac / Windowsとバリエーションが多いです。これを本書で網羅することはできないため、(1) 用意するもの、(2) インストール手順を記載したWebサイトへのリンク、(3) その他備考、のみを示します。</p>
+<p>まず、用意するもののリストは、次の通りです。</p>
+<ul>
+<li>Rust (クロスコンパイルツールチェイン含む)</li>
+<li>GDB</li>
+<li>デバッグフレームワーク (OpenOCD, JLinkなど)</li>
+<li>cargo-binutils</li>
+<li>QEMU</li>
+</ul>
+<p>Cortex-Mをターゲットとするこれらのインストール手順は、<a href="https://tomoyuki-nakabayashi.github.io/book/intro/install.html">The Embedded Rust Bookのインストール</a>に記載されています。</p>
+<h2><a class="header" href="#2-1-rust" id="2-1-rust">2-1. Rust</a></h2>
+<p>Rustはクロスコンパイルが簡単な言語ですが、デフォルトのインストールでは、ホストマシンのネイティブコンパイルのみをサポートしています。そのため、ターゲットとするクロスコンパイラを追加するために、<code>rustup</code>でターゲットを追加します。例えば、ARMのCortex-M0であれば、次の通りです。</p>
+<pre><code>$ rustup target add thumbv6m-none-eabi 
+</code></pre>
+<p>ここで、ハマりどころがあります。</p>
+<ol>
+<li>Rustがサポートするターゲットシステムの一覧がわからない</li>
+<li>ターゲットシステムがサポートされていない</li>
+</ol>
+<p>これらの詳細は、<a href="02-setup/../04-tools/compiler.html">コンパイラサポート</a>に記載しますが、解決方法を簡単にだけ示します。まず、ターゲットシステム一覧は、次のコマンドで取得できます。</p>
+<pre><code>$ rustc --print target-list
+</code></pre>
+<p>次に、ターゲットシステムがサポートされていない場合ですが、ターゲットの<code>specification</code>をJSON形式のファイルで用意します。</p>
+<h2><a class="header" href="#2-2-gdb" id="2-2-gdb">2-2. GDB</a></h2>
+<p>読者の中には、LLDBに慣れ親しんだ方も居るかと思います。通常のデバッグに関して、LLDBはGDBと同水準の機能があります。しかし、ターゲットハードウェアにプログラムをアップロードするGDBの<code>load</code>コマンド相当のものが、LLDBにはありません。そのため、マイクロコントローラのファームウェア開発に限っては、GDBの利用をおすすめします。</p>
+<h2><a class="header" href="#2-3-デバッグフレームワーク" id="2-3-デバッグフレームワーク">2-3. デバッグフレームワーク</a></h2>
+<p>マイクロコントローラ上で動作するプログラムをGDBでデバッグするためには、SWD (Serial Wire Debug) やJTAGプロトコルを使って、<em>GDBサーバー</em>のサービスを提供するソフトウェアが必要になります。</p>
+<p>このようなソフトウェアで、主要なものとしては、OpenOCDとJLinkがあります。どちらも、Rustで作成したプログラムをデバッグすることが可能です。
+ターゲットとするマイクロコントローラの開発で使いやすい方を選択して下さい。<a href="https://tomoyuki-nakabayashi.github.io/discovery/03-setup/index.html">Discovery環境構築</a>では、OpenOCDの環境構築方法が記載されています。</p>
+<h2><a class="header" href="#2-4-cargo-binutils" id="2-4-cargo-binutils">2-4. cargo-binutils</a></h2>
+<p><a href="https://github.com/rust-embedded/cargo-binutils">cargo-binutils</a>は、LLVM binary utilitiesを簡単に利用するためのCargoサブコマンドです。<code>llvm-objdump</code>や<code>llvm-size</code>などをCargoから呼び出すことができます。</p>
+<p>ターゲットアーキテクチャ用のGNU binutilsがインストールされており、そのコマンドに慣れている場合、無理に使う必要はありません。しかし、Rustでバイナリハックする上で、ターゲットアーキテクチャに依存せず、同じコマンドで利用できる、というのは大きなメリットです。</p>
+<h2><a class="header" href="#2-5-qemu" id="2-5-qemu">2-5. QEMU</a></h2>
+<p><a href="https://www.qemu.org/">QEMU</a>は、有名なエミュレータです。実際のハードウェアで開発を行う前に、実験を行う場合に重宝します。本書内でも動作確認目的で、何度か利用します。</p>
+<h1><a class="header" href="#3-ベアメタルテクニック" id="3-ベアメタルテクニック">3. ベアメタルテクニック</a></h1>
+<p>この章では、Rustでベアメタルプログラミングするにあたり、必須 / 有用なテクニックを紹介します。この章で紹介するテクニックは、組込みだけでなく、広くベアメタルプログラミングの際に利用できます。</p>
+<h2><a class="header" href="#3-1-no_std" id="3-1-no_std">3-1. no_std</a></h2>
+<p>ベアメタルを想定したRustプログラムには、<code>#![no_std]</code>アトリビュートが必須です。この<code>#![no_std]</code>アトリビュートを指定すると、<code>std</code>クレートではなく、<code>core</code>クレートをリンクします。</p>
+<p><code>std</code>クレートは、Rustの標準ライブラリです。例えば、皆さんが次のようなRustプログラムを書いた場合、<code>std</code>クレートが使われています。</p>
+<pre><pre class="playground"><code class="language-rust editable">fn main() {
+    let vector = vec!(1, 2, 3);
+    println!(&quot;vector contains {:?}&quot;, vector);
+}
+</code></pre></pre>
+<p>上記プログラムの1行目に、<code>#![no_std]</code>を追加した後、<code>▶</code>ボタンをクリックしてプログラムを実行してみて下さい。次のようなコンパイルエラーが発生したはずです。</p>
+<pre><code>error: cannot find macro `println!` in this scope
+ --&gt; src/main.rs:5:5
+  |
+5 |     println!(&quot;vector contains {:?}&quot;, vector);
+  |     ^^^^^^^
+
+error: cannot find macro `vec!` in this scope
+ --&gt; src/main.rs:4:18
+  |
+4 |     let vector = vec!(1, 2, 3);
+  |                  ^^^
+
+error: `#[panic_handler]` function required, but not found
+
+error: language item required, but not found: `eh_personality`
+</code></pre>
+<p><code>println!</code>は、標準出力にフォーマットされた文字列を表示するマクロです。ベアメタル環境では、標準出力なるものは存在しません (OSが提供するものだからです) 。そのため、標準出力を利用する<code>println!</code>マクロも利用できません。</p>
+<p>Rustの<code>Vec</code>は、ヒープにメモリ領域を確保します。ベアメタル環境では、ヒープメモリの確保 / 解放の機能が提供されていません。そのため、<code>Vec</code>のオブジェクトを作成する<code>vec!</code>マクロも、<strong><code>std</code>クレートをリンクするアプリケーションと同じようには、使えません</strong>。少し手を加えれば、ベアメタル環境でも<code>Vec</code>のようなコレクションを使うことが可能です。これは、<a href="03-bare-metal/allocator.html">メモリアロケータ</a>で解説します。</p>
+<p>さらに、言語仕様上、パニック発生時の動作を定義する必要があります。panicの主な処理は<code>std</code>クレートで定義されています。詳しくは、<a href="03-bare-metal/panic.html">panic</a>で説明します。</p>
+<p><code>core</code>クレートは、<code>std</code>クレートのサブセットで、環境 (アーキテクチャ、OS) に依存せず使えるコードが含まれています。<code>core</code>クレートは、文字列やスライスのような言語プリミティブと、アトミック操作のようなプロセッサ機能を利用するためのAPIを提供しています。</p>
+<p>先程コンパイルエラーになったことからわかるように、<code>core</code>クレートを使ったベアメタルプログラミングは、<code>std</code>を利用したプログラミングとは一味違ったものになります。</p>
+<h4><a class="header" href="#出典" id="出典">出典</a></h4>
+<ul>
+<li>Embedonomicon: [最小限の<code>#![no_std]</code>プログラム]</li>
+</ul>
+<p>[最小限の<code>#![no_std]</code>プログラム]: https://tomoyuki-nakabayashi.github.io/embedonomicon/smallest-no-std.html</p>
+<h2><a class="header" href="#3-2-panic" id="3-2-panic">3-2. panic</a></h2>
+<p>Rustのpanicは、プログラムの異常終了処理を安全に行うための機構です。例えば、下記のようなスライスの境界外アクセスは、panicを発生させます。</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let s: &amp;[u8] = &amp;[1, 2, 3, 4];
+    println!(&quot;{}&quot;, s[100]);
+}
+</code></pre></pre>
+<p>上のプログラムを実行すると、下記のようなpanic発生のエラーが出力されます。</p>
+<pre><code>thread 'main' panicked at 'index out of bounds: the len is 4 but the index is 100', src/main.rs:3:20
+</code></pre>
+<p>C言語の未定義動作と異なり、Rustでは<strong>定義されたpanicハンドラ</strong>でプログラミングエラーに対処します。OSにホストされている環境では、panicハンドラの処理が完了すると、プロセスを強制終了します。このプロセスの強制終了も、<strong>定義された動作</strong>です。</p>
+<p>Rustのpanicについては、<a href="https://qnighy.hatenablog.com/entry/2018/02/18/223000">簡潔なQ Rustのパニック機構</a>が詳しいです。こちらの解説にある通り、panicの主な処理は、<code>std</code>クレート (<a href="https://doc.rust-lang.org/std/macro.panic.html">std::panic</a>に公開API、<a href="https://github.com/rust-lang/rust/blob/stable/src/libstd/panicking.rs">std::panicking.rs</a>にpanic処理の本体) にあります。そのため、<code>std</code>クレートをリンクしない<code>#![no_std]</code>なプログラムでは、panicハンドラが未定義のままになっています。</p>
+<p>そこで、<code>#[panic_handler]</code>アトリビュートを使って、panicハンドラを定義します。最小限の<code>#![no_std]</code>プログラムは、次のようになります。</p>
+<pre><code class="language-rust ignore">#![no_main]
+#![no_std]
+
+use core::panic::PanicInfo;
+
+#[panic_handler]
+fn panic(_panic: &amp;PanicInfo&lt;'_&gt;) -&gt; ! {
+    loop {}
+}
+</code></pre>
+<p>この<code>PanicInfo</code>は、panicに関する情報を提供します。Rust 1.26からは、<code>Display</code>トレイトが実装されているため、フォーマットが使える環境を作ることで、panic発生時の情報を容易に得ることができます。まず、<code>std</code>クレートを使い、簡単に実験できるサンプルコードをお見せします。</p>
+<pre><pre class="playground"><code class="language-rust">#![allow(unused)]
+fn main() {
+    use std::panic;
+
+    panic::set_hook(Box::new(|panic_info| {
+        println!(&quot;{}&quot;, panic_info);
+    }));
+
+    panic!(&quot;Normal panic&quot;);
+}
+</code></pre></pre>
+<p>実行結果は、次のようになります。</p>
+<pre><code>panicked at 'Normal panic', src/main.rs:9:1
+</code></pre>
+<p>このことは、<code>no_std</code>環境でも同じように使うことができます。<code>no_std</code>環境での<code>print!</code>マクロ実装方法は、<a href="03-bare-metal/print.html">print!マクロ</a>で紹介します。</p>
+<pre><code class="language-rust ignore">use core::panic::PanicInfo;
+#[panic_handler]
+pub fn panic(info: &amp;PanicInfo) -&gt; ! {
+    println!(&quot;{}&quot;, info);
+    loop {}
+}
+</code></pre>
+<p><code>assert!</code>マクロの失敗でも同様の情報が得られるため、非常に有用なテクニックです。</p>
+<p><code>no_std</code>環境で利用可能なpanicハンドラを提供するクレートも存在しています。</p>
+<ul>
+<li><a href="https://crates.io/crates/panic-abort">panic-abort</a>は、パニックが発生すると、アボート命令を実行します。</li>
+<li><a href="https://crates.io/crates/panic-halt">panic-halt</a>は、パニックが発生すると、無限ループに入ります。</li>
+<li><a href="https://crates.io/crates/panic-itm">panic-itm</a>は、ARM Cortex-Mがターゲットの時に利用できるクレートで、パニック発生時のメッセージをITM経由でログを出力します。</li>
+<li><a href="https://crates.io/crates/panic-semihosting">panic-semihosting</a>は、ARM Cortex-Mがターゲットの時に利用できるクレートで、パニック発生時のメッセージを、セミホスティング機能を使ってログ出力します。</li>
+</ul>
+<p><a href="https://github.com/japaric/panic-abort/blob/master/src/lib.rs"><code>panic-abort</code>の実装</a>を見ると、30行しかありません。わざわざクレートにする理由はあるのでしょうか？</p>
+<p>panicハンドラをクレートに切り分けることで、コンパイル時のプロファイルでpanicハンドラを切り替える場合に、便利です。</p>
+<pre><code class="language-rust ignore">// 開発プロファイル：パニックをデバッグしやすくします。`rust_begin_unwind`にブレイクポイントが置けます。
+#[cfg(debug_assertions)]
+extern crate panic_halt;
+
+// リリースプロファイル：バイナリサイズを最小化します。
+#[cfg(not(debug_assertions))]
+extern crate panic_abort;
+</code></pre>
+<p>上記コードでは、<code>cargo build</code>した時は<code>panic-halt</code>クレートと、<code>cargo build --release</code>した時は<code>panic-abort</code>クレートとリンクします。</p>
+<h4><a class="header" href="#出典-1" id="出典-1">出典</a></h4>
+<ul>
+<li>The Embedded Rust Book: <a href="https://tomoyuki-nakabayashi.github.io/book/start/panicking.html">2.5.パニック</a></li>
+</ul>
+<h2><a class="header" href="#3-3-printマクロ" id="3-3-printマクロ">3-3. print!マクロ</a></h2>
+<p>ベアメタル環境でデバッグする上で、自在にテキストを表示できることは、非常に重要です。Rustでは、<code>print!</code>や<code>println!</code>マクロを使うことで、数値や文字列、構造体までフォーマットして、テキストで表示することができます。</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    println!(&quot;{}, {:?}&quot;, 1, vec!(1, 2, 3));
+}
+</code></pre></pre>
+<p>マイクロコントローラでは、文字出力はUARTで行うことが多いです。例えば、今、次のような関数を使って、1文字のASCII文字を表示できるとします。土台としては、これだけあればRustの文字列フォーマッタを利用可能です。(UARTペリフェラルの初期化がが必要な点や、TXバッファに空きがあるかどうか調べなければならない点は、一旦目を瞑って下さい)</p>
+<pre><code class="language-rust ignore">fn write_byte(c: u8) {
+    unsafe {
+        *UART0_TX = c;
+    }
+}
+</code></pre>
+<p>この状態で数値や文字列、構造体をテキストで表示しようとすると、まず文字列に変換しなければなりません。これを、自前で実装するのは、容易ではありません。読者の中には、C言語で<code>printf()</code>関数を (部分的に) 自作した経験がある方が、多数いらっしゃるかと思います。あれはあれで貴重な経験ではありますが、Rustではより簡単に、<strong>型安全</strong>なテキスト表示マクロを実装できます。</p>
+<p>では、上記関数を使って、<code>std</code>環境と同じように利用できる<code>print!</code> / <code>println!</code>マクロを実装しましょう。</p>
+<p>まず、全貌をお見せします。</p>
+<pre><code class="language-rust ignore">use core::fmt::{self, Write};
+
+#[macro_export]
+macro_rules! print {
+    ($($arg:tt)*) =&gt; ($crate::_print(format_args!($($arg)*)));
+}
+
+#[macro_export]
+macro_rules! println {
+    ($fmt:expr) =&gt; (print!(concat!($fmt, &quot;\n&quot;)));
+    ($fmt:expr, $($arg:tt)*) =&gt; (print!(concat!($fmt, &quot;\n&quot;), $($arg)*));
+}
+
+pub fn _print(args: fmt::Arguments) {
+    let mut writer = UartWriter {};
+    writer.write_fmt(args).unwrap();
+}
+
+struct UartWriter;
+
+impl Write for UartWriter {
+    fn write_str(&amp;mut self, s: &amp;str) -&gt; fmt::Result {
+        for c in s.bytes() {
+            write_byte(c);
+        }
+        Ok(())
+    }
+}
+</code></pre>
+<p>これで全てです。この30行にも満たないコードを追加するだけで、<code>std</code>環境と同じように<code>println!</code>が使えます。順番に解説していきます。</p>
+<p>まず、<code>print!</code>マクロの実装です。</p>
+<pre><code class="language-rust ignore">#[macro_export]
+macro_rules! print {
+    ($($arg:tt)*) =&gt; ($crate::_print(format_args!($($arg)*)));
+}
+</code></pre>
+<p>最も重要な部分は、<code>format_args!</code>マクロの呼び出しです。<code>format_args!</code>マクロは、コンパイラ組込みの手続きマクロで、文字列フォーマットの中心を担うAPIです。このマクロは、与えられたフォーマット文字列と引数群から、<code>core::fmt::Arguments</code>を構築するコードを生成します。この辺りの話については、<a href="https://ubnt-intrepid.github.io/blog/2017/10/11/rust-format-args/">Rustの文字列フォーマット回り (改訂版)</a>で非常に詳しく解説されています。ここでは詳細を割愛します。</p>
+<p><code>$crate::_print()</code>は、<code>format_args!</code>マクロの出力である<code>core::fmt::Arguments</code>を引数に取るラッパー関数です。</p>
+<pre><code class="language-rust ignore">pub fn _print(args: fmt::Arguments) {
+    let mut writer = UartWriter {};
+    writer.write_fmt(args).unwrap();
+}
+</code></pre>
+<p>フォーマット文字列をUARTに出力する<code>UartWriter</code>構造体のオブジェクトを作成し、<code>core::fmt::Write</code>トレイトの<code>write_fmt</code>メソッドを呼び出します。<code>UartWriter</code>は、ここではかなり実装を簡略化しており、中身のない空の構造体です。ハードウェアの排他制御などは、今回は考慮に入れていません。</p>
+<pre><code class="language-rust ignore">struct UartWriter;
+
+impl Write for UartWriter {
+    fn write_str(&amp;mut self, s: &amp;str) -&gt; fmt::Result {
+        for c in s.bytes() {
+            write_byte(c);
+        }
+        Ok(())
+    }
+}
+</code></pre>
+<p>フォーマット文字列を取り扱うために、<code>UartWriter</code>は<code>core::fmt::Write</code>トレイトを実装します。<code>write_fmt</code>メソッドは、デフォルトメソッドなので、<code>write_str</code>だけ実装すれば良いです。<code>write_str</code>メソッドの関数シグネチャは、<code>fn (&amp;mut self, &amp;str) -&gt; fmt::Result</code>となっており、<code>&amp;str</code>の形で渡されるフォーマット済み文字列をどのように出力するか、を実装します。上記コードでは、イテレータで1バイトずつ取得し、<code>write_byte</code>関数でUARTに1バイトずつ送信します。</p>
+<p>それでは、実行してみましょう。<code>03-bare-metal/print</code>ディレクトリに、QEMUで動作するサンプルがあります。リセットベクタ内で、<code>println!</code>マクロを呼び出します。</p>
+<pre><code class="language-rust ignore">#[no_mangle]
+pub unsafe extern &quot;C&quot; fn Reset() -&gt; ! {
+    println!(&quot;Hello {}&quot;, &quot;Rust&quot;);
+    // 中略
+}
+</code></pre>
+<p>次のコマンドで実行できます (<code>thumbv7m-none-eabi</code>のクロスコンパイラとqemu-system-armが必要です) 。</p>
+<pre><code>$ cargo run
+</code></pre>
+<pre><code>     Running `qemu-system-arm -cpu cortex-m3 -machine lm3s6965evb -nographic -semihosting-config enable=on,target=native -kernel target/thumbv7m-none-eabi/debug/print`
+Hello Rust
+</code></pre>
+<blockquote>
+<p>注意：このサンプルはQEMUでしか動作しません。QEMUのUARTは初期設定不要で雑に使えるため、非常に便利です。</p>
+</blockquote>
+<p>また、<a href="03-bare-metal/panic.html">panic</a>で紹介した通り、panic時の情報を表示する際も便利です。</p>
+<pre><code class="language-rust ignore">pub unsafe extern &quot;C&quot; fn Reset() -&gt; ! {
+    panic!(&quot;explicit panic!&quot;);
+}
+
+#[panic_handler]
+fn panic(panic: &amp;PanicInfo) -&gt; ! {
+    println!(&quot;{}&quot;, panic);
+    loop {}
+}
+</code></pre>
+<p>実行すると、panicを発生させたソースコードの位置と、メッセージを表示します。</p>
+<pre><code>panicked at 'explicit panic!', src/main.rs:10:5
+</code></pre>
+<h4><a class="header" href="#出典-2" id="出典-2">出典</a></h4>
+<ul>
+<li>Discovery: <a href="https://tomoyuki-nakabayashi.github.io/discovery/11-usart/uprintln.html">urpintln!</a></li>
+</ul>
+<h2><a class="header" href="#3-4-リンカ" id="3-4-リンカ">3-4. リンカ</a></h2>
+<p>ベアメタルプログラミングを行う上で、リンカは避けられない要素です。ここでは、Rustで<em>シンボル</em>や<em>セクション</em>を扱う方法について、説明します。</p>
+<h3><a class="header" href="#シンボル名とセクション配置" id="シンボル名とセクション配置">シンボル名とセクション配置</a></h3>
+<p>C++と同様に、デフォルトではRustのシンボルは、コンパイラによってマングルされます。コンパイラが生成したシンボル名は、コンパイラのバージョンごとに異なる可能性があります。そこで、次のアトリビュートを使用して、シンボル名やセクション配置を制御します。</p>
+<ul>
+<li><code>#[export_name = &quot;foo&quot;]</code>は、関数や変数のシンボル名を<code>foo</code>に設定します。</li>
+<li><code>#[no_mangle]</code>は、関数名や変数名をマングルせず、そのままシンボル名として使用します。</li>
+<li><code>#[link_section = &quot;.bar&quot;]</code>は、対象のシンボルを、<code>.bar</code>というセクションに配置します。</li>
+</ul>
+<p><code>#[no_mangle]</code>は、基本的に、<code>#[export_name = &lt;item-name&gt;]</code>のシンタックスシュガーです。このことから、<code>#[no_mangle]</code>と<code>[#link_section]</code>との組み合わせで、任意のシンボルを特定のセクションに配置できます。</p>
+<p>次のコードは、ARM Cortex-Mシリーズのリセットベクタを指定セクションに配置する例です。<code>Reset</code>関数の関数ポインタを、<code>RESET_VECTOR</code>というシンボルで、<code>.vector_table.reset_vector</code>セクションに配置します。もちろん、このセクションはリンカスクリプトで定義されている必要があります。</p>
+<pre><code class="language-rust ignore">#[link_section = &quot;.vector_table.reset_vector&quot;]
+#[no_mangle]
+pub static RESET_VECTOR: unsafe extern &quot;C&quot; fn() -&gt; ! = Reset;
+</code></pre>
+<blockquote>
+<p>補足：上のコードで<code>extern</code>を使用している理由は、Cortex-MシリーズのハードウェアがリセットハンドラにC ABIを要求するためです。</p>
+</blockquote>
+<h3><a class="header" href="#リンカスクリプトのシンボルを参照" id="リンカスクリプトのシンボルを参照">リンカスクリプトのシンボルを参照</a></h3>
+<p>Rustからリンカスクリプトのシンボルを参照することも可能です。これは、<code>.bss</code>セクションのゼロクリアや、<code>.data</code>セクションの初期化に利用できます。</p>
+<p>次のように、リンカスクリプトでセクションの開始位置と終了位置にシンボルを作成します。</p>
+<pre><code>SECTIONS
+{
+  .bss :
+  {
+    _sbss = .;
+    *(.bss .bss.*);
+    _ebss = .;
+  } &gt; RAM
+
+  .data : AT(ADDR(.rodata) + SIZEOF(.rodata))
+  {
+    _sdata = .;
+    *(.data .data.*);
+    _edata = .;
+  } &gt; RAM
+
+  _sidata = LOADADDR(.data);
+</code></pre>
+<p>これらのリンカスクリプトで作成したシンボルは、Rustで次のように利用できます。これは、<code>.bss</code>セクションのゼロクリアと、<code>.data</code>セクションの初期化を行うコードの例です。</p>
+<pre><code class="language-rust ignore">use core::ptr;
+
+#[no_mangle]
+pub unsafe extern &quot;C&quot; fn Reset() -&gt; ! {
+    // RAMの初期化
+    extern &quot;C&quot; {
+        static mut _sbss: u8;
+        static mut _ebss: u8;
+
+        static mut _sdata: u8;
+        static mut _edata: u8;
+        static _sidata: u8;
+    }
+
+    let count = &amp;_ebss as *const u8 as usize - &amp;_sbss as *const u8 as usize;
+    ptr::write_bytes(&amp;mut _sbss as *mut u8, 0, count);
+
+    let count = &amp;_edata as *const u8 as usize - &amp;_sdata as *const u8 as usize;
+    ptr::copy_nonoverlapping(&amp;_sidata as *const u8, &amp;mut _sdata as *mut u8, count);
+
+    loop {}
+}
+</code></pre>
+<p>リンカスクリプトで作成したシンボルを<code>u8</code>の変数として、そのアドレスを利用します。</p>
+<h3><a class="header" href="#extern" id="extern">extern</a></h3>
+<p><a href="https://doc.rust-lang.org/std/keyword.extern.html">extern</a>は、Rustのキーワードで、<em>外部</em>とのインタフェースに使用されます。外部クレートとの接続にも使われますが、組込みでの重要な利用方法はFFI (Foreign function interfaces) です。</p>
+<p>他言語の変数や関数を利用する場合、下記の通り<code>extern</code>ブロック内でインタフェースを宣言します。</p>
+<pre><code class="language-rust ignore">    extern &quot;C&quot; {
+        static mut _sbss: u8;
+        // ...
+    }
+</code></pre>
+<p>逆に、他言語からRustのコードを呼ぶ場合は、次のように関数シグネチャを宣言します。</p>
+<pre><code class="language-rust ignore">#[no_mangle]
+pub unsafe extern &quot;C&quot; fn Reset() -&gt; ! {
+    // ...
+}
+</code></pre>
+<p>FFIだけでなく、どこか外部にあるRustコードを宣言することも可能です。</p>
+<pre><code class="language-rust ignore">extern &quot;Rust&quot; {
+    fn main() -&gt; !;
+}
+</code></pre>
+<h3><a class="header" href="#コラムrustのabiは安定化していない" id="コラムrustのabiは安定化していない">コラム〜RustのABIは安定化していない！？〜</a></h3>
+<p>意外に思うかもしれませんが、<strong>RustのABIは定義されていません</strong>。4年前から<a href="https://github.com/rust-lang/rfcs/issues/600">このissue</a>で議論が続けられています。</p>
+<p>そのため、Rustで安定したABIを提供するためには、<code>extern &quot;C&quot;</code>を用いてC言語のABIを使用しなければなりません。</p>
+<pre><code class="language-rust ignore">/// C ABI
+#[no_mangle]
+pub unsafe extern &quot;C&quot; fn Reset() -&gt; ! {
+    /* ... */
+}
+</code></pre>
+<h3><a class="header" href="#linkageアトリビュート" id="linkageアトリビュート">linkageアトリビュート</a></h3>
+<p><code>linkage</code>アトリビュートは、まだunstableの状態です。<a href="https://github.com/rust-lang/rust/issues/29603">linkage feature</a>のissueで議論が続いています。このアトリビュートは、シンボルのリンケージを制御するものです。例えば、特定のシンボルをweakにしてデフォルト実装を与えたり、明示的に外部リンケージにすることができます。</p>
+<h4><a class="header" href="#出典-3" id="出典-3">出典</a></h4>
+<ul>
+<li>Embedonomicon
+<ul>
+<li><a href="https://tomoyuki-nakabayashi.github.io/embedonomicon/memory-layout.html">メモリレイアウト</a></li>
+<li><a href="https://tomoyuki-nakabayashi.github.io/embedonomicon/main.html">mainインタフェース</a></li>
+</ul>
+</li>
+</ul>
+<h2><a class="header" href="#3-5-アセンブリ" id="3-5-アセンブリ">3-5. アセンブリ</a></h2>
+<p>Rustでアセンブリを使う方法は2つあります。<em>インラインアセンブリ(asm!)</em> と <em>自由形式アセンブリ(global_asm!)</em> です。本当に困ったことに、<strong>両方共stableでは使えません</strong>。</p>
+<p>ベアメタルプログラミングをする上で、stableで機能が不足することは往々にしてあることです。ここでは、stableで頑張る方法と、nightlyと共に歩む道、両方を紹介します。</p>
+<h3><a class="header" href="#stableでのアセンブリ" id="stableでのアセンブリ">stableでのアセンブリ</a></h3>
+<p>stableでアセンブリを書く方法は、外部ファイルに書くことです。<code>.s</code>ファイルにアセンブリを書いておき、アセンブラを使ってオブジェクトファイル (<code>.o</code>) にアセンブルし、アーカイブ (<code>.a</code>) を作り、Rustのコードとリンクします。</p>
+<p>この方法では、ターゲットアーキテクチャのアセンブラが必要です。例えば、ARM Cortex-Mをターゲットにする時、アセンブラとして、<code>arm-none-eabi-gcc</code> (<code>arm-none-eabi-as</code>) を使います。</p>
+<p><code>Makefile</code>を使うこともできますが、よりRustらしく、<code>ビルドスクリプト</code>を作成します。<a href="https://docs.rs/cc/1.0.36/cc/">cc</a>クレートを利用し、ビルドスクリプト内でC言語 (C++やアセンブリも可) のコードをビルドします。</p>
+<p>今、Cargoプロジェクトのトップディレクトリにアセンブリを書いた<code>asm.s</code>があるとします。ビルドスクリプトは、次のようになります。</p>
+<pre><code class="language-rust ignore">use std::{env, error::Error, fs::File, io::Write, path::PathBuf};
+use cc::Build;
+
+fn main() -&gt; Result&lt;(), Box&lt;Error&gt;&gt; {
+    // このクレートのビルドディレクトリです
+    let out_dir = PathBuf::from(env::var_os(&quot;OUT_DIR&quot;).unwrap());
+
+    // ライブラリサーチパスを追加します
+    println!(&quot;cargo:rustc-link-search={}&quot;, out_dir.display());
+
+    // `link.x`をビルドディレクトリに置きます
+    File::create(out_dir.join(&quot;link.x&quot;))?.write_all(include_bytes!(&quot;link.x&quot;))?;
+
+    // `asm.s`ファイルをアセンブルします
+    Build::new().file(&quot;asm.s&quot;).compile(&quot;asm&quot;);
+
+    Ok(())
+}
+</code></pre>
+<p><code>Cargo.toml</code>に依存関係を追加します。</p>
+<pre><code class="language-toml">[build-dependencies]
+cc = &quot;1.0.36&quot;
+</code></pre>
+<p>これだけで、外部アセンブリファイルをアセンブルし、アーカイブファイルを作り、Rustコードとリンクしてくれます。</p>
+<h4><a class="header" href="#豆知識ccクレートでコンパイラを指定" id="豆知識ccクレートでコンパイラを指定">豆知識〜ccクレートでコンパイラを指定〜</a></h4>
+<p><code>cc</code>クレートで任意のコンパイラを使用したい場合、環境変数での設定が可能です。例えば、次のようにコマンドを実行します。</p>
+<pre><code>CC=/opt/toolchain/arm-none-eabi-gcc cargo build
+</code></pre>
+<p><code>CFLAGS</code>環境変数によるコンパイラフラグの指定も可能です。</p>
+<h4><a class="header" href="#豆知識ビルド生成物の配布" id="豆知識ビルド生成物の配布">豆知識〜ビルド生成物の配布〜</a></h4>
+<p>クレートと共に、あらかじめビルドした生成物を配布することができます。<code>cc</code>クレートを使う場合、ビルドマシンにターゲットアーキテクチャのアセンブラが必要です。クレートのユーザーのマシンに、このアセンブラがなくても、クレートを使ってもらえます。詳しいやり方は、Embedonomiconの<a href="https://tomoyuki-nakabayashi.github.io/embedonomicon/asm.html">stableでのアセンブリ</a>を参照して下さい。</p>
+<h3><a class="header" href="#nightlyでのアセンブリ" id="nightlyでのアセンブリ">nightlyでのアセンブリ</a></h3>
+<h4><a class="header" href="#asm" id="asm">asm!</a></h4>
+<p>まずは、インラインアセンブリの<code>asm!</code>マクロです。1命令のアセンブリを書く時に便利です。</p>
+<pre><code class="language-rust ignore">#![feature(asm)]
+
+pub unsafe fn wfi() {
+    asm!(wfi :::: &quot;volatile&quot;);
+}
+</code></pre>
+<p>記法の詳細は、<a href="https://doc.rust-jp.rs/the-rust-programming-language-ja/1.9/book/inline-assembly.html">インラインアセンブリ</a>に記載しています。x86アセンブリは、デフォルトではAT&amp;T記法ですが、オプションによりintel記法で書くことも可能です。</p>
+<p>マクロでラッパ関数を生成すると便利です。</p>
+<pre><code class="language-rust ignore">macro_rules! instruction {
+    ($fnname:ident, $asm:expr) =&gt; (
+        #[inline]
+        pub unsafe fn $fnname() {
+            match () {
+                #[cfg(target_arch = &quot;thumv7m&quot;)]
+                () =&gt; asm!($asm :::: &quot;volatile&quot;),
+            }
+        }
+    )
+}
+
+// wfi(), wfe()として利用可能です
+instruction!(wfi, &quot;wfi&quot;);
+instruction!(wfe, &quot;wfe&quot;);
+// ...
+</code></pre>
+<h4><a class="header" href="#global_asm" id="global_asm">global_asm!</a></h4>
+<p>まとまったアセンブリを書く時に便利です。</p>
+<pre><code class="language-rust ignore">#![feature(global_asm)]
+
+#[cfg(target_arch = &quot;thumv7m&quot;)]
+#[link_section = &quot;.text.boot&quot;]
+global_asm!(r#&quot;
+halt:
+    wfe
+    b halt
+&quot;#);
+</code></pre>
+<p>外部アセンブリをインクルードすることもできます。</p>
+<pre><code>$ cat asm.s
+</code></pre>
+<pre><code class="language-asm">.section &quot;.text.boot&quot;
+.global halt
+    wfe
+    b halt
+</code></pre>
+<pre><code class="language-rust ignore">#![feature(global_asm)]
+
+global_asm!(include_str!(&quot;asm.s&quot;));
+</code></pre>
+<h4><a class="header" href="#出典-4" id="出典-4">出典</a></h4>
+<ul>
+<li>Embedonomicon: <a href="https://tomoyuki-nakabayashi.github.io/embedonomicon/asm.html">stableでのアセンブリ</a></li>
+</ul>
+<h2><a class="header" href="#3-6-メモリアロケータ" id="3-6-メモリアロケータ">3-6. メモリアロケータ</a></h2>
+<p>ベアメタルプログラミングでも開発が進むと動的なコレクションが使いたくなります。<code>std</code>が使える通常のRustでは、<code>Vec</code>や<code>String</code>といった一般的なコレクションが利用できます。このようなコレクションは、ヒープメモリを利用します。そのため、デフォルトでは、<code>no_std</code>な環境では、これらのコレクションを利用できません。しかし、<code>no_std</code>なRustでも、メモリアロケータを実装することで、コレクションを利用することができます。</p>
+<p>メモリアロケータを実装<strong>せず</strong>にコレクションを利用する方法は、<a href="03-bare-metal/../05-library/heapless.html">heapless</a>で説明します。</p>
+<p>ただ、(執筆時点のRust 1.35.0では) 残念なことに<strong>nightly必須です</strong>。ベアメタルでメモリアロケータを実装するには、<a href="https://doc.rust-lang.org/alloc/index.html">alloc</a>と<a href="https://github.com/rust-lang/rust/issues/51540">alloc_error_handler</a>のフィーチャが必要です。<code>alloc</code>は、Rust 1.36でstableになるため、本書が世に出回っている時点では、stableになっています。一方、<code>alloc_error_handler</code>については、まだ安定化の目途が立っていないようです。今しばらく、メモリアロケータの実装はnightly専用になりそうです。</p>
+<p>一時的にツールチェインをnightlyに切り替えます。Cortex-M3を例に解説します。nightlyのツールチェインにCortex-M3用のターゲットを追加します。</p>
+<pre><code>$ rustup override set nightly
+$ rustup target add thumbv7m-none-eabi
+</code></pre>
+<p>ここでの目標は、次のプログラムを動作させることです。</p>
+<pre><code class="language-rust ignore">pub unsafe extern &quot;C&quot; fn Reset() -&gt; ! {
+    let mut xs = Vec::new();
+    xs.push(42);
+    xs.push(83);
+    println!(&quot;{:?}&quot;, xs);
+}
+</code></pre>
+<p><code>println!</code>マクロの実装方法については、<a href="03-bare-metal/print.html">print!マクロ</a>で説明しています。</p>
+<h3><a class="header" href="#グローバルアロケータ" id="グローバルアロケータ">グローバルアロケータ</a></h3>
+<p><code>Vec</code>や<code>String</code>といったコレクションは、デフォルトでは<strong>グローバルアロケータ</strong>を使ってヒープメモリ領域を確保します。グローバルアロケータとは、<code>#[global_allocator]</code>アトリビュートが指定されたアロケータのことです。このアトリビュートで指定するオブジェクトは、<a href="https://doc.rust-lang.org/1.29.2/core/alloc/trait.GlobalAlloc.html">GlobalAlloc</a>トレイトを実装しなければなりません。</p>
+<pre><code class="language-rust ignore">// グローバルメモリアロケータの宣言
+// ユーザはメモリ領域の`[0x2000_0100, 0x2000_0200]`がプログラムの他の部分で使用されないことを
+// 保証しなければなりません
+#[global_allocator]
+static HEAP: BumpPointerAlloc = BumpPointerAlloc {
+    head: UnsafeCell::new(0x2000_0100),
+    end: 0x2000_0200,
+};
+</code></pre>
+<p>それでは、グローバルアロケータに指定する<code>BumpPointerAlloc</code>の実装を見てみましょう。</p>
+<h3><a class="header" href="#bumppointeralloc" id="bumppointeralloc">BumpPointerAlloc</a></h3>
+<p>これから、<code>BumpPointerAlloc</code>という最も単純なアロケータを実装します。このアロケータは、次のようにヒープメモリを管理します。</p>
+<ul>
+<li>初期化時に、ヒープメモリ領域の開始アドレスと終了アドレスを受け取ります</li>
+<li>割り当て可能なメモリ領域の先頭ポインタを1つだけ保持します</li>
+<li>メモリを新しく割り当てると、割り当てた分だけ単純に先頭ポインタを増加します</li>
+<li>一度割り当てたメモリは、解放しません</li>
+</ul>
+<p>上述した通り、このアロケータは、<code>GlobalAlloc</code>トレイトを実装します。全体を示します。</p>
+<pre><code class="language-rust ignore">use core::ptr;
+use core::cell::UnsafeCell;
+use core::alloc::GlobalAlloc;
+extern crate alloc;
+use alloc::alloc::Layout;
+use alloc::vec::Vec;
+// *シングル*コアシステム用のポインタを増加するだけのアロケータ
+struct BumpPointerAlloc {
+    head: UnsafeCell&lt;usize&gt;,
+    end: usize,
+}
+
+unsafe impl Sync for BumpPointerAlloc {}
+
+unsafe impl GlobalAlloc for BumpPointerAlloc {
+    unsafe fn alloc(&amp;self, layout: Layout) -&gt; *mut u8 {
+        let head = self.head.get();
+
+        let align = layout.align();
+        let res = *head % align;
+        let start = if res == 0 { *head } else { *head + align - res };
+        if start + align &gt; self.end {
+            // ヌルポインタはメモリ不足の状態を知らせます
+            ptr::null_mut()
+        } else {
+            *head = start + align;
+            start as *mut u8
+        }
+    }
+
+    unsafe fn dealloc(&amp;self, _: *mut u8, _: Layout) {
+        // このアロケータはメモリを解放しません
+    }
+}
+</code></pre>
+<p>順番に解説します。</p>
+<pre><code class="language-rust ignore">struct BumpPointerAlloc {
+    head: UnsafeCell&lt;usize&gt;,
+    end: usize,
+}
+</code></pre>
+<p>まず、このアロケータは、割り当て可能なメモリ領域の先頭を示す<code>head</code>と、末尾を示す<code>end</code>を持ちます。<code>head</code>が<code>UnsafeCell</code>になっている理由は、<code>&amp;self</code>を引数に取る<code>alloc</code>メソッドの中で<code>head</code>の値を書き換えるためです。<code>alloc</code>メソッドのシグネチャは、<code>GlobalAlloc</code>トレイトで定義されているため、引数を<code>&amp;mut self</code>に変更することができません。</p>
+<pre><code class="language-rust ignore">unsafe impl Sync for BumpPointerAlloc {}
+</code></pre>
+<p>次に<code>Sync</code>トレイトを実装します。これは、グローバルアロケータのオブジェクトが<code>static</code>変数になるため、スレッド間で安全に共有できることをコンパイラに伝えるためです。</p>
+<p><code>GlobalAlloc</code>トレイトの実装で求められるメソッドは、<code>alloc</code>と<code>dealloc</code>のみです。<code>dealloc</code>はメモリを解放しないため、何もしません。</p>
+<pre><code class="language-rust ignore">    unsafe fn alloc(&amp;self, layout: Layout) -&gt; *mut u8 {
+        let head = self.head.get();
+
+        let align = layout.align();
+        let res = *head % align;
+        let start = if res == 0 { *head } else { *head + align - res };
+        if start + align &gt; self.end {
+            // ヌルポインタはメモリ不足の状態を知らせます
+            ptr::null_mut()
+        } else {
+            *head = start + align;
+            start as *mut u8
+        }
+    }
+</code></pre>
+<p>引数<code>layout</code> (<a href="https://doc.rust-lang.org/core/alloc/struct.Layout.html"><code>Layout</code></a>) は、要求されているメモリブロックです。<code>align()</code>で、アライメントを考慮して、確保しなければならないメモリブロックサイズを返します。<code>head</code>のアドレスが<code>end</code>に到達するまで、単純にポインタを増加しながら、メモリを割り当てます。</p>
+<p>なお、この実装は、割り込みでメモリアロケータを使用する場合、データ競合が発生し、安全に利用<strong>できません</strong>。</p>
+<h3><a class="header" href="#alloc_error_handler" id="alloc_error_handler">alloc_error_handler</a></h3>
+<p>最後の要素が、アロケーションエラー発生時のハンドラです。これは、<code>#[alloc_error_handler]</code>アトリビュートを指定します。</p>
+<pre><code class="language-rust ignore">#[alloc_error_handler]
+fn on_oom(_layout: Layout) -&gt; ! {
+    loop {}
+}
+</code></pre>
+<p>今回は、単純に無限ループに陥るだけの実装です。</p>
+<h3><a class="header" href="#動作確認" id="動作確認">動作確認</a></h3>
+<p><code>03-bare-metal/allocator</code>ディレクトリに、Cortex-M3をターゲットにした場合のサンプルコードがあります。ディレクトリに移動し、次のコマンドで実行結果が確認できます。</p>
+<pre><code>$ cargo run
+</code></pre>
+<pre><code>    Finished dev [unoptimized + debuginfo] target(s) in 0.15s
+     Running `qemu-system-arm -cpu cortex-m3 -machine lm3s6965evb -nographic -semihosting-config enable=on,target=native -kernel target/thumbv7m-none-eabi/debug/allocator`
+[42, 83]
+</code></pre>
+<p>無事、<code>Vec</code>のデバッグ表示が確認できました。</p>
+<h3><a class="header" href="#メモリアロケータ実装例" id="メモリアロケータ実装例">メモリアロケータ実装例</a></h3>
+<p>ここで紹介した<code>BumpPointerAlloc</code>は実用に耐えないものです。いくつか、より洗練されたメモリアロケータの実装例を紹介します。</p>
+<h4><a class="header" href="#linked-list-allocator" id="linked-list-allocator">linked-list-allocator</a></h4>
+<p><a href="https://github.com/phil-opp/linked-list-allocator">linked-list-allocator</a>は、BlogOSの著者が公開しているlinked-listを使ったアロケータです。Writing an OS in Rust (First Edition) <a href="https://os.phil-opp.com/kernel-heap/">Kernel Heap</a>に少し解説があります。</p>
+<h4><a class="header" href="#redox-slab-allocator" id="redox-slab-allocator">Redox Slab allocator</a></h4>
+<p><a href="https://gitlab.redox-os.org/redox-os/slab_allocator">Redox Slab allocator</a>は、RustでOSを作るプロジェクト「Redox」のメモリアロケータです。僭越ながら、簡単な解説を<a href="https://qiita.com/tomoyuki-nakabayashi/items/e0bd16e9105163cecafb">Redox Slab Allocatorで学ぶRustベアメタル環境のヒープアロケータ</a>に書いています。</p>
+<h4><a class="header" href="#alloc-cortex-m" id="alloc-cortex-m">alloc-cortex-m</a></h4>
+<p><a href="https://github.com/rust-embedded/alloc-cortex-m/">alloc-cortex-m</a>は、linked-list-allocatorを、Cortex-MのMutexを使ってラッピングしたメモリアロケータです。</p>
+<h4><a class="header" href="#kernel-roulette" id="kernel-roulette">kernel-roulette</a></h4>
+<p><a href="https://github.com/souvik1997/kernel-roulette">kernel-roulette</a>は、RustでLinux kernelのdriverを書くプロジェクトです。このプロジェクトでは、<code>kmalloc</code>や<code>kfree</code>をFFIで呼び出し、Linux kernelの機能を用いてRustのメモリアロケータを実装します。</p>
+<h4><a class="header" href="#出典-5" id="出典-5">出典</a></h4>
+<ul>
+<li>The Embedded Rust Book: <a href="https://tomoyuki-nakabayashi.github.io/book/collections/index.html">コレクション</a></li>
+</ul>
+<h2><a class="header" href="#3-7-entryポイント" id="3-7-entryポイント">3-7. entryポイント</a></h2>
+<p>ベアメタルプログラミングの開始地点では、シンボルを駆使したプログラミンを行います。このことは時として、Rustの安全性に頼らず、開発者が安全性を保証しなければならないことを意味します。</p>
+<p>ベアメタルプログラムの最初のプロセスは、<strong>無限ループを実行し、プロセスが決して停止しないように実装します</strong>。ここでは、Rustの型検査を用いて、ベアメタルプログラミングでのエントリーポイントを再利用性が高く、安全にする方法について説明します。</p>
+<h3><a class="header" href="#再利用できるリセットハンドラ" id="再利用できるリセットハンドラ">再利用できるリセットハンドラ</a></h3>
+<p>一度作って終わり、であればリセットハンドラを再利用可能とすることに、あまり意味はありません。私個人としては、自身の作るプログラムをより良い設計のものにしたり、他人に使ってもらいたいです。また、将来的に、自分が新しくプログラムを作ったり、既存のものを作り直す場合に、ソフトウェアの再利用性が高いことが重要です。</p>
+<p>そこで、まず、リセットハンドラをアプリケーション (2nd stageブートローダかもしれませんし、OSかもしれません) から独立させます。</p>
+<pre><code class="language-rust ignore">#![no_std]
+
+#[no_mangle]
+pub unsafe extern &quot;C&quot; fn Reset() -&gt; ! {
+    extern &quot;Rust&quot; {
+        fn main() -&gt; !;
+    }
+
+    main()
+}
+</code></pre>
+<p>上のプログラムでは、リセットハンドラは、「外部にあるRust ABIの<code>main</code>というシンボルがついた関数」を呼び出します。このリセットハンドラをクレートとして切り出せば、リセットハンドラとアプリケーションとを、異なるクレートで管理できます。リセットハンドラのクレートを<code>reset</code>クレートとします。アプリケーションクレートでは、次のように<code>main</code>関数を定義します。</p>
+<pre><code class="language-rust ignore">#![no_std]
+#![no_main]
+
+extern crate reset;
+
+#[no_mangle]
+pub fn main() -&gt; ! {
+    let _x = 42;
+
+    loop {}
+}
+</code></pre>
+<p>ただし、このシンボルをインタフェースとしてやり方は、<strong>安全ではありません</strong>。アプリケーション側の<code>main</code>関数を<code>!</code>なしで定義しても、コンパイルが通ってしまい、未定義動作を引き起こす可能性があります。</p>
+<h3><a class="header" href="#型安全にする" id="型安全にする">型安全にする</a></h3>
+<p>クレートの利用者や、将来の自分 (!) が誤った使い方をできないようにしましょう。シンボルの代わりに、マクロをインタフェースとして利用します。</p>
+<pre><code class="language-rust ignore">#[macro_export]
+macro_rules! entry {
+    ($path:path) =&gt; {
+        #[export_name = &quot;main&quot;]
+        pub unsafe fn __main() -&gt; ! {
+            // 与えられたパスの型チェック
+            let f: fn() -&gt; ! = $path;
+
+            f()
+        }
+    }
+}
+</code></pre>
+<p>アプリケーションは、次のようにこのマクロを利用します。</p>
+<pre><code class="language-rust ignore">#![no_std]
+#![no_main]
+
+use rt::entry;
+
+entry!(main);
+
+fn main() -&gt; ! {
+    let _x = 42;
+
+    loop {}
+}
+</code></pre>
+<p>マクロ内で型チェックを行うため、<code>main</code>の戻り値が<code>!</code>でなければ、コンパイルエラーになります。</p>
+<h3><a class="header" href="#補足発散する関数" id="補足発散する関数">補足：発散する関数</a></h3>
+<p>Rustの関数には、発散する関数 (diverging functions) という種別があります。これは、<a href="https://doc.rust-lang.org/1.30.0/book/first-edition/functions.html#diverging-functions">The Book 1st edition: Functions#diverging-functions</a>に説明があります。</p>
+<p>戻り値に<code>!</code>の型を持つ関数は、決してその関数から戻らないことを意味します。次のプログラムをビルド (実行) してみて下さい。</p>
+<pre><pre class="playground"><code class="language-rust">fn main() -&gt; ! {
+    println!(&quot;I'll be back!&quot;);
+}
+</code></pre></pre>
+<p>次のようなエラーが発生したはずです。</p>
+<pre><code>error[E0308]: mismatched types
+ --&gt; src/main.rs:1:14
+  |
+1 | fn main() -&gt; ! {
+  |    ----      ^ expected !, found ()
+  |    |
+  |    this function's body doesn't return
+  |
+  = note: expected type `!`
+             found type `()`
+</code></pre>
+<p>下記エラーが示す通り、<code>!</code>を戻り値として持つ関数が、関数から戻るようなコードになっている場合には、コンパイルエラーになります。</p>
+<pre><code>this function's body doesn't return
+</code></pre>
+<p>次に、無限ループを挿入して、再び実行してみます。</p>
+<pre><pre class="playground"><code class="language-rust">fn main() -&gt; ! {
+    println!(&quot;I never return!!&quot;);
+    
+    loop {}
+}
+</code></pre></pre>
+<p>Rust Playgroundでは、タイムアウトでプロセスが強制終了されますが、コンパイルが通ることがわかります。</p>
+<h4><a class="header" href="#出典-6" id="出典-6">出典</a></h4>
+<ul>
+<li>Embedonomicon: <a href="https://tomoyuki-nakabayashi.github.io/embedonomicon/main.html">mainインタフェース</a></li>
+</ul>
+<h1><a class="header" href="#4-ツール" id="4-ツール">4. ツール</a></h1>
+<p>Rustで組込み / ベアメタルプログラミングする上で欠かせないツールを紹介します。<a href="https://github.com/rust-embedded/wg#the-tools-team">Embedded WG tool team</a>にも情報があるので、チェックしてみて下さい。</p>
+<h2><a class="header" href="#3-1-cargo" id="3-1-cargo">3-1. Cargo</a></h2>
+<p>Rustでの開発に<a href="https://doc.rust-lang.org/cargo/index.html">Cargo</a>は欠かせません。Cargoは、Rustのパッケージマネージャですが、それ以上のことができます。3rd party製のサブコマンド拡張をインストールすることで、Cargoの機能を拡張できます。ここでは、組込み / ベアメタルでのRust開発をより便利にするCargoに機能やサブコマンド拡張について紹介します。</p>
+<h3><a class="header" href="#設定ファイル" id="設定ファイル">設定ファイル</a></h3>
+<p>まず、欠かせないのが、設定ファイルです。どのような設定項目が書けるか、は<a href="https://doc.rust-lang.org/cargo/reference/config.html">Cargo: 3.3 Configuration</a>に掲載されています。</p>
+<p>Cargo設定ファイルはTOML形式で記述し、プロジェクトの<code>.cargo/config</code>に作成することが多いです。実際は、階層的な作りになっています。どのような階層構造になっているか、は<a href="https://doc.rust-lang.org/cargo/reference/config.html#hierarchical-structure">Cargo: 3.3 Configuration 階層構造</a>を参照して下さい。</p>
+<p>組込み / ベアメタルでよく使う設定項目は、<code>target</code>と<code>build</code>です。</p>
+<h4><a class="header" href="#targettriple" id="targettriple">target.$triple</a></h4>
+<p><code>target.$triple</code>はターゲットトリプルごとに、カスタムする内容を設定します。<code>$triple</code>の部分に、有効なターゲットトリプルを指定します。カスタムランナーの設定やコンパイルオプションの指定などに使います。例えば、Cortex-M3ターゲットの時は<code>qemu-system-arm</code>で、RISC-Vターゲットの時は<code>qmue-system-riscv32</code>を、それぞれカスタムランナーにしたい場合、次のように設定ファイルを記述します。</p>
+<pre><code class="language-toml">[target.thumbv7m-none-eabi]
+runner = &quot;qemu-system-arm -machine lm3s6965evb -nographic -kernel&quot;
+
+[target.riscv32imac-unknown-none-elf]
+runner = &quot;qemu-system-riscv32 -nographic -machine sifive_u -kernel&quot;
+</code></pre>
+<p>これで、<code>cargo run --target thumbv7m-none-eabi</code>や<code>cargo run --target riscv32imac-unknown-none-elf</code>というコマンドを実行すると、QEMUでビルドしたバイナリを実行します。</p>
+<p>次の4項目が設定できます。</p>
+<ul>
+<li>linker = &quot;..&quot;</li>
+<li>ar = &quot;..&quot;</li>
+<li>runner = &quot;..&quot;</li>
+<li>rustflags = [&quot;..&quot;, &quot;..&quot;]</li>
+</ul>
+<h4><a class="header" href="#targetcfg" id="targetcfg">target.'cfg</a></h4>
+<p><code>target.$triple</code>は、ターゲットトリプルを完全に指定する方法です。一方、<code>target.'cfg</code>は、条件を複数指定して、カスタマイズできます。</p>
+<p>下記の例は、ターゲットアーキテクチャが32bitのARMで、OSなしのターゲットトリプル全てに適用されます。</p>
+<pre><code class="language-toml">[target.'cfg(all(target_arch = &quot;arm&quot;, target_os = &quot;none&quot;))']
+rustflags = [
+  &quot;-C&quot;, &quot;link-arg=-Tlink.x&quot;,
+]
+</code></pre>
+<h4><a class="header" href="#build" id="build">build</a></h4>
+<p>デフォルトのターゲットシステムが固定の場合、<code>cargo run --target thumbv7m-none-eabi</code>という長いコマンドを毎回入力するのは面倒です。そこで、<code>build</code>設定でデフォルトターゲットシステムを指定できます。</p>
+<pre><code class="language-toml">[build]
+target = &quot;thumbv7m-none-eabi&quot;
+</code></pre>
+<p><code>cargo run</code>で、<code>cargo run --target thumbv7m-none-eabi</code>と等価になります。</p>
+<h3><a class="header" href="#binutils" id="binutils">binutils</a></h3>
+<p>組込み / ベアメタルの開発において、バイナリを調査することは、息をするより自然なことです。バイナリの調査を行う際、<code>objdump</code>、<code>size</code>、<code>readelf</code>、<code>nm</code>などのツールを利用します。GNUのbinutilsを使用しても良いのですが、LLVMのものを利用すると、rustcがサポートするターゲットアーキテクチャ全てに対応しており、便利です。</p>
+<p>Cargoのサブコマンドである<a href="https://github.com/rust-embedded/cargo-binutils">cargo binutils</a>が提供されており、Cargoから<code>objdump</code>や<code>size</code>コマンドを利用できます。</p>
+<p>インストールも非常に簡単です。</p>
+<pre><code>$ cargo install cargo-binutils
+$ rustup component add llvm-tools-preview
+</code></pre>
+<p>プロジェクトバイナリ名が<code>app</code>の場合、次のように使用します。</p>
+<pre><code>$ cargo size --target thumbv7m-none-eabi --bin app
+</code></pre>
+<p>Cargo設定ファイルで、buildターゲットを指定している場合、次のコマンドで同じことができます。</p>
+<pre><code>$ cargo size --bin app
+</code></pre>
+<p>リリースビルドしたバイナリを調査する場合、<code>--release</code>を追加します。</p>
+<pre><code>$ cargo size --bin app --release
+</code></pre>
+<p>LLVMツール自体のオプションを使用する場合、空の<code>--</code>を入力した後にLLVMのオプションを指定します。</p>
+<pre><code>$ cargo objdump --bin app -- -d -no-show-raw-insn
+#                         ^^^^^^^^^^^^^^^^^^^^^^^
+</code></pre>
+<h2><a class="header" href="#3-2-コンパイラサポート" id="3-2-コンパイラサポート">3-2. コンパイラサポート</a></h2>
+<p>Rustコンパイラがサポートしているターゲットについてまとめます。また、ターゲットとするシステムをRustがサポートしていない場合、どのような対応が考えられるか、についても記載します。</p>
+<h3><a class="header" href="#rustプラットフォームサポート" id="rustプラットフォームサポート">Rustプラットフォームサポート</a></h3>
+<p>Rustがサポートしているプラットフォーム一覧は、<a href="https://forge.rust-lang.org/platform-support.html">Rust Platform Support</a>に記載されています。</p>
+<p>ここでは、ターゲットシステムを、Tier1からTier3に分類しています。Tier1は「ビルドでき、かつ、動作することが保証されている」ものです。Tier2は「ビルドできることが保証されている」ものです。Tier3は「サポートされているが、ビルドできる保証がない」ものです。</p>
+<p>あるアーキテクチャに対して、Rustが提供する最低レベルのサポートは、<strong>有効化されているLLVMバックエンドがある</strong>ことです。次のコマンドにより、Rustコンパイラが使用するLLVMでサポートが有効になっているアーキテクチャを確認できます。</p>
+<pre><code>$ cargo objdump -- -version
+LLVM (http://llvm.org/):
+  LLVM version 8.0.0-rust-1.34.1-stable
+  // 途中略
+
+  Registered Targets:
+    aarch64    - AArch64 (little endian)
+    aarch64_be - AArch64 (big endian)
+    arm        - ARM
+    arm64      - ARM64 (little endian)
+    armeb      - ARM (big endian)
+    hexagon    - Hexagon
+    mips       - MIPS (32-bit big endian)
+    mips64     - MIPS (64-bit big endian)
+    mips64el   - MIPS (64-bit little endian)
+    mipsel     - MIPS (32-bit little endian)
+    msp430     - MSP430 [experimental]
+    nvptx      - NVIDIA PTX 32-bit
+    nvptx64    - NVIDIA PTX 64-bit
+    ppc32      - PowerPC 32
+    ppc64      - PowerPC 64
+    ppc64le    - PowerPC 64 LE
+    riscv32    - 32-bit RISC-V
+    riscv64    - 64-bit RISC-V
+    sparc      - Sparc
+    sparcel    - Sparc LE
+    sparcv9    - Sparc V9
+    systemz    - SystemZ
+    thumb      - Thumb
+    thumbeb    - Thumb (big endian)
+    wasm32     - WebAssembly 32-bit
+    wasm64     - WebAssembly 64-bit
+    x86        - 32-bit X86: Pentium-Pro and above
+    x86-64     - 64-bit X86: EM64T and AMD64
+</code></pre>
+<p>もし、手元の環境にLLVMツールの最新版がインストールされている場合、そのターゲットアーキテクチャと見比べて見て下さい。執筆時点での著者の環境では、LLVM 8.0.1がリリースされており、ターゲットアーキテクチャは以下の通りでした。</p>
+<pre><code>$ llvm-objdump -version
+LLVM (http://llvm.org/):
+  LLVM version 8.0.1
+  // 中略
+
+  Registered Targets:
+    aarch64    - AArch64 (little endian)
+    aarch64_be - AArch64 (big endian)
+    amdgcn     - AMD GCN GPUs
+    arm        - ARM
+    arm64      - ARM64 (little endian)
+    armeb      - ARM (big endian)
+    avr        - Atmel AVR Microcontroller
+    // 中略
+    x86        - 32-bit X86: Pentium-Pro and above
+    x86-64     - 64-bit X86: EM64T and AMD64
+    xcore      - XCore
+</code></pre>
+<p><code>amdgcn</code>、<code>avr</code>、<code>xcore</code>など、Rustコンパイラではサポートされていないアーキテクチャがあります。Rustコンパイラではこれらのアーキテクチャサポートが無効化されて、配布されています。</p>
+<h3><a class="header" href="#rustがサポートしていないターゲットのビルド" id="rustがサポートしていないターゲットのビルド">Rustがサポートしていないターゲットのビルド</a></h3>
+<p>ここから先は、著者が試したことがないため、参考情報となります。</p>
+<p>もし使用したいターゲットが、Rustコンパイラで無効化されている場合 (上述の<code>amdcgn</code>や<code>avr</code>) 、Rustのソースコードを修正しなければなりません。<a href="https://github.com/rust-lang/rust/pull/52787">rust-lang/rust#52787</a>の最初の2つのコミットがヒントになります。</p>
+<p>メインラインのLLVMがターゲットアーキテクチャをサポートしていない場合でも、LLVMのforkが存在しているのであれば、<code>rustc</code>のビルド前にLLVMを差し替えることが可能です。<a href="https://dentrassi.de/2019/06/16/rust-on-the-esp-and-how-to-get-started/">Rust on the ESP and how to get started</a>では、LLVMのXtensa forkを使用し、ESPをターゲットにRustのコードをコンパイルする方法が紹介されています。</p>
+<p>もしGCCでしかターゲットがサポートされていない場合、<a href="https://github.com/thepowersgang/mrustc">mrustc</a>を使うことができます。これは、非公式のRustコンパイラで、RustプログラムをCコードに変換し、その後、GCCを使ってコンパイルします。</p>
+<h3><a class="header" href="#target-specification" id="target-specification">target specification</a></h3>
+<p>Rustでは、ターゲットシステムに関連する<a href="https://github.com/rust-lang/rfcs/blob/master/text/0131-target-specification.md">ターゲット仕様</a>があります。この仕様では、アーキテクチャ、オペレーティングシステム、データレイアウトなどを記述します。</p>
+<p>Rustコンパイラに組み込まれているターゲット仕様があります。コンパイラ組込みのターゲットは、次のコマンドで確認できます。</p>
+<pre><code>$ rustc --print target-list | column
+aarch64-fuchsia                 mips64el-unknown-linux-gnuabi64
+aarch64-linux-android           mipsel-unknown-linux-gnu
+aarch64-unknown-cloudabi        mipsel-unknown-linux-musl
+aarch64-unknown-freebsd         mipsel-unknown-linux-uclibc
+aarch64-unknown-linux-gnu       msp430-none-elf
+//中略
+i686-unknown-openbsd            x86_64-unknown-linux-gnux32
+mips-unknown-linux-gnu          x86_64-unknown-linux-musl
+mips-unknown-linux-musl         x86_64-unknown-netbsd
+mips-unknown-linux-uclibc       x86_64-unknown-openbsd
+mips64-unknown-linux-gnuabi64   x86_64-unknown-redox
+</code></pre>
+<p>次のコマンドを使って、ターゲット仕様を表示できます (nightlyコンパイラが必要です)。</p>
+<pre><code>$ rustc +nightly -Z unstable-options --print target-spec-json --target thumbv7m-none-eabi
+{
+  &quot;abi-blacklist&quot;: [
+    &quot;stdcall&quot;,
+    &quot;fastcall&quot;,
+    &quot;vectorcall&quot;,
+    &quot;thiscall&quot;,
+    &quot;win64&quot;,
+    &quot;sysv64&quot;
+  ],
+  &quot;arch&quot;: &quot;arm&quot;,
+  &quot;data-layout&quot;: &quot;e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64&quot;,
+  &quot;emit-debug-gdb-scripts&quot;: false,
+  &quot;env&quot;: &quot;&quot;,
+  &quot;executables&quot;: true,
+  &quot;is-builtin&quot;: true,
+  &quot;linker&quot;: &quot;rust-lld&quot;,
+  &quot;linker-flavor&quot;: &quot;ld.lld&quot;,
+  &quot;llvm-target&quot;: &quot;thumbv7m-none-eabi&quot;,
+  &quot;max-atomic-width&quot;: 32,
+  &quot;os&quot;: &quot;none&quot;,
+  &quot;panic-strategy&quot;: &quot;abort&quot;,
+  &quot;relocation-model&quot;: &quot;static&quot;,
+  &quot;target-c-int-width&quot;: &quot;32&quot;,
+  &quot;target-endian&quot;: &quot;little&quot;,
+  &quot;target-pointer-width&quot;: &quot;32&quot;,
+  &quot;vendor&quot;: &quot;&quot;
+}
+</code></pre>
+<p>もし、ターゲットとするシステムに対して、コンパイラ組込みのターゲットがない場合、JSON形式でカスタムターゲット仕様を作成します。ターゲットとするシステムに近いコンパイラ組込みターゲットを、上記コマンドで表示し、それをカスタムする方法がお勧めです。本書の執筆時点では、ターゲット仕様の各フィールドが何を意味するか説明する最新のドキュメントがありません。<a href="https://github.com/rust-lang/rfcs/blob/master/text/0131-target-specification.md">ターゲット仕様</a>時点から、追加、変更されているものについては、コンパイラのソースコードを確認する必要があります。</p>
+<p>ターゲット仕様ファイルを用意した後は、ファイルパスで指定するか、その名前で参照できます。</p>
+<pre><code>$ cargo build --target custom.json
+# もしくは
+$ cargo build --target custom
+</code></pre>
+<h4><a class="header" href="#出典-7" id="出典-7">出典</a></h4>
+<ul>
+<li>Embedonomicon: <a href="https://tomoyuki-nakabayashi.github.io/embedonomicon/compiler-support.html">コンパイラサポートに関する覚書</a></li>
+</ul>
+<h2><a class="header" href="#3-3-rustc" id="3-3-rustc">3-3. rustc</a></h2>
+<p>rustcは、Rustのコンパイラです。組込み / ベアメタルプログラミングに限りませんが、コンパイラでできることを知っていると便利なことがあります。</p>
+<h3><a class="header" href="#コマンドライン引数" id="コマンドライン引数">コマンドライン引数</a></h3>
+<p>コマンドライン引数を直接rustcに指定する機会は少ないです。多くの場合、Cargoの設定を記述し、間接的にrustcのコマンドライン引数を使用します。しかし、rustcのコマンドライン引数を把握していなければ、Cargoから使いようもありません。網羅的な説明は、<a href="https://doc.rust-lang.org/stable/rustc/command-line-arguments.html">コマンドライン引数</a>を参照して下さい。</p>
+<p>組込み / ベアメタルプログラミングで最も大事なコマンドライン引数は、間違いなく<code>-C / --codegen</code>です。このコマンドライン引数では、使用するリンカの指定や最適化レベルなどの制御ができます。詳しくは、<a href="04-tools/rustc.html#%E3%82%B3%E3%83%BC%E3%83%89%E7%94%9F%E6%88%90%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3">コード生成オプション</a>に記載します。</p>
+<p>組込みLinux開発でターゲットシステムのライブラリに依存するクレートをクロスビルドするのであれば、<code>--sysroot</code>オプションでsystem rootのパスを上書きすることができます。</p>
+<p>コンパイラより厳密なソースコード検査をするために、コマンドライン引数からlintルールごとに、lintレベルを制御できます。<code>-A</code>, <code>-W</code>, <code>-D</code>, <code>-F</code>フラグがあり、それぞれ、許可、警告、拒絶、禁止を意味します。lintルールごとに、これらのフラグを設定できます。詳細は、<a href="04-tools/rustc.html#lint">lint</a>で紹介します。下に例を示します。</p>
+<pre><code>$ rustc lib.rs --crate-type=lib -W missing-docs
+</code></pre>
+<h3><a class="header" href="#lint" id="lint">lint</a></h3>
+<p><code>lint</code>はソースコードをコンパイラより厳密なルールに則り、検査するためのツールです。Rustコンパイラには、様々なlintルールが組み込まれています。ソースコードをコンパイルする時、自動的にlintによる検査が行われます。</p>
+<p>プロジェクトの運用ルールに合わせて、適切なlintルールを設定することで、ソースコードの品質をより向上できるでしょう。</p>
+<h3><a class="header" href="#lintレベル" id="lintレベル">lintレベル</a></h3>
+<p>rustcのlintレベルは、4つに分類されます。</p>
+<ol>
+<li>allow (許可)</li>
+<li>warn (警告)</li>
+<li>deny (拒絶)</li>
+<li>forbid (禁止)</li>
+</ol>
+<p>各lintルールには、デフォルトのlintレベルがあり、コンパイルオプションかアトリビュートで上書きできるようになっています。まず、lintレベルについて説明します。</p>
+<h4><a class="header" href="#allow-許可" id="allow-許可">allow (許可)</a></h4>
+<p>lintルールを適用しません。例えば、次のコードをコンパイルしても、警告は発生しません。</p>
+<pre><code class="language-rust ignore">pub fn foo() {}
+</code></pre>
+<pre><code>$ rustc lib.rs --crate-type=lib
+</code></pre>
+<p>しかし、このコードは<code>missing_docs</code>ルールを違反しています。lintレベルを上書きしてコンパイルすると、コンパイルエラーになったり、警告が出力されるようになります。</p>
+<h4><a class="header" href="#warn-警告" id="warn-警告">warn (警告)</a></h4>
+<p>lintルール違反があった場合、警告を表示します。</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let x = 5;
+}
+</code></pre></pre>
+<p>このコードは<code>unused_variables</code>のルールに違反しており、次の警告が報告されます。</p>
+<pre><code>warning: unused variable: `x`
+ --&gt; src/main.rs:2:9
+  |
+2 |     let x = 5;
+  |         ^ help: consider prefixing with an underscore: `_x`
+  |
+  = note: #[warn(unused_variables)] on by default
+</code></pre>
+<h4><a class="header" href="#deny-拒絶" id="deny-拒絶">deny (拒絶)</a></h4>
+<p>lintルール違反があった場合、コンパイルエラーになります。</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    100u8 &lt;&lt; 10;
+}
+</code></pre></pre>
+<p>このコードは、<code>exceeding_bitshifts</code>ルールに違反しており、コンパイルエラーになります。</p>
+<pre><code>error: attempt to shift left with overflow
+ --&gt; src/main.rs:2:5
+  |
+2 |     100u8 &lt;&lt; 10;
+  |     ^^^^^^^^^^^
+  |
+  = note: #[deny(exceeding_bitshifts)] on by default
+</code></pre>
+<h4><a class="header" href="#forbid-禁止" id="forbid-禁止">forbid (禁止)</a></h4>
+<p>lintルール違反があった場合、コンパイルエラーになります。<code>forbid</code>は、<code>deny</code>より強いレベルで、上書きができません。</p>
+<p>下のコードは、アトリビュートで<code>missing_docs</code>ルールをallowに上書きしています。</p>
+<pre><code class="language-rust ignore">#![allow(missing_docs)]
+pub fn foo() {}
+</code></pre>
+<p><code>missing_dogs</code>ルールを、denyレベルに設定してコンパイルすると、このコードはコンパイルできます。</p>
+<pre><code>$ rustc lib.rs --crate-type=lib -D missing-docs
+</code></pre>
+<p>一方、forbidレベルに設定してコンパイルすると、コンパイルエラーになります。</p>
+<pre><code>$ rustc lib.rs --crate-type=lib -F missing-docs
+error[E0453]: allow(missing_docs) overruled by outer forbid(missing_docs)
+ --&gt; lib.rs:1:10
+  |
+1 | #![allow(missing_docs)]
+  |          ^^^^^^^^^^^^ overruled by previous forbid
+  |
+  = note: `forbid` lint level was set on command line
+</code></pre>
+<h3><a class="header" href="#lintレベルの設定方法" id="lintレベルの設定方法">lintレベルの設定方法</a></h3>
+<h4><a class="header" href="#コンパイラフラグで設定" id="コンパイラフラグで設定">コンパイラフラグで設定</a></h4>
+<p>コンパイルオプションで、<code>-A</code>, <code>-W</code>, <code>-D</code>, <code>-F</code>のいずれかを指定して、lintレベルを設定できます。</p>
+<pre><code>$ rustc lib.rs --crate-type=lib -W missing-docs
+</code></pre>
+<p>もちろん、複数のフラグを同時に設定することも可能です。</p>
+<pre><code>$ rustc lib.rs --crate-type=lib -D missing-docs -A unused-variables
+</code></pre>
+<p>Cargoの設定ファイル内で、lintレベルを設定することも可能です。</p>
+<pre><code>$ cat .cargo/config
+</code></pre>
+<pre><code class="language-toml">[build]
+rustflags = [&quot;-D&quot;, &quot;unsafe-code&quot;]
+</code></pre>
+<h4><a class="header" href="#アトリビュートで設定" id="アトリビュートで設定">アトリビュートで設定</a></h4>
+<p>ソースコード内のアトリビュートで、<code>allow</code>, <code>warn</code>, <code>deny</code>, <code>forbid</code>のいずれかを指定して、lintレベルを設定できます。</p>
+<pre><code class="language-rust ignore">$ cat lib.rs
+#![warn(missing_docs)]
+
+pub fn foo() {}
+</code></pre>
+<p>1つのアトリビュートに、複数のlintルールを指定できます。</p>
+<pre><code class="language-rust ignore">#![warn(missing_docs, unused_variables)]
+
+fn main() {
+pub fn foo() {}
+}
+</code></pre>
+<p>複数のアトリビュートを組み合わせて使うこともできます。</p>
+<pre><code class="language-rust ignore">#![warn(missing_docs)]
+#![deny(unused_variables)]
+
+pub fn foo() {}
+</code></pre>
+<h3><a class="header" href="#lintルール" id="lintルール">lintルール</a></h3>
+<p>次のコマンドでlintルールと、デフォルトレベルの一覧が取得できます。</p>
+<pre><code>$ rustc -W help
+</code></pre>
+<p>デフォルトレベルごとに、サンプルコード付きでlintルールが説明されています。</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/rustc/lints/listing/allowed-by-default.html">Allowed-by-default lints</a></li>
+<li><a href="https://doc.rust-lang.org/stable/rustc/lints/listing/warn-by-default.html">Warn-by-default lints</a></li>
+<li><a href="https://doc.rust-lang.org/stable/rustc/lints/listing/deny-by-default.html">Deny-by-default lints</a></li>
+</ul>
+<!-- ### コラム〜MISRA-C〜 -->
+<h3><a class="header" href="#コラムrustのlintツールclippy" id="コラムrustのlintツールclippy">コラム〜Rustのlintツールclippy〜</a></h3>
+<p>さらに細かなlintルールで検査したい場合、<a href="https://github.com/rust-lang/rust-clippy">clippy</a>が使用できます。clippyは、下記のようなルールを含んでいます。</p>
+<ul>
+<li>不必要にコードを複雑にする書き方の検出</li>
+<li>正当性がないコードの検出 (常に条件が真になるなど)</li>
+<li>性能が低下するコードの検出</li>
+</ul>
+<p>導入も容易なため、プロジェクトの初期段階からclippyを導入することをお勧めします。<a href="https://rust-lang.github.io/rust-clippy/master/index.html">clippy lintルール一覧</a>も合わせてご覧ください。</p>
+<h3><a class="header" href="#コード生成オプション" id="コード生成オプション">コード生成オプション</a></h3>
+<p><a href="https://doc.rust-lang.org/stable/rustc/codegen-options/index.html">Codegen options</a>にコード生成に関するオプション一覧がまとめられています。</p>
+<p>組込みで特に重要な最適化オプションについて説明します。デフォルト (cargo build) では、最適化を行いません。コンパイラオプションとしては、<code>-C opt-level = 0</code>を使用します。</p>
+<h4><a class="header" href="#速度最適化" id="速度最適化">速度最適化</a></h4>
+<p><code>rustc</code>は、3つの最適化レベルを提供しています。<code>opt-level = 1</code>, <code>2</code>, <code>3</code>です。<code>cargo build --release</code>を実行した場合、デフォルトでは、<code>opt-level = 3</code>です。</p>
+<p><code>opt-level = 2</code>, <code>3</code>では、バイナリサイズを犠牲にする (大きくする) ことで、速度を向上します。例えば、<code>opt-level = 2</code>以上では、ループ展開が行われます。ループ展開は、Flash/ROMの容量をより多く使用します。</p>
+<p>組込みでは、速度よりもバイナリサイズが制限になる場合があります。その場合には、バイナリサイズの最適化が必要です。</p>
+<h4><a class="header" href="#サイズ最適化" id="サイズ最適化">サイズ最適化</a></h4>
+<p><code>rustc</code>は、2つのサイズ最適化レベルを提供しています。<code>opt-level = &quot;s&quot;</code>, <code>&quot;z&quot;</code>です。<code>&quot;z&quot;</code>は、<code>&quot;s&quot;</code>より小さなバイナリを作ります。</p>
+<p>これらの最適化レベルは、LLVMのインライン展開しきい値を下げます。インライン展開しきい値は、<code>-C inline-threshold</code>で指定することもできます。Rust 1.34.1でのしきい値の使われ方は、<a href="https://github.com/rust-lang/rust/blob/1.34.1/src/librustc_codegen_llvm/back/write.rs#L735-L759">ソースコード</a>を見るとわかります。</p>
+<ul>
+<li><code>opt-level = 3</code>は275</li>
+<li><code>opt-level = 2</code>は225</li>
+<li><code>opt-level = &quot;s&quot;</code>は75</li>
+<li><code>opt-level = &quot;s&quot;</code>は25</li>
+</ul>
+<h4><a class="header" href="#出典-8" id="出典-8">出典</a></h4>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/rustc/">The rustc book</a></li>
+<li><a href="https://tomoyuki-nakabayashi.github.io/book/unsorted/speed-vs-size.html">Embedonomicon 最適化</a></li>
+</ul>
+<h1><a class="header" href="#5-ライブラリ--フレームワーク" id="5-ライブラリ--フレームワーク">5. ライブラリ / フレームワーク</a></h1>
+<p>組込み / ベアメタルプログラミングで役に立つライブラリやフレームワークを紹介します。</p>
+<h2><a class="header" href="#5-1-heaplessクレート" id="5-1-heaplessクレート">5-1. heaplessクレート</a></h2>
+<p>通常、コレクション利用には、グローバルメモリアロケータの実装が必須です (<a href="05-library/../03-bare-metal/allocator.html">メモリアロケータ</a>参照)。<a href="https://github.com/japaric/heapless">heapless</a>クレートは、グローバルメモリアロケータがなくても利用できるコレクションです。</p>
+<blockquote>
+<p><code>heapless</code>クレートは、Rust 1.36からstableで利用可能になります。</p>
+</blockquote>
+<p>単純にクレートの依存関係を追加し、コレクションを<code>use</code>するだけです。</p>
+<pre><pre class="playground"><code class="language-rust">extern crate heapless; // v0.4.x
+
+use heapless::Vec;
+use heapless::consts::*;
+
+#[entry]
+fn main() -&gt; ! {
+    let mut xs: Vec&lt;_, U8&gt; = Vec::new();
+
+    xs.push(42).unwrap();
+    assert_eq!(xs.pop(), Some(42));
+}
+</code></pre></pre>
+<p>通常のコレクションと違う点が2つあります。</p>
+<p>1つ目は、コレクションの容量を最初に宣言しなければならないことです。<code>heapless</code>コレクションは固定容量のコレクションです。上の<code>Vec</code>は最大で8つの要素を保持することができます。型シグネチャの<code>U8</code>が容量を表しています。型シグネチャについては、<a href="https://crates.io/crates/typenum">typenum</a>を参照して下さい。</p>
+<p>2つ目は、<code>push</code>など多くのメソッドが<code>Result</code>を返すことです。<code>heapless</code>コレクションは、固定容量を超える要素の挿入は、失敗します。APIは、この操作失敗に対処するために、<code>Result</code>を返しています。</p>
+<p><code>heapless</code>コレクションは、通常、スタック上にコレクションを割り当てます。また、<code>static</code>変数や、ヒープ上に割り当てることも可能です。</p>
+<p>v.0.4.4現在、<code>heapless</code>は次のコレクションを提供しています。</p>
+<ul>
+<li>BinaryHeap: 優先度キュー</li>
+<li>IndexMap: ハッシュテーブル</li>
+<li>IndexSet: ハッシュセット</li>
+<li>LinearMap: </li>
+<li>spsc::Queue: single producer single consumer lock-free queue</li>
+<li>String</li>
+<li>Vec</li>
+</ul>
+<h3><a class="header" href="#heaplessの利点" id="heaplessの利点">heaplessの利点</a></h3>
+<p>固定容量のコレクションだけを使用して、そのほとんどを<code>static</code>変数に格納し、コールスタックの最大サイズを設定すると、リンカは、物理的に利用可能なメモリより大きな容量を使おうとしたかどうか検出します。</p>
+<p>その上、スタックに割り当てられた固定容量のコレクションは、<a href="https://doc.rust-lang.org/beta/unstable-book/compiler-flags/emit-stack-sizes.html">-Z emit-stack-sizes</a>フラグによって報告されます。このフラグは、（<a href="https://crates.io/crates/stack-sizes">stack-sizes</a>のような）スタック使用量を解析するツールがスタック使用量を解析することを意味します。</p>
+<h4><a class="header" href="#出典-9" id="出典-9">出典</a></h4>
+<ul>
+<li>The Embedded Rust Book: <a href="https://tomoyuki-nakabayashi.github.io/book/collections/index.html">コレクション</a></li>
+</ul>
+<h2><a class="header" href="#5-2-no_stdクレート" id="5-2-no_stdクレート">5-2. no_stdクレート</a></h2>
+<p>no_stdや組込みで利用可能なクレートを紹介します。Rustのクレートが登録されている<code>crates.io</code>には、<a href="https://crates.io/categories/no-std">crates.io No standard library</a>カテゴリがあります。2019/5/16現在、840ものクレートが登録されています。</p>
+<p>組込みに関連するものは、<a href="https://github.com/rust-embedded/awesome-embedded-rust">awesome-embedded-rust</a>に主要なものがまとめられています。</p>
+<h3><a class="header" href="#rt-runtime-クレート" id="rt-runtime-クレート">rt (runtime) クレート</a></h3>
+<p>rtクレートは、ターゲットアーキテクチャ用の最小限のスタートアップ / ランタイムを提供するクレートです。<a href="https://github.com/rust-embedded/cortex-m-rt">cortex-m-rt</a>、<a href="https://github.com/rust-embedded/msp430-rt">msp430-rt</a>、<a href="https://github.com/rust-embedded/riscv-rt">riscv-rt</a>の3つのターゲットアーキテクチャに対して実装が存在しています。</p>
+<p>これらのクレートは、以下の機能を提供します。</p>
+<ul>
+<li><code>.bss</code>と<code>.data</code>セクションの初期化</li>
+<li>FPUの初期化</li>
+<li>プログラムのエントリポイントを指定するための<code>#[entry]</code>アトリビュート</li>
+<li><code>static</code>変数が初期化される前に呼ばれるコードを指定するための<code>#[pre_init]</code>アトリビュート</li>
+<li>一般的なターゲットアーキテクチャ用のリンカスクリプト</li>
+<li>ヒープ領域の開始アドレスを表す<code>_sheap</code>シンボル</li>
+</ul>
+<p>このクレートを使用することで、次のようにアプリケーションのmainコードからプログラムを記述することができます。</p>
+<pre><code class="language-rust ignore">#![no_std]
+#![no_main]
+
+extern crate panic_halt;
+
+use cortex_m_rt::entry;
+
+// `main`をこのアプリケーションのエントリポイントであるかのように利用できます。
+// `main`は戻れません
+#[entry]
+fn main() -&gt; ! {
+    // ここに処理を書きます
+    loop { }
+}
+</code></pre>
+<p><a href="https://tomoyuki-nakabayashi.github.io/embedonomicon/">Embedonomicon</a>は、このような<code>rt</code>クレートの実装方法を解説しています。</p>
+<h3><a class="header" href="#embedded-hal" id="embedded-hal">embedded HAL</a></h3>
+<p><a href="https://github.com/rust-embedded/embedded-hal">embedded HAL</a>は、組込みRustで共通して利用できる<code>trait</code>を定義しているクレートです。例えば、SPIやシリアル、といったトレイトが定義されています。</p>
+<p>このクレートの抽象を利用して、デバイスドライバを書くことで、アプリケーションの再利用性が向上します。組込みRustの多くのプロジェクトが、このembedded HALを利用しています。</p>
+<h3><a class="header" href="#その他" id="その他">その他</a></h3>
+<h4><a class="header" href="#lazy_static" id="lazy_static">lazy_static</a></h4>
+<p><a href="https://crates.io/crates/lazy_static">lazy_static</a>は、実行時にしか初期化できない (<code>new()</code>関数でのみオブジェクトが構築できる) ような、複雑なオブジェクトの<code>static</code>変数を作るために使います。通常、<code>new()</code>関数でオブジェクトを作るような構造体は、コンパイル時に値が計算できないため、<code>static</code>変数の初期化には使えません。また、<code>lazy_static</code>は、<code>static</code>変数を1度だけ初期化する機能も提供します。<code>lazy_static</code>マクロで作られた<code>static</code>変数は、その変数が実行時に最初に使用される時に、初期化されます。</p>
+<p>例えば、<a href="https://os.phil-opp.com/vga-text-mode/#lazy-statics">Writing an OS in RustのVGA Text mode Lazy Statics</a>では、VGAにテキストを描画するグローバルインタフェース<code>WRITER</code>の実装で使用しています。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use lazy_static::lazy_static;
+use spin::Mutex;
+
+lazy_static! {
+    pub static ref WRITER: Mutex&lt;Writer&gt; = Mutex::new(Writer {
+        column_position: 0,
+        color_code: ColorCode::new(Color::Yellow, Color::Black),
+        buffer: unsafe { &amp;mut *(0xb8000 as *mut Buffer) },
+    });
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>Mutex&lt;Writer&gt;</code>という初期化が非常に複雑なオブジェクトの参照が<code>static</code>変数になっていることがわかります。このように実行時にしか構築できない値も<code>static</code>変数にできる上、どこで初期化するかに悩まなくて済みます。</p>
+<h4><a class="header" href="#bitflags" id="bitflags">bitflags</a></h4>
+<p><a href="https://crates.io/crates/bitflags">bitflags</a>は、<strong>型安全</strong>なビットマスクフラグを提供するクレートです。型安全であることがポイントで、誤ったビット操作を起こしにくいです。AndやOrのオペレータも実装されており、<code>bits()</code>メソッドで生の値を取り出すことができます。</p>
+<pre><pre class="playground"><code class="language-rust">#[macro_use]
+extern crate bitflags;
+
+bitflags! {
+    struct Flags: u32 {
+        const A = 0b00000001;
+        const B = 0b00000010;
+        const C = 0b00000100;
+        const ABC = Self::A.bits | Self::B.bits | Self::C.bits;
+    }
+}
+
+fn main() {
+    let e1 = Flags::A | Flags::C;
+    let e2 = Flags::B | Flags::C;
+    assert_eq!((e1 | e2), Flags::ABC);   // union
+    assert_eq!((e1 &amp; e2), Flags::C);     // intersection
+    assert_eq!((e1 - e2), Flags::A);     // set difference
+    assert_eq!(!e2, Flags::A);           // set complement
+    assert_eq!(e1.bits(), 5u32);         // get raw value
+}
+</code></pre></pre>
+<h4><a class="header" href="#bit_field" id="bit_field">bit_field</a></h4>
+<p><a href="https://crates.io/crates/bit_field">bit_field</a>は、ビットフィールドへのアクセスを簡単にするためのクレートです。<code>BitField</code>トレイトを提供しており、<code>i8</code>, <code>u8</code>, <code>usize</code>などの整数型が、トレイトを実装しています。</p>
+<p>ビットフィールドへのアクセスは、次のように書けます。</p>
+<pre><code class="language-rust ignore">let mut value: u32 = 0b110101;
+
+assert_eq!(value.get_bit(1), false);
+assert_eq!(value.get_bit(2), true);
+assert_eq!(value.get_bits(2..6), 0b1101);
+
+value.set_bit(2, true);
+assert_eq!(value, 0b110111);
+
+value.set_bits(0..2, 0b00);
+assert_eq!(value, 0b110100);
+</code></pre>
+<h4><a class="header" href="#bitfield" id="bitfield">bitfield</a></h4>
+<p><a href="https://docs.rs/bitfield/0.13.1/bitfield/">bitfield</a>は、ビットフィールドを定義するマクロを提供するクレートです。<code>bit_field</code>とクレート名が似ていますが、別物です。</p>
+<p>下のように、ビットフィールドを定義します。</p>
+<pre><code class="language-rust ignore">bitfield! {
+    #[derive(Clone, Copy, Debug)]
+    pub struct PinSelect(u32);
+    pub connected, set_connected: 31;
+    reserved, _: 30, 6;
+    pub port, set_port: 5;
+    pub pin, set_pin: 4, 0;
+};
+
+fn main() {
+    let mut reg = PinSelect(0);
+
+    reg.set_pin(5);
+    reg.set_port(0);
+    reg.set_connected(1);
+    assert_eq!(0x1000_0005, reg.all_bits());
+}
+</code></pre>
+<h4><a class="header" href="#micromath" id="micromath">micromath</a></h4>
+<p><a href="https://crates.io/crates/micromath">micromath</a>は、軽量な数値計算ライブラリです。三角関数などがあります。加速度計など、センサドライバでの計算に利用できます。</p>
+<h4><a class="header" href="#register-rs" id="register-rs">register-rs</a></h4>
+<p><a href="https://crates.io/crates/register">register-rs</a>は、Rust製のRTOSである<code>Tock</code>で利用されているMMIO / CPUレジスタインタフェースです。読み書き可能、読み込み専用、書き込み専用、を表現するジェネリック構造体を提供します。</p>
+<h4><a class="header" href="#volatile_register" id="volatile_register">volatile_register</a></h4>
+<p><a href="https://docs.rs/volatile-register/0.2.0/volatile_register/">volatile_register</a>は、メモリマップドレジスタへのvolatileアクセスを提供します。<a href="https://crates.io/crates/register">register-rs</a>の簡易版、と言った印象です。</p>
+<pre><code class="language-rust ignore">use volatile_register::RW;
+
+// メモリマップドレジスタブロックを表現するstructを作ります
+/// Nested Vector Interrupt Controller
+#[repr(C)]
+pub struct Nvic {
+    /// Interrupt Set-Enable
+    pub iser: [RW&lt;u32&gt;; 8],
+    reserved0: [u32; 24],
+    /// Interrupt Clear-Enable
+    pub icer: [RW&lt;u32&gt;; 8],
+    reserved1: [u32; 24],
+    // .. more registers ..
+}
+
+// ベースアドレスをキャストしてアクセスします
+let nvic = 0xE000_E100 as *const Nvic;
+// unsafeブロックが必要です
+unsafe { (*nvic).iser[0].write(1) }
+</code></pre>
+<h4><a class="header" href="#embedded-graphics" id="embedded-graphics">embedded-graphics</a></h4>
+<p><a href="https://crates.io/crates/embedded-graphics">embedded-graphics</a>は、2Dグラフィックを簡単に描画するためのクレートです。次の機能を提供します。</p>
+<ul>
+<li>1ビット / ピクセルの画像</li>
+<li>8ビット / ピクセルの画像</li>
+<li>16ビット / ピクセル画像</li>
+<li>プリミティブ
+<ul>
+<li>行、四角、丸、三角</li>
+</ul>
+</li>
+<li>テキスト</li>
+</ul>
+<p>このクレートは、メモリアロケータも事前の巨大なメモリ領域確保も必要としません。</p>
+<h2><a class="header" href="#5-3-svd2rust" id="5-3-svd2rust">5-3. svd2rust</a></h2>
+<p><a href="http://www.keil.com/pack/doc/CMSIS/SVD/html/index.html">SVD</a> (System View Description) ファイルからRustの<code>struct</code>を自動生成するツールです。SVDファイルはXMLファイルで、特にペリフェラルのメモリマップドレジスタの記述を形式化したものです。</p>
+<p><a href="https://docs.rs/svd2rust/0.14.0/svd2rust/">svd2rust</a>は、Cortex-M, MSP430, RISCVのマイクロコントローラに対応しています。<code>svd2rust</code>で自動生成されたクレートは、<code>PAC (Peripheral Access Crate)</code> と呼ばれています。主要なPACは、<a href="https://github.com/rust-embedded/awesome-embedded-rust#peripheral-access-crates">Peripheral Access Crates</a>にまとめられています。</p>
+<p>ちょっとしたプログラムを書く場合、<code>svd2rust</code>から生成されたPACは間違いを犯しにくいです。<code>svd2rust</code>で生成されたレジスタアクセス関数では、数値ではなく<strong>クロージャ</strong>を引数に取ります。例えば、GPIOピン (8番ピン) を出力設定にして、highレベルを出力するコードは、次のようになります。</p>
+<pre><code class="language-rust ignore">    // ピンを出力に設定します
+    gpioe.moder.modify(|_, w| {
+        w.moder8().output();
+    });
+
+    // LEDを点灯します
+    gpioe.odr.write(|w| {
+        w.odr8().set_bit();
+    });
+</code></pre>
+<p>クロージャを引数に取る利点は、<code>modify()</code>メソッドの利用時にあります。<code>modify()</code>メソッドは、メモリマップドレジスタのリード・モディファイ・ライトを行うAPIです。操作対象のレジスタがクロージャ内でしか操作できないため、別レジスタを誤って操作するような事故が発生しません。</p>
+<p>単純なレジスタ読み書きより複雑なコードに見えますが、コンパイラの最適化により、リリースビルドされたバイナリは、通常のレジスタアクセスと同等の機械語になります。</p>
+<p><a href="https://tomoyuki-nakabayashi.github.io/discovery/">Discovery</a>では、<code>svd2rust</code>で生成したPACを利用して、LEDを点灯したり、シリアル通信します。</p>
+<p>後述する<a href="https://github.com/japaric/cortex-m-rtfm">RTFM for ARM Cortex-M</a>でも、<code>svd2rust</code>で生成したPACを利用します。</p>
+<h2><a class="header" href="#5-4-rtfm-real-time-for-the-masses" id="5-4-rtfm-real-time-for-the-masses">5-4. RTFM (Real Time For the Masses)</a></h2>
+<p><a href="https://github.com/japaric/cortex-m-rtfm">RTFM for ARM Cortex-M</a>は、リアルタイムシステムを構築するための並行処理フレームワークです。<a href="https://www.diva-portal.org/smash/get/diva2:1005680/FULLTEXT01.pdf">Real-time for the masses, step 1: Programming API and static priority SRP kernel primitives.</a>というリアルタイムシステム構築の論文を、Rustで実装しています。RTOSほどの機能はありませんが、小規模なリアルタイムシステム構築に向いています。</p>
+<h3><a class="header" href="#機能一覧" id="機能一覧">機能一覧</a></h3>
+<ul>
+<li>並行処理の単位tとしてタスクが定義されています。タスクはイベントトリガ、もしくは、アプリケーションからspawnすることができます。</li>
+<li>タスク間でメッセージ送受信が可能です。</li>
+<li>ソフトウェアタスクをスケジュールするタイマキューがあります。周期タスクを実装するために利用できます。</li>
+<li>優先度付きのタスク、および、プリエンプティブマルチタスキングを提供します。</li>
+<li>優先度に基づいたクリティカルセクション制御により、効率的でデータ競合のないメモリ共有が可能です。</li>
+<li>コンパイル時にデッドロックが発生しないことが保証されます。</li>
+<li>スケジューラは最小限のソフトウェアで実装されており、スケジューリングオーバーヘッドは最小です。</li>
+<li>全てのタスクが1つのコールスタックを共有しており、極めて効率的にメモリを利用します。</li>
+<li>全Cortex-Mデバイスをサポートしています。</li>
+</ul>
+<h3><a class="header" href="#アプリケーション実装方法" id="アプリケーション実装方法">アプリケーション実装方法</a></h3>
+<p><code>cortex-m-rt</code>クレートと<code>Peripheral Access Crate (PAC) </code>に、初期化、タスク、優先度、共有リソースの概念が追加されます。</p>
+<pre><code class="language-rust ignore">#[app(device = lm3s6965)]
+const APP: () = {
+    #[init]
+    fn init() {
+        // Cortex-M peripherals
+        let _core: rtfm::Peripherals = core;
+
+        // Device specific peripherals
+        let _device: lm3s6965::Peripherals = device;
+
+        // Pends the UART0 interrupt but its handler won't run until *after*
+        // `init` returns because interrupts are disabled
+        rtfm::pend(Interrupt::UART0);
+
+        hprintln!(&quot;init&quot;).unwrap();
+    }
+
+    #[idle]
+    fn idle() -&gt; ! {
+        // interrupts are enabled again; the `UART0` handler runs at this point
+
+        hprintln!(&quot;idle&quot;).unwrap();
+
+        rtfm::pend(Interrupt::UART0);
+
+        debug::exit(debug::EXIT_SUCCESS);
+
+        loop {}
+    }
+
+    #[interrupt]
+    fn UART0() {
+        static mut TIMES: u32 = 0;
+
+        // Safe access to local `static mut` variable
+        *TIMES += 1;
+
+        hprintln!(
+            &quot;UART0 called {} time{}&quot;,
+            *TIMES,
+            if *TIMES &gt; 1 { &quot;s&quot; } else { &quot;&quot; }
+        )
+        .unwrap();
+    }
+};
+</code></pre>
+<p><code>#[app(..)]</code>アトリビュートは、device引数を使って、svd2rustで生成されたPACのパスを指定します。<code>#[init]</code>アトリビュートが指定された関数は、アプリケーションとして実行される最初の関数です。この関数は、割り込み禁止状態で実行します。</p>
+<p>coreとdeviceという変数があり、この変数を通して、Cortex-Mとペリフェラルにアクセスできます。</p>
+<h3><a class="header" href="#コラムrtfmの実装" id="コラムrtfmの実装">コラム〜RTFMの実装〜</a></h3>
+<p>RTFMソースコードを覗いてみると、その多くが手続きマクロによる静的検査と、コードジェネレータであることがわかります。<code>cortex-m-rt</code>クレートを使用する場合、割り込みとメイン関数間でのデータ共有に制限があります。常に、全ての割り込みを無効化する<code>cortex_m::interrupt::Mutex</code>を使わなければなりません。しかし、全ての割り込みを無効化することは、常に求められる条件ではありません。</p>
+<p>例えば、2つの割り込みハンドラがデータを共有する場合、両者の優先度が同じで、プリエンプションが発生しないとすると、ロックは不要です。RTFMでは、ソースコードを静的に解析することで、不要なロックをせずに、共有データにアクセスできるようになっています。このような解析が可能な理由は、appアトリビュート内にアプリケーションの実装を、全て書くためです。</p>
+<p>また、RTFMでは、動的な割り込み優先度の変更をサポートしていません。そのため、全ての割り込みハンドラ間の優先度は静的に決定します。これがうまいこと生きており、ある共有データを使用する割り込みハンドラ同士で、最も優先度の高いハンドラはロックを取得しなくても共有データにアクセスできます。</p>
+<p>RTFMは、機能性と安全性を両立するアプローチです。しかし、複雑な手続きマクロで実装されているため、自分で機能を追加したり、アプリケーションをデバッグするのは、骨が折れそうです。</p>
+<h3><a class="header" href="#more-information" id="more-information">more information</a></h3>
+<p><a href="https://japaric.github.io/cortex-m-rtfm/book/en/">RTFMのドキュメント</a>にRTFMの使い方がまとめられています。</p>
+<p><a href="https://tomo-wait-for-it-yuki.hatenablog.com/archive/category/rtfm">低レイヤ強くなりたい組み込みやさんのブログ</a>で、RTRMについていくつかエントリを書きました。タスクの利用方法や共有リソースの管理方法について気になった方は、こちらを参照下さい。</p>
+<h2><a class="header" href="#5-5-tock" id="5-5-tock">5-5. Tock</a></h2>
+<p><a href="https://www.tockos.org/">Tock</a>はRust製の組込みOSです。Cortex-Mアーキテクチャに対応しており、<a href="https://github.com/tock/tock/issues/1135">RISC-Vへの移植</a>も進められています。長期に渡り開発が進められており、2018年2月時点でversion 1.0がリリースされています。</p>
+<h3><a class="header" href="#主な対応ボード" id="主な対応ボード">主な対応ボード</a></h3>
+<p>対応ボードは、既存のRTOSと比較すると多くはありません。一部を紹介します。</p>
+<ul>
+<li>Hail</li>
+<li>TI LAUNCHXL CC26x2 / CC13x2 SimpleLink</li>
+<li>Nordic nRF52x</li>
+<li>STM32 Nucleo</li>
+<li>HiFive1</li>
+</ul>
+<p>HiFiveはRISC-Vで、他はARM Cortex-Mが搭載されたボードです。</p>
+<h3><a class="header" href="#設計概要" id="設計概要">設計概要</a></h3>
+<p align="center">
+<img title="Tock stack" src="05-library/../assets/tock-stack.png">
+</p>
+<blockquote>
+<p>https://github.com/tock/tock/blob/master/doc/tock-stack.pngより</p>
+</blockquote>
+<p>TockのKernelはRustで実装されています。Kernelは2つの階層に分割されています。</p>
+<p>1つは、Core kernelでHIL (Hardware Interface Layer) 、スケジューラ、プラットフォーム固有の設定が含まれます。</p>
+<p>もう1つは、Capsuleです。Capsuleは、マイコンに依存しないkernel機能を拡張するためのコンポーネント、という位置づけで、通信スタックやコンソールなどが該当します。Capsuleは、<code>unsafe</code>ブロックの使用が禁止されているなど、Rust固有の安全性を保証する設計がなされています。</p>
+<p>Tockでは、Capsuleもユーザプロセスも<code>Untrusted</code>という扱いですが、その中でも差が設けられています。Capsuleは、kernelのイベントループの中で協調的にスケジューリングされます。そのため、Capsuleがパニックしたり、イベントハンドラに戻らない場合、システムの回復には再起動が必要です。一方で、ユーザプロセスは、MPUでメモリが隔離されており、スケジューリングもプリエンプティブです。</p>
+<h3><a class="header" href="#ドキュメント" id="ドキュメント">ドキュメント</a></h3>
+<p><a href="https://github.com/tock/tock/tree/master/doc">Tock Documentation</a>に、Tockの設計や実装に関するドキュメントがまとめられています。</p>
+<p><a href="https://github.com/tock/tock/tree/master/doc#tock-implementation">Tock Implementation</a>には、Tockの実装についての解説があり、RustでOSを実装する際に参考にできる情報がまとめられています。ここでは、OS実装に必要な要素について、Tock内でどのようにRustで実装しているか、が述べられています。例えば、ライフタイムや可変参照というRust固有の要素をどう扱っているか、メモリアイソレーションやメモリップドレジスタ、システムコールをRustでどのように実装しているか、というトピックが取り上げられています。</p>
+<h3><a class="header" href="#ユーザランドアプリケーション" id="ユーザランドアプリケーション">ユーザランドアプリケーション</a></h3>
+<p>ユーザランドアプリケーションはCとRust、どちらでも書くことができます。C言語用のユーザランドライブラリ<a href="https://github.com/tock/libtock-c">libtock-c</a>には、<code>newlib</code>や<code>libc++</code>、<code>lua</code>ライブラリが含まれます。</p>
+<p><a href="https://github.com/tock/libtock-rs">libtock-rs</a>は、2019年5月現在、<code>WIP</code>の状態です。</p>
+<h2><a class="header" href="#5-6-テスト" id="5-6-テスト">5-6. テスト</a></h2>
+<p>テストを活用することは、組込みやベアメタルの開発でも非常に重要です。しかし、Rustのテストフレームワークは標準ライブラリに依存しており、<code>#[no_std]</code>環境で使うことができません。ここでは、組込み / ベアメタルRustのプロジェクトで利用されているテストやCIについて紹介します。</p>
+<h3><a class="header" href="#デュアルターゲット" id="デュアルターゲット">デュアルターゲット</a></h3>
+<p>部品をcrateに切り出し、ホスト上でテストする方法です。</p>
+<p>テスト時には、<code>#![no_std]</code>でビルドしないようにします。そうすることで、標準ライブラリに依存するRustのテストフレームワークを利用することができます。</p>
+<p><code>lib.rs</code>でクレートレベルのアトリビュートを次のように指定します。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span>#![cfg_attr(not(test), no_std)]
+<span class="boring">fn main() {
+</span><span class="boring">}
+</span></code></pre></pre>
+<p>これで、テスト時には、<code>#![no_std]</code>アトリビュートが有効になりません。後は、通常通りテストを書くだけです。<a href="https://github.com/japaric/heapless">heapless</a>クレートのテストが、参考になります。</p>
+<h3><a class="header" href="#カスタムテストフレームワーク" id="カスタムテストフレームワーク">カスタムテストフレームワーク</a></h3>
+<p><a href="https://os.phil-opp.com/testing/">Writing an OS in Rust Testing</a>で紹介されている方法です。unstableな<a href="https://doc.rust-lang.org/unstable-book/language-features/custom-test-frameworks.html">custom_test_frameworks</a>フィーチャを利用します。</p>
+<p>Rust標準のテストフレームワークと比較すると、パニックすることをテストする<code>should_panic</code>などの機能が利用できません。</p>
+<p>カスタムテストフレームワークを実装するには、次のコードを<code>main.rs</code>に追加します。</p>
+<pre><code class="language-rust ignore">#![feature(custom_test_frameworks)]
+#![test_runner(crate::test_runner)]
+
+#[cfg(test)]
+fn test_runner(tests: &amp;[&amp;dyn Fn()]) {
+    println!(&quot;Running {} tests&quot;, tests.len());
+    for test in tests {
+        test();
+    }
+}
+</code></pre>
+<p><code>test_runner</code>の引数は<code>Fn()</code>トレイトのトレイトオブジェクトのスライスです。<a href="https://doc.rust-lang.org/unstable-book/language-features/custom-test-frameworks.html">custom_test_frameworks</a>によると、<code>#[test_case]</code>アトリビュートのついたアイテムが、<code>test_runner</code>アトリビュートで指定した関数に渡されます。</p>
+<p>プロダクトコードのエントリポイントに、テストビルド時のみ、テストハーネスの<code>test_main</code>を呼び出すコードを追加します。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span>#![reexport_test_harness_main = &quot;test_main&quot;]
+
+<span class="boring">fn main() {
+</span>#[no_mangle]
+pub extern &quot;C&quot; fn _start() -&gt; ! {
+    println!(&quot;Hello World{}&quot;, &quot;!&quot;);
+
+    #[cfg(test)]
+    test_main();
+
+    loop {}
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>テストケースを書きます。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[test_case]
+fn trivial_assertion() {
+    print!(&quot;trivial assertion... &quot;);
+    assert_eq!(1, 1);
+    println!(&quot;[ok]&quot;);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>後は、テストを実行するだけです。</p>
+<p>より詳しい情報は、<a href="https://os.phil-opp.com/testing/">Writing an OS in Rust Testing</a>を参照して下さい。</p>
+<h3><a class="header" href="#インテグレーションテスト" id="インテグレーションテスト">インテグレーションテスト</a></h3>
+<p>QEMUを利用して、特定デバイスのペリフェラルに依存しない試験を実施することができます。<code>RTFM</code>では、QEMUでバイナリを実行し、semi-hosting機能で標準出力に表示した文字列と期待値とを比較しています。</p>
+<pre><code>$ cargo run --example binds
+   Compiling cortex-m-rtfm v0.5.0-alpha.1
+     Running `qemu-system-arm -cpu cortex-m3 -machine lm3s6965evb -nographic -semihosting-config enable=on,target=native -kernel target/thumbv7m-none-eabi/debug/examples/binds`
+init
+foo called 1 time
+idle
+foo called 2 times
+</code></pre>
+<pre><code>$ cat ci/expected/binds.run 
+init
+foo called 1 time
+idle
+foo called 2 times
+</code></pre>
+<pre><code>$ cargo run --example binds | diff -u ci/expected/binds.run -
+</code></pre>
+<p>期待通りの動作結果の場合、差分は出力されません。テストの実行結果、差分が出力されるかどうかを検証することで、インテグレーションテストを実施しています。</p>
+<h3><a class="header" href="#コンパイルテスト" id="コンパイルテスト">コンパイルテスト</a></h3>
+<p>複雑な (手続き) マクロを利用するクレートでは、様々な利用方法でコンパイルが通るかどうか、をテストします。</p>
+<p><code>RTFM</code>の<code>tests</code>ディレクトリにコンパイルテストのテストケース<a href="https://github.com/japaric/cortex-m-rtfm/blob/master/tests/compiletest.rs">compiletest.rs</a>があります。</p>
+<p>ここでは、<code>cfail</code>ディレクトリにコンパイルが失敗するソースファイルが、<code>cpass</code>にコンパイルが成功するソースファイルが置かれています。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::{fs, path::PathBuf, process::Command};
+
+use compiletest_rs::{common::Mode, Config};
+
+#[test]
+fn cfail() {
+    let mut config = Config::default();
+
+    config.mode = Mode::CompileFail;
+    config.src_base = PathBuf::from(&quot;tests/cfail&quot;);
+    config.link_deps();
+// 中略
+    compiletest_rs::run_tests(&amp;config);
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>コンパイルテストの設定<code>compiletest_rs::Config</code>を作成し、<code>compiletest_rs::run_tests</code>でテストを実行します。これで、<code>cfail</code>ディレクトリ内の全てのRustソースファイルのコンパイルに失敗すると、テストがパス、という扱いになります。</p>
+<p>一方、コンパイルが成功するテストは、同テストケース内で次のように実装されています。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use tempdir::TempDir;
+// ...
+    let td = TempDir::new(&quot;rtfm&quot;).unwrap();
+    for f in fs::read_dir(&quot;tests/cpass&quot;).unwrap() {
+        let f = f.unwrap().path();
+        let name = f.file_stem().unwrap().to_str().unwrap();
+
+        assert!(Command::new(&quot;rustc&quot;)
+            .args(s.split_whitespace())
+            .arg(f.display().to_string())
+            .arg(&quot;-o&quot;)
+            .arg(td.path().join(name).display().to_string())
+            .arg(&quot;-C&quot;)
+            .arg(&quot;linker=true&quot;)
+            .status()
+            .unwrap()
+            .success());
+    }
+<span class="boring">}
+</span></code></pre></pre>
+<p>システムコマンドで<code>rustc</code>を呼び出して、終了ステータスが<code>success</code>かどうか、をテストしています。</p>
+<h1><a class="header" href="#6-ffi-foreign-function-interface" id="6-ffi-foreign-function-interface">6. FFI (Foreign Function Interface)</a></h1>
+<p>組込みRustは急速に環境が整備されつつありますが、まだまだ不足しているものがたくさんあります。そこで、C言語の資産活用が重要になります。本章では、ベアメタル環境でのC言語とのFFIについて説明します。</p>
+<p>標準ライブラリが使える場合のFFIについては、実践Rust入門のFFIの章が詳しいです。標準ライブラリ内でC言語とのFFIに使えるモジュールには、<code>std::ffi</code>と<code>std::os::raw</code>があります。残念ながら、どちらのモジュールも<code>core</code>には含まれておらず、<code>#![no_std]</code>環境では利用できません。</p>
+<p>代わりに、<a href="https://crates.io/crates/cty">cty</a>クレートと<a href="https://crates.io/crates/cstr_core">cstr_core</a>クレートとを利用します。</p>
+<p>ctyクレートは、コンパイラによって暗黙変換される低レベルのプリミティブ型を扱います。このようなプリミティブ型には、C言語の<code>unsigned int</code>を表現する<code>c_uint</code>などがあります。</p>
+<pre><code class="language-rust ignore">unsafe fn foo(num: u32) {
+    let c_num: c_uint = num;  // 暗黙変換
+}
+</code></pre>
+<p>cstr_coreクレートは、文字列のようなより複雑な型を変換するユーティリティを提供します。</p>
+<h2><a class="header" href="#6-1-rustからcを呼ぶ" id="6-1-rustからcを呼ぶ">6-1. RustからCを呼ぶ</a></h2>
+<p>ここでは、RustのソースコードからC言語のソースコードを呼び出す方法を説明します。やることは2つです。</p>
+<ol>
+<li>CのAPIを、Rustで使えるようにインタフェースを定義する</li>
+<li>Cのコードを、Rustのコードと一緒にビルドする</li>
+</ol>
+<p>上記の1.については、<a href="https://github.com/rust-lang/rust-bindgen">bindgen</a>で自動生成できます。2.については、基本的に、Rustの<code>build.rs</code>スクリプトで対応します。</p>
+<h3><a class="header" href="#インタフェース定義" id="インタフェース定義">インタフェース定義</a></h3>
+<p>まず、手動でインタフェースを定義する例を示します。標準ライブラリが使える環境と異なる点は、<code>cty</code>クレートを使う点です。</p>
+<p>今、次のようなCヘッダファイルが公開されているとします。</p>
+<pre><code class="language-c">/* target.h */
+typedef struct MyStruct {
+    int32_t x;
+    int32_t y;
+} MyStruct;
+
+void my_function(int32_t i, MyStruct* ms);
+</code></pre>
+<p>このヘッダファイルをRustに変換すると、インタフェースは次のようになります。</p>
+<pre><code class="language-rust ignore">/* bindings.rs */
+#[repr(C)]
+pub struct MyStruct {
+    pub x: cty::int32_t,
+    pub y: cty::int32_t,
+}
+
+pub extern &quot;C&quot; fn my_function(
+    i: cty::int32_t,
+    ms: *mut MyStruct
+);
+</code></pre>
+<p><code>#[repr(C)]</code>アトリビュートにより、Rustコンパイラは、構造体のデータをCと同じルールで構成します。デフォルトでは、Rustコンパイラは、<code>struct</code>内のデータ順やサイズを保証しません。</p>
+<pre><code class="language-rust ignore">pub extern &quot;C&quot; fn my_function(...);
+</code></pre>
+<p>このコードは、<code>my_function</code>という名前の、C ABIを使った関数を宣言します。関数の定義は、別の場所で与えるか、静的ライブラリから最終バイナリにリンクする必要があります。</p>
+<h3><a class="header" href="#インタフェースの自動生成" id="インタフェースの自動生成">インタフェースの自動生成</a></h3>
+<p>上述の通り、手動でインタフェースを作成することもできますが、これは単純作業です。そこで、インタフェースを自動生成してくれる<code>bindgen</code>を利用します。ここでは、一般的な手順を説明し、具体的な例は、<a href="06-ffi/./zephyr-bindings.html">ケーススタディ Zephyr bindings</a>で紹介します。</p>
+<p>標準ライブラリが使える環境と、ベアメタル環境とで共通する手順は、次の通りです。</p>
+<ol>
+<li>Rustで使いたいインタフェースやデータ型を定義している全てのCヘッダを集める</li>
+<li>ステップ1で集めたヘッダファイルを<code>#include &quot;...&quot;</code>する<code>binding.h</code>ファイルを書く</li>
+<li><code>bindgen</code>に<code>binding.h</code>を与えて実行する</li>
+<li><code>bindgen</code>の出力を、<code>bindings.rs</code>にリダイレクトする</li>
+<li><code>bindings.rs</code>を<code>include!</code>する<code>lib.rs</code>を用意し、クレートとして利用できるようにする</li>
+<li>ステップ5で作成したクレートをRustらしく使えるAPIに変換するラッパクレートを作成する</li>
+</ol>
+<p>ステップ5で作成する自動生成されたコードのクレートは、<code>-sys</code>という名前にすることが慣例になっています。</p>
+<p>ベアメタル環境でバインディングを作る場合、標準ライブラリが使える環境と異なる点は、次の3点です。</p>
+<ol>
+<li><code>bindgen</code>利用時に、コマンドラインなら<code>--ctypes-prefix</code>に<code>cty</code>オプションを使う、または、ビルドスクリプトなら<code>Builder.ctypes_prefix(&quot;cty&quot;)</code>を使う</li>
+<li>bindingクレートに<code>cty</code>クレートとの依存関係を追加する</li>
+<li>bindingクレートに<code>#![no_std]</code>アトリビュートを追加する</li>
+</ol>
+<p><code>#[no_std]</code>環境をターゲットに<code>bindgen</code>をコマンドラインから利用する場合、例えば次のようなオプションを指定します。</p>
+<pre><code>bindgen --use-core --ctypes-prefix cty ...
+</code></pre>
+<p><code>--use-core</code>は、標準ライブラリの型を使わずに<code>core</code>クレートの型を使うコードを生成します。<code>--ctypes-prefix cty</code>は、Cの型プレフィックスを<code>cty</code>クレートの物が使われるようにします。</p>
+<p><code>bindgen</code>で生成したRustコードを、クレートにまとめます。その際、<code>cty</code>クレートの依存を<code>Cargo.toml</code>に追加します。</p>
+<pre><code class="language-toml">[dependencies]
+cty = &quot;0.2.0&quot;
+</code></pre>
+<p>ほぼ定型作業ですが、bindgenで自動生成したコードは<code>bindings.rs</code>としておき、<code>lib.rs</code>からインクルードします。<code>lib.rs</code>には、次の内容を書いておきます。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span>#![no_std]
+#![allow(non_upper_case_globals)]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+
+<span class="boring">fn main() {
+</span>include!(&quot;bindings.rs&quot;);
+<span class="boring">}
+</span></code></pre></pre>
+<p>Cのソースコードは、Rust推奨のコーディングスタイルに沿っていないため、コンパイル時に警告が出ないようにlintルールを緩和します。加えて、<code>#[no_std]</code>アトリビュートを追加します。</p>
+<h4><a class="header" href="#出典-10" id="出典-10">出典</a></h4>
+<ul>
+<li>The Embedded Rust Book: <a href="https://tomoyuki-nakabayashi.github.io/book/interoperability/c-with-rust.html">9.1.Rustと少しのC</a></li>
+</ul>
+<h2><a class="header" href="#6-2-cからrustを呼ぶ" id="6-2-cからrustを呼ぶ">6-2. CからRustを呼ぶ</a></h2>
+<p>ここでは、CのソースコードからRustのソースコードを呼び出す方法を説明します。やることは2つです。</p>
+<ol>
+<li>Cが扱えるAPIをRust側に作成する</li>
+<li>外部ビルドシステムにRustプロジェクトを組み込む</li>
+</ol>
+<p>上記の1.については、<a href="https://github.com/eqrion/cbindgen">cbindgen</a>で自動生成できます。2.は、Cのプロジェクトやビルドシステムに強く依存するため、一般的な方法はありません。<a href="06-ffi/./zephyr-bindings.html">ケーススタディ Zephyr bindings</a>では、cmakeプロジェクトに組み込む一例を示します。</p>
+<h3><a class="header" href="#ライブラリプロジェクトの作成" id="ライブラリプロジェクトの作成">ライブラリプロジェクトの作成</a></h3>
+<p>通常のRustプロジェクトではなく、システムライブラリを出力します。</p>
+<pre><code class="language-toml">[lib]
+crate-type = [&quot;cdylib&quot;]      # 動的ライブラリ
+# crate-type = [&quot;staticlib&quot;] # 静的ライブラリ
+</code></pre>
+<h3><a class="header" href="#c-apiの作成" id="c-apiの作成">C APIの作成</a></h3>
+<p>C ABIで呼び出しできるRustのAPIを作成します。おおよそ、次のような関数になります。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[no_mangle]
+pub extern &quot;C&quot; fn rust_function() {
+    // ...
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h4><a class="header" href="#no_mangle" id="no_mangle">no_mangle</a></h4>
+<p>Rustコンパイラは、シンボル名をマングルします。そのため、Cから呼び出すRustの関数は、マングルしないように<code>#[no_mangle]</code>アトリビュートを付けます。</p>
+<h4><a class="header" href="#extern-c" id="extern-c">extern &quot;C&quot;</a></h4>
+<p>デフォルトでは、Rustの関数はRustのABIを使用します。そこで、CのABIを仕様するように、コンパイラに指示します。プラットフォーム固有のABI指定については、<a href="https://doc.rust-lang.org/reference/items/external-blocks.html#abi">External Blocks ABI</a>にドキュメントがあります。</p>
+<h3><a class="header" href="#cヘッダファイル作成" id="cヘッダファイル作成">Cヘッダファイル作成</a></h3>
+<p>Rustで作ったAPIをCから呼べるように、Cヘッダファイルを作成します。</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[no_mangle]
+pub extern &quot;C&quot; fn rust_function() { ... }
+<span class="boring">}
+</span></code></pre></pre>
+<p>上のRust APIはCヘッダファイルでは、次のようになります。</p>
+<pre><code class="language-c">void rust_function();
+</code></pre>
+<h3><a class="header" href="#cヘッダファイルの自動生成" id="cヘッダファイルの自動生成">Cヘッダファイルの自動生成</a></h3>
+<p><a href="https://github.com/eqrion/cbindgen">cbindgen</a>により、RustソースコードからCヘッダファイルを自動生成することができます。<code>cbindgen</code>をベアメタル環境で使うにあたり注意することは、いくつかの標準ライブラリヘッダをインクルードしたヘッダファイルが生成されることです。</p>
+<pre><code class="language-c">#include &lt;stdarg.h&gt;
+#include &lt;stdbool.h&gt;
+#include &lt;stdint.h&gt;
+#include &lt;stdlib.h&gt;
+
+void rust_function(void);
+</code></pre>
+<p>ターゲットシステムによっては<code>stdlib.h</code>が与えられていない可能性があるので、注意して下さい。</p>
+<h3><a class="header" href="#外部ビルドシステムにrustプロジェクトを組み込む" id="外部ビルドシステムにrustプロジェクトを組み込む">外部ビルドシステムにRustプロジェクトを組み込む</a></h3>
+<p>Rust APIを作成し、ヘッダファイルを生成すれば、後はCファイルでヘッダをインクルードするだけです。</p>
+<pre><code class="language-c">#include &quot;rust_lib.h&quot;
+
+void call_rust() {
+    rust_fuction();
+}
+</code></pre>
+<p>ビルドシステムへの組み込みについては、Cプロジェクトのビルドシステムが何か、に強く依存します。Makefileでビルドしている場合、ビルドステップの途中でMakefileから<code>cargo</code>を呼び出し、静的ライブラリとしてRustコードをビルドし、リンクします。</p>
+<h4><a class="header" href="#出典-11" id="出典-11">出典</a></h4>
+<ul>
+<li>The Embedded Rust Book: <a href="https://tomoyuki-nakabayashi.github.io/book/interoperability/rust-with-c.html">9.2.Cと少しのRust</a></li>
+</ul>
+<h2><a class="header" href="#6-3-ケーススタディ-zephyr-binding" id="6-3-ケーススタディ-zephyr-binding">6-3. ケーススタディ Zephyr binding</a></h2>
+<p>Rust Embedded devices WGでもRTOSとRustとのインテグレーションは<a href="https://github.com/rust-embedded/book/issues/62">issue #62</a>で議論中です。</p>
+<p>ここでは、Cで作られたRTOSである<a href="https://www.zephyrproject.org/">Zephyr</a>をターゲットに、RTOSとのインテグレーションを実験してみます。ZephyrのAPIを利用して、Rustから<code>println!</code>マクロを使って、コンソールに文字を出力します。また、RTOSのような複雑なCプロジェクトとのインテグレーションが困難な理由を考察します。</p>
+<p>そのために、次のことができるようにします。</p>
+<ol>
+<li>CからRustのAPIを呼び出す</li>
+<li>RustからZephyrのAPIを呼び出す</li>
+</ol>
+<p>双方のバインディングは、<code>cbindgen</code>および<code>bindgen</code>を用いて自動生成します。ここで掲載する方法には、まだまだ改善の余地があることに注意して下さい。</p>
+<p>次のコードが動くようにします。</p>
+<pre><code class="language-c">#include &lt;rustlib.h&gt;
+
+int main(void) {
+	rust_main();
+}
+</code></pre>
+<p>まずC言語から、Rustの<code>rust_main</code>関数を呼び出します。バインディング用のヘッダファイル<code>rustlib.h</code>は<code>cbindgen</code>で自動生成します。</p>
+<pre><code class="language-rust ignore">#[no_mangle]
+pub extern &quot;C&quot; fn rust_main() {
+    println!(&quot;Hello {}&quot;, &quot;Rust&quot;);
+}
+</code></pre>
+<p>Rustには<code>println!</code>マクロを実装します。この<code>println!</code>マクロは、ZephyrのAPIを利用してコンソールに文字列を出力します。Zephyr APIのバインディングは、<code>bindgen</code>で自動生成します。</p>
+<p>最終的に、C (main) → Rust (rust_main) → C (Zephyr API)というコールグラフになります。</p>
+<h3><a class="header" href="#環境" id="環境">環境</a></h3>
+<p>これから示すインテグレーション例を試すために必要な環境です。カッコ内は、著者が試したバージョンです。</p>
+<ul>
+<li>Rust (stable 1.35.0)</li>
+<li>cbindgen (0.8.3)</li>
+<li>bindgen (0.49.0)</li>
+<li>Zephyr v.1.14</li>
+<li>Zephyr SDK (0.10.0)</li>
+<li>west (v0.5.8)</li>
+<li>qemu-system-arm (2.11.1)</li>
+</ul>
+<h3><a class="header" href="#cからrustのapiを呼び出す" id="cからrustのapiを呼び出す">CからRustのAPIを呼び出す</a></h3>
+<p>下のRust関数に対するヘッダファイルを作成します。</p>
+<pre><code class="language-rust ignore">#[no_mangle]
+pub extern &quot;C&quot; fn rust_main() { /* ... */ }
+</code></pre>
+<p>ビルドスクリプトでも容易に生成できますが、今回はZephyrとのインテグレーション上、Makefileを使う必要があるため、Makefile内で次のコマンドを呼び出します。</p>
+<pre><code>cbindgen src/lib.rs -l c -o lib/rustlib.h
+</code></pre>
+<p>これで、次のヘッダファイルが生成されます。</p>
+<pre><code>cat hello/lib/rustlib.h
+</code></pre>
+<pre><code class="language-c">#include &lt;stdarg.h&gt;
+#include &lt;stdbool.h&gt;
+#include &lt;stdint.h&gt;
+#include &lt;stdlib.h&gt;
+
+void rust_main(void);
+</code></pre>
+<p>このヘッダファイルをCでインクルードします。</p>
+<pre><code class="language-c">#include &lt;rustlib.h&gt;
+
+int main(void) {
+	rust_main();
+}
+</code></pre>
+<p>今回は非常に簡潔です。構造体を引数にしたり、ヒープメモリの管理などリソース管理が加わると、より複雑になります。</p>
+<h3><a class="header" href="#rustからzephyrのapiを呼び出す" id="rustからzephyrのapiを呼び出す">RustからZephyrのAPIを呼び出す</a></h3>
+<p>こちらの方が難易度が高いです。下準備も色々と必要です。</p>
+<p>一般的なライブラリと異なり、多くの組込みOSでは必要最小限の機能だけを組み込んでバイナリを形成します。ビルド時のコンフィギュレーション次第で、ユーザーアプリケーションが利用できるAPIが増減します。そのため、全てのコンフィギュレーションで利用可能なバインディングを作ることは、難しいです。このケーススタディでも、固定のコンフィギュレーションに対してバインディングを作成します。</p>
+<p>今回、Zephyrは、デフォルトのZephyr kernel APIに加えて、<code>newlib</code>という組込み用標準CライブラリのAPIを有効化します。この<code>newlib</code>を有効化することにより、C標準ライブラリの<strong>一部</strong>がZephyrアプリケーションで利用可能になります。</p>
+<pre><code>cat prj.config
+</code></pre>
+<pre><code># General config
+CONFIG_NEWLIB_LIBC=y
+</code></pre>
+<p>この設定により、次のようなC標準ライブラリAPIが利用可能になります。</p>
+<ul>
+<li>I/O
+<ul>
+<li>printf, fwrite, etc</li>
+</ul>
+</li>
+<li>文字列
+<ul>
+<li>strtoul, atoi, etc</li>
+</ul>
+</li>
+<li>メモリ
+<ul>
+<li>malloc, free, etc</li>
+</ul>
+</li>
+</ul>
+<p>これらAPIのバインディングを自動生成しつつ、Rustっぽく使えるようにラッピングしていきます。</p>
+<h4><a class="header" href="#バインディングの自動生成" id="バインディングの自動生成">バインディングの自動生成</a></h4>
+<p>まず、第一関門です。ここで難しい点は、2つあります。</p>
+<ol>
+<li>OSのコンフィギュレーションによって利用できるAPIが異なる</li>
+<li>一部APIがZephyrのビルドシステムで自動生成するヘッダに依存している</li>
+</ol>
+<p>上記理由から、<strong>一度ターゲットとするZephyrをビルドした後</strong>で、<code>bindgen</code>を使用することにしました。まず、空のアプリケーションを用意して、Zephyrをビルドします。</p>
+<pre><code>cat src/main.c
+</code></pre>
+<pre><code class="language-c">int main(void) {
+	return;
+}
+</code></pre>
+<pre><code># Zephyrプロジェクトのディレクトリ
+source zephyr-env.sh
+
+# ケーススタディプロジェクトのディレクトリ
+west build -b cortex_qemu_m3 hello
+</code></pre>
+<p>これで、<code>build/zephyr/include.generated</code>に必要なヘッダファイルが生成されます。<code>Zephyr</code>の環境変数を利用しながら、<code>bindgen</code>でバインディングを生成します。</p>
+<pre><code>$ bindgen --use-core --ctypes-prefix cty zephyr-sys/headers/bindings.h -o zephyr-sys/src/bindings.rs -- -I${ZEPHYR_BASE}/include -I${ZEPHYR_BASE}/arch/arm/include -I./build/zephyr/include/generated -m32
+</code></pre>
+<p>前述の通り、<code>std</code>クレートにあるFFI型は利用できないため、<code>cty</code>クレートを使います。<code>--ctypes-prefix cty</code>の部分です。</p>
+<p>バインディングを生成するためのヘッダファイルは以下の通りです。</p>
+<pre><code>cat zephyr-sys/headers/bindings.h
+</code></pre>
+<pre><code class="language-c">#include &lt;autoconf.h&gt;
+#include &lt;stdio.h&gt;
+</code></pre>
+<p>Zephyrのビルドシステムで自動生成されるヘッダ<code>autoconf.h</code>内には、アーキテクチャ依存のマクロ定義など、重要な定義が数多く含まれます。Zephyrのヘッダファイルおよびソースファイルは、この<code>autoconf.h</code>に含まれるマクロが定義されていることが前提になっています。そこで、バインディング作成時にも、まず最初に<code>autoconf.h</code>をインクルードしています。</p>
+<p><code>--</code>以降 (<code>-I${ZEPHYR_BASE}</code>から後) のオプションは、<code>clang</code>に与えるオプションです。<code>-I</code>でインクルードパスを、<code>-m32</code>でターゲットアーキテクチャが32ビットであることを指示しています。</p>
+<p>これで、<code>bindings.rs</code>を得ます。例えば、<code>printf</code>のバインディングは、次のように生成されています。</p>
+<pre><code class="language-rust ignore">extern &quot;C&quot; {
+    pub fn printf(fmt: *const cty::c_char, ...) -&gt; cty::c_int;
+}
+</code></pre>
+<p>この<code>bindings.rs</code>をクレートとして利用できるようにします。次の<code>lib.rs</code>を作成します。</p>
+<pre><code class="language-rust ignore">#![no_std]
+#![allow(non_upper_case_globals)]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(dead_code)]
+
+include!(&quot;bindings.rs&quot;);
+</code></pre>
+<p>Rustとしてはあくまでの<code>no_std</code>な環境となるため、<code>#![no_std]</code>アトリビュートが必要です。バインディングを作成したCソースファイルは、Rustの命名規則に沿っていません。そこで、Rustコンパイラのlintで警告が出ないように、命名規則のlintルールを除外しています。</p>
+<p><code>lib.rs</code>と<code>bindings.rs</code>を<code>zephyr-sys</code>クレートとしてまとめれば、バインディングの生成は完了です。</p>
+<h4><a class="header" href="#ラッピングクレートの作成" id="ラッピングクレートの作成">ラッピングクレートの作成</a></h4>
+<p><code>zephyr-sys</code>クレートのバインディングは、C APIをそのまま変換しただけなので、Rustらしい安全で使いやすいAPIになっていません。例えば、<code>printf</code>をRustから呼び出そうとすると、次のようなコードになります。</p>
+<pre><code class="language-rust ignore">    unsafe {
+        zephyr::printf(b&quot;Hello from %s\0&quot;.as_ptr() as *const cty::c_char,
+                       b&quot;Rust\0&quot;.as_ptr());
+    }
+</code></pre>
+<p>お世辞にも使いやすいとは言えません。その上、文字列をナル文字 (<code>\0</code>) で終端し忘れると、未定義動作に突入します。</p>
+<p>そこで、<code>zephyr-sys</code>をラッピングして、Rustらしく使えるAPIを実装します。ここが、Cとのインテグレーションで一番大変なところです。</p>
+<p>ここでは、Zephyrの<code>newlib</code> APIを使って、アプリケーションから安全に利用できる<code>println!</code>マクロを作ります。ベースは、<a href="06-ffi/../03-bare-metal/print.html">print!マクロ</a>で実装したマクロと同じです。異なる点は、<code>fmt::Write</code>トレイトの<code>write_str</code>メソッドの実装で、Zephyrの<code>fwrite</code>を呼び出す点です。</p>
+<pre><code class="language-rust ignore">/// Pseudo writer which uses Zephyr `fwrite` API.
+/// Because `fwrite` does not guarantee its atomicity, this wrapper
+/// does not provide any lock mechanism.
+pub struct DebugWriter {}
+
+impl fmt::Write for DebugWriter {
+    fn write_str(&amp;mut self, s: &amp;str) -&gt; fmt::Result {
+        // safe: `fwrite` does not need to guarantee the atomicity.
+        unsafe {
+            zephyr_sys::fwrite(s.as_ptr() as *const cty::c_void, s.len(), 1, stdout_as_ptr_mut());
+        }
+        Ok(())
+    }
+}
+</code></pre>
+<p>今回の実装では、マルチスレッドで動作した場合のアトミック性については考慮しません。Zephyrの<code>fwrite</code> API自体がアトミック性を保証していないため、Rust側で工夫をしても、システム全体のアトミック性が保証できないためです。</p>
+<p>もし、C APIが (例えばMutexなどにより) アトミック性を保証する仕組みを持つ場合、<code>DebugWriter</code>を空実装にせず、然るべきロック機能を持たせると良いでしょう。</p>
+<p>今回、<code>fwrite</code>を用いて<code>println!</code>マクロを実装した理由は、ランタイムコストを減らすためです。別解として、<code>printf</code>を用いる実装が考えられますが、文字列のフォーマットはRust処理系で安全性が保証されているため、Cのフォーマットを使う理由がありません。それどころか、<code>printf</code>のフォーマット処理分、余分なランタイムコストがかかります。</p>
+<p>Rustの<code>str</code>は、バイト数を取得する<code>len</code>メソッドを備えているため、<code>stdout</code>に対して、指定バイト数書き込む実装にすると、ランタイムコストが少なくなります。</p>
+<p>最後になりますが、このクレートを<code>zephyr</code>クレートとします。<code>Cargo.toml</code>ファイルに<code>zephyr-sys</code>クレートへの依存関係を追加します。</p>
+<pre><code class="language-toml">[dependencies]
+cty = &quot;0.2.0&quot;
+zephyr-sys = { path = &quot;../zephyr-sys&quot; }
+</code></pre>
+<h4><a class="header" href="#アプリケーション作成" id="アプリケーション作成">アプリケーション作成</a></h4>
+<p>アプリケーションは、上記で作成した<code>println!</code>マクロを呼び出すだけです。</p>
+<pre><code class="language-rust ignore">use zephyr::{print, println};
+
+#[no_mangle]
+pub extern &quot;C&quot; fn rust_main() {
+    println!(&quot;Hello {}&quot;, &quot;Rust&quot;);
+}
+</code></pre>
+<p>このクレートを<code>hello</code>クレートとして、<code>zephyr</code>クレートへの依存を追加します。</p>
+<pre><code class="language-toml">[dependencies]
+cty = &quot;0.2.0&quot;
+zephyr = { path = &quot;../zephyr&quot; }
+</code></pre>
+<p>このクレートは、staticライブラリとしてビルドし、Zephyrとリンクします。</p>
+<pre><code class="language-toml">[lib]
+name = &quot;rustlib&quot;
+crate-type = [&quot;staticlib&quot;]
+</code></pre>
+<p>このクレートは、<code>Makefile</code>を使ってビルドします。これは主にZephyrとのインテグレーション上の理由です。おおよそ、次のコマンドが実行されるように<code>Makefile</code>を作成します。</p>
+<pre><code>cargo build
+cargo objcopy -- --weaken lib/librustlib.a
+cbindgen src/lib.rs -l c -o lib/rustlib.h
+</code></pre>
+<p><code>cargo</code>でプロジェクトのstaticライブラリを作成し、<code>objcopy</code>でシンボルを<code>weak</code>にします。これは、Rustコンパイラビルトインの<code>memcopy</code>や<code>memset</code>といった関数が、Zephyrのシンボルと衝突してしまうためです。</p>
+<blockquote>
+<p>余談ですが、現状、Rustにはビルド後のバイナリやライブラリを操作するための<strong>ポストビルドスクリプト</strong>の仕組みがありません。
+今回のように、<code>objcopy</code>などを使いたい場合には、<code>Makefile</code>など外部ビルドシステムに依存しなければなりません。</p>
+</blockquote>
+<p>また、このクレートはCから呼び出されるため、Cのバインディングを生成します (先述の通り)。</p>
+<h4><a class="header" href="#ビルドシステムへのインテグレーション" id="ビルドシステムへのインテグレーション">ビルドシステムへのインテグレーション</a></h4>
+<p>最後の仕事です。Zephyrはビルドシステムに<code>CMake</code>を採用しています。Zephyrのビルドプロセス中で外部ビルドシステムを呼び出し、ライブラリをリンクする方法が確立されています。</p>
+<p>詳細な説明は省略しますが、<code>cmake</code>の<code>ExternalProject</code>を用いて、<code>CMakeLists.txt</code>を次の通り記述します。</p>
+<pre><code class="language-cmake"># Include External Rust Library
+include(ExternalProject)
+
+set(rust_prj hello)
+set(rust_src_dir   ${CMAKE_CURRENT_SOURCE_DIR}/${rust_prj})
+set(rust_build_dir ${CMAKE_CURRENT_BINARY_DIR}/${rust_prj})
+
+ExternalProject_Add(
+  rust_project                 # Name for custom target
+  PREFIX     ${rust_build_dir} # Root dir for entire project
+  SOURCE_DIR ${rust_src_dir}
+  BINARY_DIR ${rust_src_dir}   # This particular build system is invoked from the root
+  CONFIGURE_COMMAND &quot;&quot;         # Skip configuring the project, e.g. with autoconf
+  BUILD_COMMAND make
+  INSTALL_COMMAND &quot;&quot;      # This particular build system has no install command
+  BUILD_BYPRODUCTS ${rust_src_dir}/lib/librust.a
+)
+
+add_library(rust_lib STATIC IMPORTED GLOBAL)
+add_dependencies(
+  rust_lib
+  rust_project
+)
+
+set_target_properties(rust_lib PROPERTIES IMPORTED_LOCATION ${rust_src_dir}/lib/librust.a)
+set_target_properties(rust_lib PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${rust_src_dir}/lib)
+
+target_link_libraries(app PUBLIC rust_lib)
+</code></pre>
+<p>今回は、先の手順で作成した<code>Makefile</code>を呼び出す形にしました。これでようやく全ての準備が整いました。</p>
+<h4><a class="header" href="#動作確認-1" id="動作確認-1">動作確認</a></h4>
+<p>次のCアプリケーションを作成して、<code>src/main.c</code>とします。</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main(void) {
+	rust_main();
+}
+</code></pre>
+<p>次のコマンドで今回のプロジェクトをビルドし、QEMUで実行できます。</p>
+<pre><code>mkdir build &amp;&amp; cd $_
+cmake -GNinja -DBOARD=qemu_cortex_m3 ..
+ninja run
+</code></pre>
+<p>実行すると無事に<code>Hello Rust</code>が表示されます。</p>
+<pre><code>To exit from QEMU enter: 'CTRL+a, x'[QEMU] CPU: cortex-m3
+qemu-system-arm: warning: nic stellaris_enet.0 has no peer
+***** Booting Zephyr OS zephyr-v1.14.0 *****
+Hello Rust
+</code></pre>
+<h3><a class="header" href="#考察" id="考察">考察</a></h3>
+<p>この通り、RTOSのような複雑なCプロジェクトとRustとのインテグレーションには、特有の困難さがあります。まず、ラッピングするAPIの数が膨大です。今回は、単一機能に対してのみラッピングAPIを作成しましたが、これをRTOSがアプリケーションに提供するAPIの数分こなさなければなりません。</p>
+<p>加えて、RTOSではターゲットシステムごとに、アプリケーションが利用できるAPIが増減します。この要素をどのように統一的に扱うか、を解決する必要があります。今後のコミュニティの動きに注目しましょう。</p>
+<h2><a class="header" href="#コラムマイコン上でrustで書いたwasmアプリケーションが動く" id="コラムマイコン上でrustで書いたwasmアプリケーションが動く">コラム〜マイコン上でRustで書いたWASMアプリケーションが動く！？〜</a></h2>
+<p>2019年5月、<a href="https://github.com/intel/wasm-micro-runtime">WebAssembly Micro Runtime</a>というマイコン上で動作するWASMランタイムが公開されました。このWASMランタイムは、Zephyr上で動かすことができます。</p>
+<p>それほど苦労せずに、256KBのRAMが搭載されているマイコン上でRustのアプリケーションを実行できました。アプリケーション実行までの簡単な手順を<a href="https://tomo-wait-for-it-yuki.hatenablog.com/entry/2019/06/16/133344?_ga=2.61433454.350764793.1560857949-1518570932.1554416614">WebAssembly Micro RuntimeでRustアプリをマイコンで動かす！</a>で公開しています。ランタイムの性能が気になるところですが、WASMが動くようになればターゲットアーキテクチャを気にしなくてもRustアプリケーションが動かせるようになるため、今後もWASM Micro Runtimeに注目しましょう。</p>
+<h4><a class="header" href="#参考" id="参考">参考</a></h4>
+<p><a href="https://github.com/hashmismatch/freertos.rs">freertos.rs</a></p>
+<h1><a class="header" href="#7-組込みlinux" id="7-組込みlinux">7. 組込みLinux</a></h1>
+<p>組込み開発でも比較的リッチなシステムでは、Linuxを採用します。ここでは、組込みLinuxのアプリケーションをRustで作成する方法を説明します。</p>
+<p>Rustコンパイラがサポートしているターゲットであれば、難しいことはほとんどありません。コンパイラのターゲットをインストールし、<code>--target</code>オプションで指定するだけです。</p>
+<p>ここでは、Raspberry Pi3向けにクロスビルドする方法、テストの実行方法、Yoctoに組み込んでのビルドについて説明します。Raspberry Pi3をお持ちでない方向けに、QEMUでの動作確認方法も記載しています。</p>
+<h2><a class="header" href="#7-1-ビルド" id="7-1-ビルド">7-1. ビルド</a></h2>
+<p>32ビットの<code>ARMv7</code>と、64ビットの<code>AArch64</code>とでビルドできる手順をそれぞれ示します。Raspbianを使用している場合は、32ビットの<code>ARMv7</code>をターゲットにして下さい。</p>
+<p><code>Ubuntu 18.04</code>で動作するコマンドを掲載しています。他のOSをご利用の方は、お手数ですが読み替えをお願いします。</p>
+<h3><a class="header" href="#環境構築" id="環境構築">環境構築</a></h3>
+<p>まずクロスコンパイルのターゲットをインストールします。</p>
+<pre><code># ARMv7
+rustup target add armv7-unknown-linux-gnueabihf
+# AArch64
+rustup target add aarch64-unknown-linux-gnu
+</code></pre>
+<p>Rustコンパイラでは、ネイティブ用のリンカしか配布していないため、リンカは別途用意します。Yoctoなどでツールチェインを構築している場合、そのツールチェインを利用できます。</p>
+<pre><code># ARMv7
+sudo apt install g++-arm-linux-gnueabihf
+# AArch64
+sudo apt install g++-aarch64-linux-gnu
+</code></pre>
+<p><code>.cargo/config</code>でリンカを指定します。</p>
+<pre><code class="language-toml"># ARMv7
+[target.armv7-unknown-linux-gnueabihf]
+linker = &quot;arm-linux-gnueabihf-gcc&quot;
+
+# AArch64
+[target.aarch64-unknown-linux-gnu]
+linker = &quot;aarch64-linux-gnu-gcc&quot;
+</code></pre>
+<p>プロジェクトをビルドする際は、次の通り、ターゲットを指定します。</p>
+<pre><code># ARMv7
+cargo build --target=armv7-unknown-linux-gnueabihf
+# AArch64
+cargo build --target=aarch64-linux-gnu-gcc
+</code></pre>
+<p>生成されたバイナリ (<code>target/armv7-unknown-linux-gnueabihf/debug/</code>または<code>target/aarch64-unknown-linux-gnu/debug/</code>にあります) をRaspberry Pi3にコピーするだけで、実行できます。ターゲットシステム上のライブラリに依存する場合は、ライブラリパスなどを別途、指定する必要があります。</p>
+<p>QEMUのユーザーモードエミュレーションを使って、動作確認してみましょう。</p>
+<pre><code>sudo apt install qemu-user-binfmt
+</code></pre>
+<p>ダイナミックリンクしているのでクロスルートディレクトリを明示的に指定します。</p>
+<pre><code># ARMv7
+$ qemu-arm -L /usr/arm-linux-gnueabihf target/armv7-unknown-linux-gnueabihf/debug/raspi
+Hello, world!
+# AArch64
+qemu-aarch64 -L /usr/aarch64-linux-gnu/ target/aarch64-unknown-linux-gnu/debug/raspi
+Hello, world!
+</code></pre>
+<p><code>.cargo/config</code>にカスタムランナーを設定することで、<code>cargo run</code>でQEMU上やRaspberry Pi3上で実行することができます。まず、QEMU上で実行する設定です。</p>
+<pre><code>cat .cargo/config
+</code></pre>
+<pre><code class="language-toml"># ARMv7
+[target.armv7-unknown-linux-gnueabihf]
+linker = &quot;arm-linux-gnueabihf-gcc&quot;
+runner = &quot;qemu-arm -L /usr/arm-linux-gnueabihf&quot;
+
+# AArch64
+[target.aarch64-unknown-linux-gnu]
+linker = &quot;aarch64-linux-gnu-gcc&quot;
+runner = &quot;qemu-aarch64 -L /usr/aarch64-linux-gnu&quot;
+</code></pre>
+<pre><code># ARMv7
+cargo run --target armv7-unknown-linux-gnueabihf
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+     Running `qemu-arm -L /usr/arm-linux-gnueabihf target/armv7-unknown-linux-gnueabihf/debug/raspi`
+Hello, world!
+
+# AArch64
+cargo run --target aarch64-unknown-linux-gnu
+    Finished dev [unoptimized + debuginfo] target(s) in 0.01s
+     Running `qemu-aarch64 -L /usr/aarch64-linux-gnu target/aarch64-unknown-linux-gnu/debug/raspi`
+Hello, world!
+</code></pre>
+<p>バイナリサイズを気にしない場合、<code>musl</code>のターゲットを利用すると、ターゲット環境のlibcに依存しないバイナリを生成することができます。その場合、<code>armv7-unknown-linux-musleabihf</code>もしくは<code>aarch64-unknown-linux-musl</code>を指定します。<code>Hello World</code>プログラムで、<code>armv7-unknown-linux-gnueabihf</code>は約1.5 MB、<code>armv7-unknown-linux-musleabihf</code>は約1.8 MBになります。</p>
+<p>続いて、カスタムランナーを設定して、リモートのRaspberry Pi3でバイナリを実行する例を示します。以降では、パスワード認証方式でsshすることを想定しています。Raspberry Pi3にsshするための設定は、事前に済ませて下さい。公開鍵認証方式を使用してもかまいませんし、開発期間の間はパスワードなしでssh可能にしても良いです。</p>
+<p>shell script内でパスワードを入力するため<code>expect</code>をインストールします。</p>
+<pre><code>sudo apt install expect
+</code></pre>
+<p>次のシェルスクリプトを用意します。</p>
+<pre><code>$ cat run.sh
+</code></pre>
+<pre><code class="language-sh">#!/bin/sh
+
+PW=&quot;raspberry&quot;
+
+expect -c &quot;
+set timeout 5
+spawn env LANG=C /usr/bin/scp $1 pi@&lt;IPアドレス&gt;:/home/pi/raspi
+expect \&quot;password:\&quot;
+send \&quot;${PW}\n\&quot;
+expect \&quot;$\&quot;
+
+spawn env LANG=C /usr/bin/ssh pi@&lt;IPアドレス&gt; ./raspi
+expect \&quot;password:\&quot;
+send \&quot;${PW}\n\&quot;
+expect \&quot;$\&quot;
+exit 0
+&quot;
+</code></pre>
+<p>shell script実行時の第一引数を、<code>/home/pi/</code>に<code>raspi</code>としてコピーします。次に、Raspberry Pi3上の<code>raspi</code>バイナリを実行します。</p>
+<p>これをプロジェクトのルートディレクトリ (Cargo.tomlのあるディレクトリ) に置いて、カスタムランナーに指定します。</p>
+<pre><code class="language-toml"># ARMv7
+[target.armv7-unknown-linux-gnueabihf]
+linker = &quot;arm-linux-gnueabihf-gcc&quot;
+runner = &quot;sh run.sh&quot;
+</code></pre>
+<p>Raspberry Pi3にssh可能な状態で、<code>cargo run</code>を実行します。</p>
+<pre><code>cargo run --target armv7-unknown-linux-gnueabihf
+    Finished dev [unoptimized + debuginfo] target(s) in 0.01s
+     Running `sh run.sh target/armv7-unknown-linux-gnueabihf/debug/raspi`
+spawn env LANG=C /usr/bin/scp target/armv7-unknown-linux-gnueabihf/debug/raspi pi@&lt;IPアドレス&gt;:/home/pi/raspi
+pi@&lt;IPアドレス&gt;'s password: 
+raspi                                         100% 1481KB   1.3MB/s   00:01    
+spawn env LANG=C /usr/bin/ssh pi@&lt;IPアドレス&gt; ./raspi
+pi@&lt;IPアドレス&gt;'s password: 
+Hello, world!
+</code></pre>
+<h2><a class="header" href="#テスト" id="テスト">テスト</a></h2>
+<p>上述のカスタムランナーを登録しておけば、<code>cargo test</code>でQEMU上やRaspberry Pi3上でテストを実行可能です。</p>
+<p>QEMU上での実行例です。</p>
+<pre><code>cargo test --target armv7-unknown-linux-gnueabihf
+   Compiling raspi v0.1.0 (embedded-rust-techniques/ci/07-linux/raspi)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.32s
+     Running target/armv7-unknown-linux-gnueabihf/debug/deps/raspi-3f64731a0be9b753
+
+running 1 test
+test ok ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+</code></pre>
+<p>Raspberry Pi3上での実行例です。</p>
+<pre><code>cargo test --target armv7-unknown-linux-gnueabihf
+    Finished dev [unoptimized + debuginfo] target(s) in 0.03s
+     Running target/armv7-unknown-linux-gnueabihf/debug/deps/raspi-2fd52b9957ada715
+spawn env LANG=C /usr/bin/scp embedded-rust-techniques/ci/07-linux/raspi/target/armv7-unknown-linux-gnueabihf/debug/deps/raspi-2fd52b9957ada715 pi@&lt;IPアドレス&gt;:/home/pi/raspi
+pi@&lt;IPアドレス&gt;'s password: 
+raspi-2fd52b9957ada715                        100% 2820KB 998.2KB/s   00:02    
+spawn env LANG=C /usr/bin/ssh pi@&lt;IPアドレス&gt; ./raspi
+pi@&lt;IPアドレス&gt;'s password: 
+
+running 1 test
+test ok ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+</code></pre>
+<h2><a class="header" href="#7-2-yocto" id="7-2-yocto">7-2. Yocto</a></h2>
+<p>Yoctoは、組込みLinuxディストリビューションを作成するためのプロジェクトです。製品固有のLinuxディストリビューションを作成、管理できるため、組込みLinux開発で広く用いられています。ここで言うLinuxディストリビューションは、Linux kernel、ライブラリ、アプリケーションを全て含みます。</p>
+<p>日本語のまとまった書籍は、2019年現在ありませんが、雑誌インタフェースなどで、Raspberry Piの独自環境構築や、FPGAボードZynqの環境構築方法が紹介されています。<a href="http://mickey-happygolucky.hatenablog.com/">みつきんのメモ</a>は、Yocto関連のノウハウが多く掲載されており、普段からお世話になっています。</p>
+<p>ここでは、RustプロジェクトをYoctoビルド環境にインテグレーションする方法を紹介します。想定する利用方法は、ホスト上のRustツールチェインで一通り開発、デバッグを行った上で、distributionに取り込んで配布する、というものです。</p>
+<p>Yoctoの基礎から説明するスキルが著者にないため、Yoctoを触ったことある方向けの情報になります。ご了承下さい。</p>
+<p>ターゲット環境はRaspberry Pi3で、Yoctoのバージョンは<code>thud</code>です。</p>
+<h3><a class="header" href="#meta-rust" id="meta-rust">meta-rust</a></h3>
+<p><a href="https://github.com/meta-rust/meta-rust">meta-rust</a>は、既存のRustプロジェクトをYoctoでビルドできるようにするための、Yoctoのレイヤです。</p>
+<p>まず、raspberry pi3環境をビルドするためのレイヤを取得します。</p>
+<pre><code>mkdir -p rpi-thud/layers
+cd rpi-thud/layers
+git clone git://git.yoctoproject.org/poky.git -b thud
+git clone git://git.yoctoproject.org/meta-raspberrypi -b thud
+git clone git://git.openembedded.org/meta-openembedded -b thud
+</code></pre>
+<p>次に、Rustのパッケージを含んでいる<code>meta-rust</code>をcloneします。</p>
+<pre><code>git clone https://github.com/meta-rust/meta-rust.git
+</code></pre>
+<p>環境変数を読み込みます。</p>
+<pre><code>source layers/poky/oe-init-build-env build
+</code></pre>
+<p>ビルド対象のレイヤを追加します。</p>
+<pre><code>bitbake-layers add-layer ../layers/meta-openembedded/meta-oe
+bitbake-layers add-layer ../layers/meta-openembedded/meta-python
+bitbake-layers add-layer ../layers/meta-openembedded/meta-networking
+bitbake-layers add-layer ../layers/meta-raspberrypi
+bitbake-layers add-layer ../layers/meta-rust
+</code></pre>
+<p><code>local.conf</code>を修正します。</p>
+<p>ターゲットをRaspberry Pi3にします。</p>
+<pre><code>MACHINE = &quot;raspberrypi3&quot;
+</code></pre>
+<p>Rustのサンプルパッケージをrootfsにインストールするようにします。</p>
+<pre><code>IMAGE_INSTALL_append = &quot; rust-hello-world&quot;
+</code></pre>
+<p>ビルドします。</p>
+<pre><code>bitbake core-image-base
+</code></pre>
+<p><code>dd</code>コマンドでマイクロSDカードにイメージを書き込みます。</p>
+<pre><code>sudo dd if=tmp/deploy/images/raspberrypi3/core-image-base-raspberrypi3.rpi-sdimg of=/dev/sdX bs=100M
+</code></pre>
+<p><code>/sdX</code>は使用している環境に合わせて適宜変更して下さい。</p>
+<p>raspberry pi3を起動して、<code>rust-hello-world</code>を実行します。</p>
+<pre><code># rust-hello-world
+Hello, world!
+</code></pre>
+<p>無事、実行できます。</p>
+<h4><a class="header" href="#cargo-bitbake" id="cargo-bitbake">cargo-bitbake</a></h4>
+<p><a href="https://github.com/cardoe/cargo-bitbake">cargo-bitbake</a>は、既存のCargoプロジェクトから<code>meta-rust</code>のYoctoレシピを作成してくれるCargoの拡張機能です。</p>
+<p><code>cargo-bitbake</code>は<code>libssl-dev</code>を使用するため、インストールします。</p>
+<pre><code>sudo apt install libssl-dev
+</code></pre>
+<p><code>cargo-bitbake</code>をインストールします。</p>
+<pre><code>cargo install cargo-bitbake
+</code></pre>
+<p>Rust製grepツールの<a href="https://github.com/BurntSushi/ripgrep">ripgrep</a>を取り込んでみます。</p>
+<pre><code>git clone https://github.com/BurntSushi/ripgrep.git
+cd ripgrep
+cargo bitbake
+</code></pre>
+<p>これで、レシピが自動生成されます。</p>
+<pre><code>head ripgrep_11.0.1.bb 
+</code></pre>
+<pre><code># Auto-Generated by cargo-bitbake 0.3.10
+#
+inherit cargo
+
+# If this is git based prefer versioned ones if they exist
+# DEFAULT_PREFERENCE = &quot;-1&quot;
+
+# how to get ripgrep could be as easy as but default to a git checkout:
+# SRC_URI += &quot;crate://crates.io/ripgrep/11.0.1&quot;
+SRC_URI += &quot;git://github.com/BurntSushi/ripgrep.git;protocol=https&quot;
+</code></pre>
+<p><code>LIC_FILES_CHKSUM</code>だけは、手動で変更する必要があります。</p>
+<pre><code># FIXME: update generateme with the real MD5 of the license file
+LIC_FILES_CHKSUM=&quot; \
+file://Unlicense OR MIT;md5=generateme \
+&quot;
+</code></pre>
+<p><code>ripgrep</code>では、<code>COPYING</code>ファイルにライセンス情報が記載されています。<code>md5sum</code>コマンドでチェックサムを計算して、レシピを修正します。</p>
+<pre><code>md5sum COPYING
+</code></pre>
+<pre><code>034e2d49ef70c35b64be514bef39415a  COPYING
+</code></pre>
+<p>レシピは次のようになります。</p>
+<pre><code>LIC_FILES_CHKSUM=&quot; \
+file://COPYING;md5=034e2d49ef70c35b64be514bef39415a \
+&quot;
+</code></pre>
+<p><code>layers/meta-rust/recipes-example/ripgrep/</code>ディレクトリを作成し、自動生成されたレシピファイルをコピーします。</p>
+<pre><code>mkdir ../layers/meta-rust/recipes-example/ripgrep/
+cp &lt;path to ripgrep&gt;/ripgrep_11.0.1.bb ../layers/meta-rust/recipes-example/ripgrep/
+</code></pre>
+<p>ビルドします。</p>
+<pre><code>bitbake ripgrep
+</code></pre>
+<p>これで、<code>ripgrep</code>がビルドできます。</p>
+<h3><a class="header" href="#meta-rust-bin" id="meta-rust-bin">meta-rust-bin</a></h3>
+<p><code>meta-rust</code>では、LLVM、Rustコンパイラ、CargoをビルドしてRustツールチェインを構築するため、ビルド時間が大幅に増加します。それにも関わらず、Yoctoで作成したクロス開発環境には、このツールチェインが含まれません。純粋に、Rustのプロジェクトをビルドするだけであれば、既存のRustツールチェインバイナリを取得する方がよほどお手軽です。</p>
+<p>そこで、Rustのツールチェインバイナリを取得して、Rustプロジェクトをビルドする<a href="https://github.com/rust-embedded/meta-rust-bin">meta-rust-bin</a>があります。</p>
+<p><code>meta-rust</code>と異なり、こちらは、pokyのバージョンが<code>sumo</code>までしか対応されていません (2019/6/22現在)。</p>
+<pre><code>mkdir -p rpi-sumo/layers
+cd rpi-sumo/layers
+git clone git://git.yoctoproject.org/poky.git -b sumo
+git clone git://git.yoctoproject.org/meta-raspberrypi -b sumo
+git clone git://git.openembedded.org/meta-openembedded -b sumo
+git clone https://github.com/rust-embedded/meta-rust-bin
+</code></pre>
+<p>環境変数を読み込みます。</p>
+<pre><code>source layers/poky/oe-init-build-env build
+</code></pre>
+<p>ビルド対象のレイヤを追加します。</p>
+<pre><code>bitbake-layers add-layer ../layers/meta-openembedded/meta-oe
+bitbake-layers add-layer ../layers/meta-openembedded/meta-python
+bitbake-layers add-layer ../layers/meta-openembedded/meta-networking
+bitbake-layers add-layer ../layers/meta-raspberrypi
+bitbake-layers add-layer ../layers/meta-rust-bin
+</code></pre>
+<p><code>meta-rust-bin</code>には、レシピ例が同梱されていないため、サンプルアプリのレシピを作成します。<code>meta-rust</code>の<code>rust-hello-world</code>レシピがそのまま利用できます。</p>
+<pre><code>cp -r &lt;path to meta-rust&gt;/recipes-example/rust-hello-world/ ../layers/meta-rust-bin/
+</code></pre>
+<p><code>local.conf</code>を修正します。</p>
+<p>ターゲットをRaspberry Pi3にします。</p>
+<pre><code>MACHINE = &quot;raspberrypi3&quot;
+</code></pre>
+<p>Rustのサンプルパッケージをrootfsにインストールするようにします。</p>
+<pre><code>IMAGE_INSTALL_append = &quot; rust-hello-world&quot;
+</code></pre>
+<p>ビルドします。</p>
+<pre><code>bitbake core-image-base
+</code></pre>
+<p><code>dd</code>コマンドでマイクロSDカードにイメージを書き込みます。</p>
+<pre><code>sudo dd if=tmp/deploy/images/raspberrypi3/core-image-base-raspberrypi3.rpi-sdimg of=/dev/sdX bs=100M
+</code></pre>
+<p><code>/sdX</code>は使用している環境に合わせて適宜変更して下さい。</p>
+<p>raspberry pi3を起動して、<code>rust-hello-world</code>を実行します。</p>
+<pre><code># rust-hello-world
+Hello, world!
+</code></pre>
+<p>無事、実行できます。</p>
+<p><code>meta-rust-bin</code>でも<code>ripgrep</code>をビルドしてみます。レシピの用意は簡単です。</p>
+<pre><code>inherit cargo
+
+SUMMARY = &quot;ripgrep recursively searches directories for a regex pattern&quot;
+HOMEPAGE = &quot;https://github.com/BurntSushi/ripgrep&quot;
+LICENSE = &quot;MIT&quot;
+
+SRC_URI = &quot;git://github.com/BurntSushi/ripgrep.git;tag=${PV};protocol=https&quot;
+S = &quot;${WORKDIR}/git&quot;
+
+LIC_FILES_CHKSUM = &quot;file://LICENSE-MIT;md5=8d0d0aa488af0ab9aafa3b85a7fc8e12&quot;
+</code></pre>
+<pre><code>bitbake ripgrep
+</code></pre>
+<p>これで、<code>ripgrep</code>がビルドできます。</p>
+<h4><a class="header" href="#meta-rustとの比較" id="meta-rustとの比較">meta-rustとの比較</a></h4>
+<p>ラズパイ3の<code>core-image-base</code>に<code>rust-hello-world</code>を追加したイメージのフルビルドにかかる時間を計測したろころ、<code>meta-rust</code>が約220分、<code>meta-rust-bin</code>が約75分でした。Yoctoのバージョンが異なるため、完全なベンチマークとは言えませんが、<code>meta-rust-bin</code>の方がビルド時間がかなり短いです。</p>
+<p><code>meta-rust-bin</code>はビルド済みのRustツールチェインを利用するため、Rustコンパイラをカスタマイズしてビルドする、ということができません。Rustが公式にサポートしていないアーキテクチャをターゲットにする場合は、<code>meta-rust</code>の利用が必要です。</p>
+<p>また、ビルド済みのRust標準ライブラリを利用するため、カスタムビルドされた標準ライブラリよりパフォーマンスが低い可能性があります。</p>
+<p><code>cargo-bitbake</code>で自動生成するレシピは、<code>meta-rust-bin</code>のclassとは互換性がありません。<code>meta-rust-bin</code>のレシピを用意するのは、それほど難しくないため、大きなデメリットではありません。</p>
+<h4><a class="header" href="#参考-1" id="参考-1">参考</a></h4>
+<ul>
+<li><a href="http://mickey-happygolucky.hatenablog.com/entry/2019/05/01/125555?_ga=2.6048497.350764793.1560857949-1518570932.1554416614">yoctoでもRust</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+        
+        
+
+    </body>
+</html>

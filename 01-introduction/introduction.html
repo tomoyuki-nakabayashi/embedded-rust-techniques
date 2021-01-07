@@ -1,0 +1,283 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>はじめに - Embedded Rust Techniques</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../01-introduction/introduction.html" class="active"><strong aria-hidden="true">1.</strong> はじめに</a></li><li class="chapter-item expanded "><a href="../02-setup/setup.html"><strong aria-hidden="true">2.</strong> 環境構築</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/bare-metal.html"><strong aria-hidden="true">3.</strong> ベアメタルテクニック</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../03-bare-metal/no_std.html"><strong aria-hidden="true">3.1.</strong> no_std</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/panic.html"><strong aria-hidden="true">3.2.</strong> panic</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/print.html"><strong aria-hidden="true">3.3.</strong> print!マクロ</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/linker.html"><strong aria-hidden="true">3.4.</strong> リンカ</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/assembly.html"><strong aria-hidden="true">3.5.</strong> アセンブリ</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/allocator.html"><strong aria-hidden="true">3.6.</strong> メモリアロケータ</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/entry.html"><strong aria-hidden="true">3.7.</strong> entryポイント</a></li></ol></li><li class="chapter-item expanded "><a href="../04-tools/tools.html"><strong aria-hidden="true">4.</strong> ツール</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../04-tools/cargo.html"><strong aria-hidden="true">4.1.</strong> Cargo</a></li><li class="chapter-item expanded "><a href="../04-tools/compiler.html"><strong aria-hidden="true">4.2.</strong> コンパイラサポート</a></li><li class="chapter-item expanded "><a href="../04-tools/rustc.html"><strong aria-hidden="true">4.3.</strong> rustc</a></li></ol></li><li class="chapter-item expanded "><a href="../05-library/library.html"><strong aria-hidden="true">5.</strong> ライブラリ / フレームワーク</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../05-library/heapless.html"><strong aria-hidden="true">5.1.</strong> heapless</a></li><li class="chapter-item expanded "><a href="../05-library/no_std_crates.html"><strong aria-hidden="true">5.2.</strong> no_stdクレート</a></li><li class="chapter-item expanded "><a href="../05-library/svd2rust.html"><strong aria-hidden="true">5.3.</strong> svd2rust</a></li><li class="chapter-item expanded "><a href="../05-library/rtfm.html"><strong aria-hidden="true">5.4.</strong> RTFM</a></li><li class="chapter-item expanded "><a href="../05-library/tock.html"><strong aria-hidden="true">5.5.</strong> Tock</a></li><li class="chapter-item expanded "><a href="../05-library/testing.html"><strong aria-hidden="true">5.6.</strong> testing</a></li></ol></li><li class="chapter-item expanded "><a href="../06-ffi/ffi.html"><strong aria-hidden="true">6.</strong> FFI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../06-ffi/c-with-rust.html"><strong aria-hidden="true">6.1.</strong> RustからCを呼ぶ</a></li><li class="chapter-item expanded "><a href="../06-ffi/rust-with-c.html"><strong aria-hidden="true">6.2.</strong> CからRustを呼ぶ</a></li><li class="chapter-item expanded "><a href="../06-ffi/zephyr-bindings.html"><strong aria-hidden="true">6.3.</strong> ケーススタディ Zephyr</a></li></ol></li><li class="chapter-item expanded "><a href="../07-linux/embedded-linux.html"><strong aria-hidden="true">7.</strong> 組込みLinux</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../07-linux/basic.html"><strong aria-hidden="true">7.1.</strong> ビルド/テスト</a></li><li class="chapter-item expanded "><a href="../07-linux/yocto.html"><strong aria-hidden="true">7.2.</strong> Yocto</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Embedded Rust Techniques</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#1-はじめに" id="1-はじめに">1. はじめに</a></h1>
+<p>この本は、Rustで組込み / ベアメタルプログラミングするための小技を集めたものです。OSにホストされた環境でプログラミングするだけでも、Rustには特有の複雑さがあります。その複雑さは、コンパイル時に型安全性、メモリ安全性、スレッド安全性を保証するための対価です。私は (そして多くのRustaceanが) 、その対価を妥当なものと考え、Rustでのプログラミングを楽しんでいます。</p>
+<p>Rustを組込み / ベアメタル環境で使おうとすると、上述した複雑さに加えて、<em>特別な知識</em>が求められます。この本は、私が知る限りの<em>特別な知識</em>を詰め込んだクックブックです。</p>
+<p>この本の内容は、<a href="https://github.com/rust-embedded/wg">Rust Embedded devices Working Group</a>が発行している<a href="https://docs.rust-embedded.org/">組込みRustドキュメント</a>の内容を数多く含んでいます。本書に含まれる内容の多くは、私が独自に考えたものではなく、Web上に公開されているドキュメントをテクニック集としてまとめ直したものです。WGは多くのドキュメントを公開してくれています。この本で不足する内容は、ぜひWGのドキュメントを探して見て下さい。</p>
+<p>本書内で出典を表す際、和訳文書がある場合は、和訳文書へのリンクを示しています。これは日本人の読者を想定しているからであり、本家文書を軽視しているわけではないことを、ご了承下さい。</p>
+<p>本書は、クックブックとして、各項目を独立して読めるようにしています。前から順番に読む、というよりは、必要や興味に応じて、辞書のようにお使い下さい。また、本書内では同じ情報がやや重複して書かれている部分もあります。これは、手抜きという一面もありますが、欲しいところに必要な情報が記載されているようにするためです。</p>
+<h2><a class="header" href="#1-1-紙媒体で読んでいる方へ" id="1-1-紙媒体で読んでいる方へ">1-1. 紙媒体で読んでいる方へ</a></h2>
+<p>この本は、Rust製のドキュメントビルダー<a href="https://rust-lang-nursery.github.io/mdBook/">mdbook</a>で作成しています。mdbookは、htmlが一番読みやすい形式ですので、ぜひhtml形式でも読んでみて下さい。紙媒体を購入された方は、html形式の本書をダウンロードできます。参考文献へのリンクは、html形式の媒体から簡単にアクセスできます。そのため、本文内でのURL掲載は省略しています。</p>
+<h2><a class="header" href="#1-2-サンプルコードの実行" id="1-2-サンプルコードの実行">1-2. サンプルコードの実行</a></h2>
+<p>html形式で本書を読んでいる場合、掲載しているいくつかのコードは、<em>実行して、結果を確認することができます</em>。<a href="https://play.rust-lang.org/">Rust Playpen</a>にコードを送信して実行しますので、インターネット接続が必要です。下記コードのコードブロック右上に見えている実行ボタン (▶) をクリックすると、コンソール出力結果が確認可能です。</p>
+<pre><pre class="playground"><code class="language-rust editable">fn main() {
+    println!(&quot;{}&quot;, &quot;hello&quot;);
+}
+</code></pre></pre>
+<p>また、コードブロック右上に、時計マークの<strong>Undo changes</strong>アイコンがある場合は、コードを編集して実行することができます。上記コードの<strong>hello</strong>を、<strong>hello world</strong>に変更して、実行してみて下さい。</p>
+<h2><a class="header" href="#1-3-スコープ" id="1-3-スコープ">1-3. スコープ</a></h2>
+<p>本書には、次のトピックが含まれます。</p>
+<ul>
+<li>組込みRust環境構築</li>
+<li>ベアメタル固有のプログラミングテクニック</li>
+<li>ツール</li>
+<li>ライブラリ / フレームワーク</li>
+<li>FFI (C言語との相互呼び出し)</li>
+<li>組込みLinux</li>
+</ul>
+<p>提供するシステムコマンドは、<strong>Ubuntu 18.04</strong>を想定しています。他のOSをご利用の方は、お手数ですが読み替えをお願いします。</p>
+<h2><a class="header" href="#1-4-想定読者" id="1-4-想定読者">1-4. 想定読者</a></h2>
+<p>下記トピックに興味があり、いずれかの項目について、<em>ある程度</em>開発経験がある方を想定しています。</p>
+<ul>
+<li>Rust</li>
+<li>組込み / マイクロコントローラ</li>
+<li>低レイヤ / ベアメタルプログラミング</li>
+</ul>
+<h2><a class="header" href="#1-5-本書に含まれない内容" id="1-5-本書に含まれない内容">1-5. 本書に含まれない内容</a></h2>
+<ul>
+<li>なぜRustで組込みなのか？</li>
+<li>Rustの基礎的な文法 / イディオム</li>
+<li>リンカスクリプトなど低レイヤ知識の基礎事項</li>
+<li>クロスコンパイルの概念</li>
+<li>メモリマップ方式のペリフェラル制御</li>
+</ul>
+<p>なぜRustで組込みなのか？は、詳しくは書きません。実行速度が速く、バイナリも小さく、安全で、生産性が高い、というのが簡単な回答です。</p>
+<h2><a class="header" href="#1-6-参考文献" id="1-6-参考文献">1-6. 参考文献</a></h2>
+<p>本書に含まれない内容について学習したい場合に、参考となる書籍を紹介します。</p>
+<ul>
+<li>The Rust Programming Language (TRPL)</li>
+<li>プログラミングRust</li>
+<li>実践Rust入門</li>
+<li>プログラミング言語Rust 公式ガイド</li>
+<li><a href="https://doc.rust-jp.rs/">Rustの日本語ドキュメント</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+                            <a rel="next" href="../02-setup/setup.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+                    <a rel="next" href="../02-setup/setup.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

@@ -1,0 +1,391 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>rustc - Embedded Rust Techniques</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../01-introduction/introduction.html"><strong aria-hidden="true">1.</strong> はじめに</a></li><li class="chapter-item expanded "><a href="../02-setup/setup.html"><strong aria-hidden="true">2.</strong> 環境構築</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/bare-metal.html"><strong aria-hidden="true">3.</strong> ベアメタルテクニック</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../03-bare-metal/no_std.html"><strong aria-hidden="true">3.1.</strong> no_std</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/panic.html"><strong aria-hidden="true">3.2.</strong> panic</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/print.html"><strong aria-hidden="true">3.3.</strong> print!マクロ</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/linker.html"><strong aria-hidden="true">3.4.</strong> リンカ</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/assembly.html"><strong aria-hidden="true">3.5.</strong> アセンブリ</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/allocator.html"><strong aria-hidden="true">3.6.</strong> メモリアロケータ</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/entry.html"><strong aria-hidden="true">3.7.</strong> entryポイント</a></li></ol></li><li class="chapter-item expanded "><a href="../04-tools/tools.html"><strong aria-hidden="true">4.</strong> ツール</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../04-tools/cargo.html"><strong aria-hidden="true">4.1.</strong> Cargo</a></li><li class="chapter-item expanded "><a href="../04-tools/compiler.html"><strong aria-hidden="true">4.2.</strong> コンパイラサポート</a></li><li class="chapter-item expanded "><a href="../04-tools/rustc.html" class="active"><strong aria-hidden="true">4.3.</strong> rustc</a></li></ol></li><li class="chapter-item expanded "><a href="../05-library/library.html"><strong aria-hidden="true">5.</strong> ライブラリ / フレームワーク</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../05-library/heapless.html"><strong aria-hidden="true">5.1.</strong> heapless</a></li><li class="chapter-item expanded "><a href="../05-library/no_std_crates.html"><strong aria-hidden="true">5.2.</strong> no_stdクレート</a></li><li class="chapter-item expanded "><a href="../05-library/svd2rust.html"><strong aria-hidden="true">5.3.</strong> svd2rust</a></li><li class="chapter-item expanded "><a href="../05-library/rtfm.html"><strong aria-hidden="true">5.4.</strong> RTFM</a></li><li class="chapter-item expanded "><a href="../05-library/tock.html"><strong aria-hidden="true">5.5.</strong> Tock</a></li><li class="chapter-item expanded "><a href="../05-library/testing.html"><strong aria-hidden="true">5.6.</strong> testing</a></li></ol></li><li class="chapter-item expanded "><a href="../06-ffi/ffi.html"><strong aria-hidden="true">6.</strong> FFI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../06-ffi/c-with-rust.html"><strong aria-hidden="true">6.1.</strong> RustからCを呼ぶ</a></li><li class="chapter-item expanded "><a href="../06-ffi/rust-with-c.html"><strong aria-hidden="true">6.2.</strong> CからRustを呼ぶ</a></li><li class="chapter-item expanded "><a href="../06-ffi/zephyr-bindings.html"><strong aria-hidden="true">6.3.</strong> ケーススタディ Zephyr</a></li></ol></li><li class="chapter-item expanded "><a href="../07-linux/embedded-linux.html"><strong aria-hidden="true">7.</strong> 組込みLinux</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../07-linux/basic.html"><strong aria-hidden="true">7.1.</strong> ビルド/テスト</a></li><li class="chapter-item expanded "><a href="../07-linux/yocto.html"><strong aria-hidden="true">7.2.</strong> Yocto</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Embedded Rust Techniques</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2><a class="header" href="#3-3-rustc" id="3-3-rustc">3-3. rustc</a></h2>
+<p>rustcは、Rustのコンパイラです。組込み / ベアメタルプログラミングに限りませんが、コンパイラでできることを知っていると便利なことがあります。</p>
+<h3><a class="header" href="#コマンドライン引数" id="コマンドライン引数">コマンドライン引数</a></h3>
+<p>コマンドライン引数を直接rustcに指定する機会は少ないです。多くの場合、Cargoの設定を記述し、間接的にrustcのコマンドライン引数を使用します。しかし、rustcのコマンドライン引数を把握していなければ、Cargoから使いようもありません。網羅的な説明は、<a href="https://doc.rust-lang.org/stable/rustc/command-line-arguments.html">コマンドライン引数</a>を参照して下さい。</p>
+<p>組込み / ベアメタルプログラミングで最も大事なコマンドライン引数は、間違いなく<code>-C / --codegen</code>です。このコマンドライン引数では、使用するリンカの指定や最適化レベルなどの制御ができます。詳しくは、<a href="rustc.html#%E3%82%B3%E3%83%BC%E3%83%89%E7%94%9F%E6%88%90%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3">コード生成オプション</a>に記載します。</p>
+<p>組込みLinux開発でターゲットシステムのライブラリに依存するクレートをクロスビルドするのであれば、<code>--sysroot</code>オプションでsystem rootのパスを上書きすることができます。</p>
+<p>コンパイラより厳密なソースコード検査をするために、コマンドライン引数からlintルールごとに、lintレベルを制御できます。<code>-A</code>, <code>-W</code>, <code>-D</code>, <code>-F</code>フラグがあり、それぞれ、許可、警告、拒絶、禁止を意味します。lintルールごとに、これらのフラグを設定できます。詳細は、<a href="rustc.html#lint">lint</a>で紹介します。下に例を示します。</p>
+<pre><code>$ rustc lib.rs --crate-type=lib -W missing-docs
+</code></pre>
+<h3><a class="header" href="#lint" id="lint">lint</a></h3>
+<p><code>lint</code>はソースコードをコンパイラより厳密なルールに則り、検査するためのツールです。Rustコンパイラには、様々なlintルールが組み込まれています。ソースコードをコンパイルする時、自動的にlintによる検査が行われます。</p>
+<p>プロジェクトの運用ルールに合わせて、適切なlintルールを設定することで、ソースコードの品質をより向上できるでしょう。</p>
+<h3><a class="header" href="#lintレベル" id="lintレベル">lintレベル</a></h3>
+<p>rustcのlintレベルは、4つに分類されます。</p>
+<ol>
+<li>allow (許可)</li>
+<li>warn (警告)</li>
+<li>deny (拒絶)</li>
+<li>forbid (禁止)</li>
+</ol>
+<p>各lintルールには、デフォルトのlintレベルがあり、コンパイルオプションかアトリビュートで上書きできるようになっています。まず、lintレベルについて説明します。</p>
+<h4><a class="header" href="#allow-許可" id="allow-許可">allow (許可)</a></h4>
+<p>lintルールを適用しません。例えば、次のコードをコンパイルしても、警告は発生しません。</p>
+<pre><code class="language-rust ignore">pub fn foo() {}
+</code></pre>
+<pre><code>$ rustc lib.rs --crate-type=lib
+</code></pre>
+<p>しかし、このコードは<code>missing_docs</code>ルールを違反しています。lintレベルを上書きしてコンパイルすると、コンパイルエラーになったり、警告が出力されるようになります。</p>
+<h4><a class="header" href="#warn-警告" id="warn-警告">warn (警告)</a></h4>
+<p>lintルール違反があった場合、警告を表示します。</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let x = 5;
+}
+</code></pre></pre>
+<p>このコードは<code>unused_variables</code>のルールに違反しており、次の警告が報告されます。</p>
+<pre><code>warning: unused variable: `x`
+ --&gt; src/main.rs:2:9
+  |
+2 |     let x = 5;
+  |         ^ help: consider prefixing with an underscore: `_x`
+  |
+  = note: #[warn(unused_variables)] on by default
+</code></pre>
+<h4><a class="header" href="#deny-拒絶" id="deny-拒絶">deny (拒絶)</a></h4>
+<p>lintルール違反があった場合、コンパイルエラーになります。</p>
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    100u8 &lt;&lt; 10;
+}
+</code></pre></pre>
+<p>このコードは、<code>exceeding_bitshifts</code>ルールに違反しており、コンパイルエラーになります。</p>
+<pre><code>error: attempt to shift left with overflow
+ --&gt; src/main.rs:2:5
+  |
+2 |     100u8 &lt;&lt; 10;
+  |     ^^^^^^^^^^^
+  |
+  = note: #[deny(exceeding_bitshifts)] on by default
+</code></pre>
+<h4><a class="header" href="#forbid-禁止" id="forbid-禁止">forbid (禁止)</a></h4>
+<p>lintルール違反があった場合、コンパイルエラーになります。<code>forbid</code>は、<code>deny</code>より強いレベルで、上書きができません。</p>
+<p>下のコードは、アトリビュートで<code>missing_docs</code>ルールをallowに上書きしています。</p>
+<pre><code class="language-rust ignore">#![allow(missing_docs)]
+pub fn foo() {}
+</code></pre>
+<p><code>missing_dogs</code>ルールを、denyレベルに設定してコンパイルすると、このコードはコンパイルできます。</p>
+<pre><code>$ rustc lib.rs --crate-type=lib -D missing-docs
+</code></pre>
+<p>一方、forbidレベルに設定してコンパイルすると、コンパイルエラーになります。</p>
+<pre><code>$ rustc lib.rs --crate-type=lib -F missing-docs
+error[E0453]: allow(missing_docs) overruled by outer forbid(missing_docs)
+ --&gt; lib.rs:1:10
+  |
+1 | #![allow(missing_docs)]
+  |          ^^^^^^^^^^^^ overruled by previous forbid
+  |
+  = note: `forbid` lint level was set on command line
+</code></pre>
+<h3><a class="header" href="#lintレベルの設定方法" id="lintレベルの設定方法">lintレベルの設定方法</a></h3>
+<h4><a class="header" href="#コンパイラフラグで設定" id="コンパイラフラグで設定">コンパイラフラグで設定</a></h4>
+<p>コンパイルオプションで、<code>-A</code>, <code>-W</code>, <code>-D</code>, <code>-F</code>のいずれかを指定して、lintレベルを設定できます。</p>
+<pre><code>$ rustc lib.rs --crate-type=lib -W missing-docs
+</code></pre>
+<p>もちろん、複数のフラグを同時に設定することも可能です。</p>
+<pre><code>$ rustc lib.rs --crate-type=lib -D missing-docs -A unused-variables
+</code></pre>
+<p>Cargoの設定ファイル内で、lintレベルを設定することも可能です。</p>
+<pre><code>$ cat .cargo/config
+</code></pre>
+<pre><code class="language-toml">[build]
+rustflags = [&quot;-D&quot;, &quot;unsafe-code&quot;]
+</code></pre>
+<h4><a class="header" href="#アトリビュートで設定" id="アトリビュートで設定">アトリビュートで設定</a></h4>
+<p>ソースコード内のアトリビュートで、<code>allow</code>, <code>warn</code>, <code>deny</code>, <code>forbid</code>のいずれかを指定して、lintレベルを設定できます。</p>
+<pre><code class="language-rust ignore">$ cat lib.rs
+#![warn(missing_docs)]
+
+pub fn foo() {}
+</code></pre>
+<p>1つのアトリビュートに、複数のlintルールを指定できます。</p>
+<pre><code class="language-rust ignore">#![warn(missing_docs, unused_variables)]
+
+fn main() {
+pub fn foo() {}
+}
+</code></pre>
+<p>複数のアトリビュートを組み合わせて使うこともできます。</p>
+<pre><code class="language-rust ignore">#![warn(missing_docs)]
+#![deny(unused_variables)]
+
+pub fn foo() {}
+</code></pre>
+<h3><a class="header" href="#lintルール" id="lintルール">lintルール</a></h3>
+<p>次のコマンドでlintルールと、デフォルトレベルの一覧が取得できます。</p>
+<pre><code>$ rustc -W help
+</code></pre>
+<p>デフォルトレベルごとに、サンプルコード付きでlintルールが説明されています。</p>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/rustc/lints/listing/allowed-by-default.html">Allowed-by-default lints</a></li>
+<li><a href="https://doc.rust-lang.org/stable/rustc/lints/listing/warn-by-default.html">Warn-by-default lints</a></li>
+<li><a href="https://doc.rust-lang.org/stable/rustc/lints/listing/deny-by-default.html">Deny-by-default lints</a></li>
+</ul>
+<!-- ### コラム〜MISRA-C〜 -->
+<h3><a class="header" href="#コラムrustのlintツールclippy" id="コラムrustのlintツールclippy">コラム〜Rustのlintツールclippy〜</a></h3>
+<p>さらに細かなlintルールで検査したい場合、<a href="https://github.com/rust-lang/rust-clippy">clippy</a>が使用できます。clippyは、下記のようなルールを含んでいます。</p>
+<ul>
+<li>不必要にコードを複雑にする書き方の検出</li>
+<li>正当性がないコードの検出 (常に条件が真になるなど)</li>
+<li>性能が低下するコードの検出</li>
+</ul>
+<p>導入も容易なため、プロジェクトの初期段階からclippyを導入することをお勧めします。<a href="https://rust-lang.github.io/rust-clippy/master/index.html">clippy lintルール一覧</a>も合わせてご覧ください。</p>
+<h3><a class="header" href="#コード生成オプション" id="コード生成オプション">コード生成オプション</a></h3>
+<p><a href="https://doc.rust-lang.org/stable/rustc/codegen-options/index.html">Codegen options</a>にコード生成に関するオプション一覧がまとめられています。</p>
+<p>組込みで特に重要な最適化オプションについて説明します。デフォルト (cargo build) では、最適化を行いません。コンパイラオプションとしては、<code>-C opt-level = 0</code>を使用します。</p>
+<h4><a class="header" href="#速度最適化" id="速度最適化">速度最適化</a></h4>
+<p><code>rustc</code>は、3つの最適化レベルを提供しています。<code>opt-level = 1</code>, <code>2</code>, <code>3</code>です。<code>cargo build --release</code>を実行した場合、デフォルトでは、<code>opt-level = 3</code>です。</p>
+<p><code>opt-level = 2</code>, <code>3</code>では、バイナリサイズを犠牲にする (大きくする) ことで、速度を向上します。例えば、<code>opt-level = 2</code>以上では、ループ展開が行われます。ループ展開は、Flash/ROMの容量をより多く使用します。</p>
+<p>組込みでは、速度よりもバイナリサイズが制限になる場合があります。その場合には、バイナリサイズの最適化が必要です。</p>
+<h4><a class="header" href="#サイズ最適化" id="サイズ最適化">サイズ最適化</a></h4>
+<p><code>rustc</code>は、2つのサイズ最適化レベルを提供しています。<code>opt-level = &quot;s&quot;</code>, <code>&quot;z&quot;</code>です。<code>&quot;z&quot;</code>は、<code>&quot;s&quot;</code>より小さなバイナリを作ります。</p>
+<p>これらの最適化レベルは、LLVMのインライン展開しきい値を下げます。インライン展開しきい値は、<code>-C inline-threshold</code>で指定することもできます。Rust 1.34.1でのしきい値の使われ方は、<a href="https://github.com/rust-lang/rust/blob/1.34.1/src/librustc_codegen_llvm/back/write.rs#L735-L759">ソースコード</a>を見るとわかります。</p>
+<ul>
+<li><code>opt-level = 3</code>は275</li>
+<li><code>opt-level = 2</code>は225</li>
+<li><code>opt-level = &quot;s&quot;</code>は75</li>
+<li><code>opt-level = &quot;s&quot;</code>は25</li>
+</ul>
+<h4><a class="header" href="#出典" id="出典">出典</a></h4>
+<ul>
+<li><a href="https://doc.rust-lang.org/stable/rustc/">The rustc book</a></li>
+<li><a href="https://tomoyuki-nakabayashi.github.io/book/unsorted/speed-vs-size.html">Embedonomicon 最適化</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../04-tools/compiler.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../05-library/library.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../04-tools/compiler.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../05-library/library.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

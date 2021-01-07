@@ -1,0 +1,372 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>メモリアロケータ - Embedded Rust Techniques</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../01-introduction/introduction.html"><strong aria-hidden="true">1.</strong> はじめに</a></li><li class="chapter-item expanded "><a href="../02-setup/setup.html"><strong aria-hidden="true">2.</strong> 環境構築</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/bare-metal.html"><strong aria-hidden="true">3.</strong> ベアメタルテクニック</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../03-bare-metal/no_std.html"><strong aria-hidden="true">3.1.</strong> no_std</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/panic.html"><strong aria-hidden="true">3.2.</strong> panic</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/print.html"><strong aria-hidden="true">3.3.</strong> print!マクロ</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/linker.html"><strong aria-hidden="true">3.4.</strong> リンカ</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/assembly.html"><strong aria-hidden="true">3.5.</strong> アセンブリ</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/allocator.html" class="active"><strong aria-hidden="true">3.6.</strong> メモリアロケータ</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/entry.html"><strong aria-hidden="true">3.7.</strong> entryポイント</a></li></ol></li><li class="chapter-item expanded "><a href="../04-tools/tools.html"><strong aria-hidden="true">4.</strong> ツール</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../04-tools/cargo.html"><strong aria-hidden="true">4.1.</strong> Cargo</a></li><li class="chapter-item expanded "><a href="../04-tools/compiler.html"><strong aria-hidden="true">4.2.</strong> コンパイラサポート</a></li><li class="chapter-item expanded "><a href="../04-tools/rustc.html"><strong aria-hidden="true">4.3.</strong> rustc</a></li></ol></li><li class="chapter-item expanded "><a href="../05-library/library.html"><strong aria-hidden="true">5.</strong> ライブラリ / フレームワーク</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../05-library/heapless.html"><strong aria-hidden="true">5.1.</strong> heapless</a></li><li class="chapter-item expanded "><a href="../05-library/no_std_crates.html"><strong aria-hidden="true">5.2.</strong> no_stdクレート</a></li><li class="chapter-item expanded "><a href="../05-library/svd2rust.html"><strong aria-hidden="true">5.3.</strong> svd2rust</a></li><li class="chapter-item expanded "><a href="../05-library/rtfm.html"><strong aria-hidden="true">5.4.</strong> RTFM</a></li><li class="chapter-item expanded "><a href="../05-library/tock.html"><strong aria-hidden="true">5.5.</strong> Tock</a></li><li class="chapter-item expanded "><a href="../05-library/testing.html"><strong aria-hidden="true">5.6.</strong> testing</a></li></ol></li><li class="chapter-item expanded "><a href="../06-ffi/ffi.html"><strong aria-hidden="true">6.</strong> FFI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../06-ffi/c-with-rust.html"><strong aria-hidden="true">6.1.</strong> RustからCを呼ぶ</a></li><li class="chapter-item expanded "><a href="../06-ffi/rust-with-c.html"><strong aria-hidden="true">6.2.</strong> CからRustを呼ぶ</a></li><li class="chapter-item expanded "><a href="../06-ffi/zephyr-bindings.html"><strong aria-hidden="true">6.3.</strong> ケーススタディ Zephyr</a></li></ol></li><li class="chapter-item expanded "><a href="../07-linux/embedded-linux.html"><strong aria-hidden="true">7.</strong> 組込みLinux</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../07-linux/basic.html"><strong aria-hidden="true">7.1.</strong> ビルド/テスト</a></li><li class="chapter-item expanded "><a href="../07-linux/yocto.html"><strong aria-hidden="true">7.2.</strong> Yocto</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Embedded Rust Techniques</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2><a class="header" href="#3-6-メモリアロケータ" id="3-6-メモリアロケータ">3-6. メモリアロケータ</a></h2>
+<p>ベアメタルプログラミングでも開発が進むと動的なコレクションが使いたくなります。<code>std</code>が使える通常のRustでは、<code>Vec</code>や<code>String</code>といった一般的なコレクションが利用できます。このようなコレクションは、ヒープメモリを利用します。そのため、デフォルトでは、<code>no_std</code>な環境では、これらのコレクションを利用できません。しかし、<code>no_std</code>なRustでも、メモリアロケータを実装することで、コレクションを利用することができます。</p>
+<p>メモリアロケータを実装<strong>せず</strong>にコレクションを利用する方法は、<a href="../05-library/heapless.html">heapless</a>で説明します。</p>
+<p>ただ、(執筆時点のRust 1.35.0では) 残念なことに<strong>nightly必須です</strong>。ベアメタルでメモリアロケータを実装するには、<a href="https://doc.rust-lang.org/alloc/index.html">alloc</a>と<a href="https://github.com/rust-lang/rust/issues/51540">alloc_error_handler</a>のフィーチャが必要です。<code>alloc</code>は、Rust 1.36でstableになるため、本書が世に出回っている時点では、stableになっています。一方、<code>alloc_error_handler</code>については、まだ安定化の目途が立っていないようです。今しばらく、メモリアロケータの実装はnightly専用になりそうです。</p>
+<p>一時的にツールチェインをnightlyに切り替えます。Cortex-M3を例に解説します。nightlyのツールチェインにCortex-M3用のターゲットを追加します。</p>
+<pre><code>$ rustup override set nightly
+$ rustup target add thumbv7m-none-eabi
+</code></pre>
+<p>ここでの目標は、次のプログラムを動作させることです。</p>
+<pre><code class="language-rust ignore">pub unsafe extern &quot;C&quot; fn Reset() -&gt; ! {
+    let mut xs = Vec::new();
+    xs.push(42);
+    xs.push(83);
+    println!(&quot;{:?}&quot;, xs);
+}
+</code></pre>
+<p><code>println!</code>マクロの実装方法については、<a href="print.html">print!マクロ</a>で説明しています。</p>
+<h3><a class="header" href="#グローバルアロケータ" id="グローバルアロケータ">グローバルアロケータ</a></h3>
+<p><code>Vec</code>や<code>String</code>といったコレクションは、デフォルトでは<strong>グローバルアロケータ</strong>を使ってヒープメモリ領域を確保します。グローバルアロケータとは、<code>#[global_allocator]</code>アトリビュートが指定されたアロケータのことです。このアトリビュートで指定するオブジェクトは、<a href="https://doc.rust-lang.org/1.29.2/core/alloc/trait.GlobalAlloc.html">GlobalAlloc</a>トレイトを実装しなければなりません。</p>
+<pre><code class="language-rust ignore">// グローバルメモリアロケータの宣言
+// ユーザはメモリ領域の`[0x2000_0100, 0x2000_0200]`がプログラムの他の部分で使用されないことを
+// 保証しなければなりません
+#[global_allocator]
+static HEAP: BumpPointerAlloc = BumpPointerAlloc {
+    head: UnsafeCell::new(0x2000_0100),
+    end: 0x2000_0200,
+};
+</code></pre>
+<p>それでは、グローバルアロケータに指定する<code>BumpPointerAlloc</code>の実装を見てみましょう。</p>
+<h3><a class="header" href="#bumppointeralloc" id="bumppointeralloc">BumpPointerAlloc</a></h3>
+<p>これから、<code>BumpPointerAlloc</code>という最も単純なアロケータを実装します。このアロケータは、次のようにヒープメモリを管理します。</p>
+<ul>
+<li>初期化時に、ヒープメモリ領域の開始アドレスと終了アドレスを受け取ります</li>
+<li>割り当て可能なメモリ領域の先頭ポインタを1つだけ保持します</li>
+<li>メモリを新しく割り当てると、割り当てた分だけ単純に先頭ポインタを増加します</li>
+<li>一度割り当てたメモリは、解放しません</li>
+</ul>
+<p>上述した通り、このアロケータは、<code>GlobalAlloc</code>トレイトを実装します。全体を示します。</p>
+<pre><code class="language-rust ignore">use core::ptr;
+use core::cell::UnsafeCell;
+use core::alloc::GlobalAlloc;
+extern crate alloc;
+use alloc::alloc::Layout;
+use alloc::vec::Vec;
+// *シングル*コアシステム用のポインタを増加するだけのアロケータ
+struct BumpPointerAlloc {
+    head: UnsafeCell&lt;usize&gt;,
+    end: usize,
+}
+
+unsafe impl Sync for BumpPointerAlloc {}
+
+unsafe impl GlobalAlloc for BumpPointerAlloc {
+    unsafe fn alloc(&amp;self, layout: Layout) -&gt; *mut u8 {
+        let head = self.head.get();
+
+        let align = layout.align();
+        let res = *head % align;
+        let start = if res == 0 { *head } else { *head + align - res };
+        if start + align &gt; self.end {
+            // ヌルポインタはメモリ不足の状態を知らせます
+            ptr::null_mut()
+        } else {
+            *head = start + align;
+            start as *mut u8
+        }
+    }
+
+    unsafe fn dealloc(&amp;self, _: *mut u8, _: Layout) {
+        // このアロケータはメモリを解放しません
+    }
+}
+</code></pre>
+<p>順番に解説します。</p>
+<pre><code class="language-rust ignore">struct BumpPointerAlloc {
+    head: UnsafeCell&lt;usize&gt;,
+    end: usize,
+}
+</code></pre>
+<p>まず、このアロケータは、割り当て可能なメモリ領域の先頭を示す<code>head</code>と、末尾を示す<code>end</code>を持ちます。<code>head</code>が<code>UnsafeCell</code>になっている理由は、<code>&amp;self</code>を引数に取る<code>alloc</code>メソッドの中で<code>head</code>の値を書き換えるためです。<code>alloc</code>メソッドのシグネチャは、<code>GlobalAlloc</code>トレイトで定義されているため、引数を<code>&amp;mut self</code>に変更することができません。</p>
+<pre><code class="language-rust ignore">unsafe impl Sync for BumpPointerAlloc {}
+</code></pre>
+<p>次に<code>Sync</code>トレイトを実装します。これは、グローバルアロケータのオブジェクトが<code>static</code>変数になるため、スレッド間で安全に共有できることをコンパイラに伝えるためです。</p>
+<p><code>GlobalAlloc</code>トレイトの実装で求められるメソッドは、<code>alloc</code>と<code>dealloc</code>のみです。<code>dealloc</code>はメモリを解放しないため、何もしません。</p>
+<pre><code class="language-rust ignore">    unsafe fn alloc(&amp;self, layout: Layout) -&gt; *mut u8 {
+        let head = self.head.get();
+
+        let align = layout.align();
+        let res = *head % align;
+        let start = if res == 0 { *head } else { *head + align - res };
+        if start + align &gt; self.end {
+            // ヌルポインタはメモリ不足の状態を知らせます
+            ptr::null_mut()
+        } else {
+            *head = start + align;
+            start as *mut u8
+        }
+    }
+</code></pre>
+<p>引数<code>layout</code> (<a href="https://doc.rust-lang.org/core/alloc/struct.Layout.html"><code>Layout</code></a>) は、要求されているメモリブロックです。<code>align()</code>で、アライメントを考慮して、確保しなければならないメモリブロックサイズを返します。<code>head</code>のアドレスが<code>end</code>に到達するまで、単純にポインタを増加しながら、メモリを割り当てます。</p>
+<p>なお、この実装は、割り込みでメモリアロケータを使用する場合、データ競合が発生し、安全に利用<strong>できません</strong>。</p>
+<h3><a class="header" href="#alloc_error_handler" id="alloc_error_handler">alloc_error_handler</a></h3>
+<p>最後の要素が、アロケーションエラー発生時のハンドラです。これは、<code>#[alloc_error_handler]</code>アトリビュートを指定します。</p>
+<pre><code class="language-rust ignore">#[alloc_error_handler]
+fn on_oom(_layout: Layout) -&gt; ! {
+    loop {}
+}
+</code></pre>
+<p>今回は、単純に無限ループに陥るだけの実装です。</p>
+<h3><a class="header" href="#動作確認" id="動作確認">動作確認</a></h3>
+<p><code>03-bare-metal/allocator</code>ディレクトリに、Cortex-M3をターゲットにした場合のサンプルコードがあります。ディレクトリに移動し、次のコマンドで実行結果が確認できます。</p>
+<pre><code>$ cargo run
+</code></pre>
+<pre><code>    Finished dev [unoptimized + debuginfo] target(s) in 0.15s
+     Running `qemu-system-arm -cpu cortex-m3 -machine lm3s6965evb -nographic -semihosting-config enable=on,target=native -kernel target/thumbv7m-none-eabi/debug/allocator`
+[42, 83]
+</code></pre>
+<p>無事、<code>Vec</code>のデバッグ表示が確認できました。</p>
+<h3><a class="header" href="#メモリアロケータ実装例" id="メモリアロケータ実装例">メモリアロケータ実装例</a></h3>
+<p>ここで紹介した<code>BumpPointerAlloc</code>は実用に耐えないものです。いくつか、より洗練されたメモリアロケータの実装例を紹介します。</p>
+<h4><a class="header" href="#linked-list-allocator" id="linked-list-allocator">linked-list-allocator</a></h4>
+<p><a href="https://github.com/phil-opp/linked-list-allocator">linked-list-allocator</a>は、BlogOSの著者が公開しているlinked-listを使ったアロケータです。Writing an OS in Rust (First Edition) <a href="https://os.phil-opp.com/kernel-heap/">Kernel Heap</a>に少し解説があります。</p>
+<h4><a class="header" href="#redox-slab-allocator" id="redox-slab-allocator">Redox Slab allocator</a></h4>
+<p><a href="https://gitlab.redox-os.org/redox-os/slab_allocator">Redox Slab allocator</a>は、RustでOSを作るプロジェクト「Redox」のメモリアロケータです。僭越ながら、簡単な解説を<a href="https://qiita.com/tomoyuki-nakabayashi/items/e0bd16e9105163cecafb">Redox Slab Allocatorで学ぶRustベアメタル環境のヒープアロケータ</a>に書いています。</p>
+<h4><a class="header" href="#alloc-cortex-m" id="alloc-cortex-m">alloc-cortex-m</a></h4>
+<p><a href="https://github.com/rust-embedded/alloc-cortex-m/">alloc-cortex-m</a>は、linked-list-allocatorを、Cortex-MのMutexを使ってラッピングしたメモリアロケータです。</p>
+<h4><a class="header" href="#kernel-roulette" id="kernel-roulette">kernel-roulette</a></h4>
+<p><a href="https://github.com/souvik1997/kernel-roulette">kernel-roulette</a>は、RustでLinux kernelのdriverを書くプロジェクトです。このプロジェクトでは、<code>kmalloc</code>や<code>kfree</code>をFFIで呼び出し、Linux kernelの機能を用いてRustのメモリアロケータを実装します。</p>
+<h4><a class="header" href="#出典" id="出典">出典</a></h4>
+<ul>
+<li>The Embedded Rust Book: <a href="https://tomoyuki-nakabayashi.github.io/book/collections/index.html">コレクション</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../03-bare-metal/assembly.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../03-bare-metal/entry.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../03-bare-metal/assembly.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../03-bare-metal/entry.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

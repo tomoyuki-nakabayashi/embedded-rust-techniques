@@ -1,0 +1,500 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>ケーススタディ Zephyr - Embedded Rust Techniques</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../01-introduction/introduction.html"><strong aria-hidden="true">1.</strong> はじめに</a></li><li class="chapter-item expanded "><a href="../02-setup/setup.html"><strong aria-hidden="true">2.</strong> 環境構築</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/bare-metal.html"><strong aria-hidden="true">3.</strong> ベアメタルテクニック</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../03-bare-metal/no_std.html"><strong aria-hidden="true">3.1.</strong> no_std</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/panic.html"><strong aria-hidden="true">3.2.</strong> panic</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/print.html"><strong aria-hidden="true">3.3.</strong> print!マクロ</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/linker.html"><strong aria-hidden="true">3.4.</strong> リンカ</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/assembly.html"><strong aria-hidden="true">3.5.</strong> アセンブリ</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/allocator.html"><strong aria-hidden="true">3.6.</strong> メモリアロケータ</a></li><li class="chapter-item expanded "><a href="../03-bare-metal/entry.html"><strong aria-hidden="true">3.7.</strong> entryポイント</a></li></ol></li><li class="chapter-item expanded "><a href="../04-tools/tools.html"><strong aria-hidden="true">4.</strong> ツール</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../04-tools/cargo.html"><strong aria-hidden="true">4.1.</strong> Cargo</a></li><li class="chapter-item expanded "><a href="../04-tools/compiler.html"><strong aria-hidden="true">4.2.</strong> コンパイラサポート</a></li><li class="chapter-item expanded "><a href="../04-tools/rustc.html"><strong aria-hidden="true">4.3.</strong> rustc</a></li></ol></li><li class="chapter-item expanded "><a href="../05-library/library.html"><strong aria-hidden="true">5.</strong> ライブラリ / フレームワーク</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../05-library/heapless.html"><strong aria-hidden="true">5.1.</strong> heapless</a></li><li class="chapter-item expanded "><a href="../05-library/no_std_crates.html"><strong aria-hidden="true">5.2.</strong> no_stdクレート</a></li><li class="chapter-item expanded "><a href="../05-library/svd2rust.html"><strong aria-hidden="true">5.3.</strong> svd2rust</a></li><li class="chapter-item expanded "><a href="../05-library/rtfm.html"><strong aria-hidden="true">5.4.</strong> RTFM</a></li><li class="chapter-item expanded "><a href="../05-library/tock.html"><strong aria-hidden="true">5.5.</strong> Tock</a></li><li class="chapter-item expanded "><a href="../05-library/testing.html"><strong aria-hidden="true">5.6.</strong> testing</a></li></ol></li><li class="chapter-item expanded "><a href="../06-ffi/ffi.html"><strong aria-hidden="true">6.</strong> FFI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../06-ffi/c-with-rust.html"><strong aria-hidden="true">6.1.</strong> RustからCを呼ぶ</a></li><li class="chapter-item expanded "><a href="../06-ffi/rust-with-c.html"><strong aria-hidden="true">6.2.</strong> CからRustを呼ぶ</a></li><li class="chapter-item expanded "><a href="../06-ffi/zephyr-bindings.html" class="active"><strong aria-hidden="true">6.3.</strong> ケーススタディ Zephyr</a></li></ol></li><li class="chapter-item expanded "><a href="../07-linux/embedded-linux.html"><strong aria-hidden="true">7.</strong> 組込みLinux</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../07-linux/basic.html"><strong aria-hidden="true">7.1.</strong> ビルド/テスト</a></li><li class="chapter-item expanded "><a href="../07-linux/yocto.html"><strong aria-hidden="true">7.2.</strong> Yocto</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Embedded Rust Techniques</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2><a class="header" href="#6-3-ケーススタディ-zephyr-binding" id="6-3-ケーススタディ-zephyr-binding">6-3. ケーススタディ Zephyr binding</a></h2>
+<p>Rust Embedded devices WGでもRTOSとRustとのインテグレーションは<a href="https://github.com/rust-embedded/book/issues/62">issue #62</a>で議論中です。</p>
+<p>ここでは、Cで作られたRTOSである<a href="https://www.zephyrproject.org/">Zephyr</a>をターゲットに、RTOSとのインテグレーションを実験してみます。ZephyrのAPIを利用して、Rustから<code>println!</code>マクロを使って、コンソールに文字を出力します。また、RTOSのような複雑なCプロジェクトとのインテグレーションが困難な理由を考察します。</p>
+<p>そのために、次のことができるようにします。</p>
+<ol>
+<li>CからRustのAPIを呼び出す</li>
+<li>RustからZephyrのAPIを呼び出す</li>
+</ol>
+<p>双方のバインディングは、<code>cbindgen</code>および<code>bindgen</code>を用いて自動生成します。ここで掲載する方法には、まだまだ改善の余地があることに注意して下さい。</p>
+<p>次のコードが動くようにします。</p>
+<pre><code class="language-c">#include &lt;rustlib.h&gt;
+
+int main(void) {
+	rust_main();
+}
+</code></pre>
+<p>まずC言語から、Rustの<code>rust_main</code>関数を呼び出します。バインディング用のヘッダファイル<code>rustlib.h</code>は<code>cbindgen</code>で自動生成します。</p>
+<pre><code class="language-rust ignore">#[no_mangle]
+pub extern &quot;C&quot; fn rust_main() {
+    println!(&quot;Hello {}&quot;, &quot;Rust&quot;);
+}
+</code></pre>
+<p>Rustには<code>println!</code>マクロを実装します。この<code>println!</code>マクロは、ZephyrのAPIを利用してコンソールに文字列を出力します。Zephyr APIのバインディングは、<code>bindgen</code>で自動生成します。</p>
+<p>最終的に、C (main) → Rust (rust_main) → C (Zephyr API)というコールグラフになります。</p>
+<h3><a class="header" href="#環境" id="環境">環境</a></h3>
+<p>これから示すインテグレーション例を試すために必要な環境です。カッコ内は、著者が試したバージョンです。</p>
+<ul>
+<li>Rust (stable 1.35.0)</li>
+<li>cbindgen (0.8.3)</li>
+<li>bindgen (0.49.0)</li>
+<li>Zephyr v.1.14</li>
+<li>Zephyr SDK (0.10.0)</li>
+<li>west (v0.5.8)</li>
+<li>qemu-system-arm (2.11.1)</li>
+</ul>
+<h3><a class="header" href="#cからrustのapiを呼び出す" id="cからrustのapiを呼び出す">CからRustのAPIを呼び出す</a></h3>
+<p>下のRust関数に対するヘッダファイルを作成します。</p>
+<pre><code class="language-rust ignore">#[no_mangle]
+pub extern &quot;C&quot; fn rust_main() { /* ... */ }
+</code></pre>
+<p>ビルドスクリプトでも容易に生成できますが、今回はZephyrとのインテグレーション上、Makefileを使う必要があるため、Makefile内で次のコマンドを呼び出します。</p>
+<pre><code>cbindgen src/lib.rs -l c -o lib/rustlib.h
+</code></pre>
+<p>これで、次のヘッダファイルが生成されます。</p>
+<pre><code>cat hello/lib/rustlib.h
+</code></pre>
+<pre><code class="language-c">#include &lt;stdarg.h&gt;
+#include &lt;stdbool.h&gt;
+#include &lt;stdint.h&gt;
+#include &lt;stdlib.h&gt;
+
+void rust_main(void);
+</code></pre>
+<p>このヘッダファイルをCでインクルードします。</p>
+<pre><code class="language-c">#include &lt;rustlib.h&gt;
+
+int main(void) {
+	rust_main();
+}
+</code></pre>
+<p>今回は非常に簡潔です。構造体を引数にしたり、ヒープメモリの管理などリソース管理が加わると、より複雑になります。</p>
+<h3><a class="header" href="#rustからzephyrのapiを呼び出す" id="rustからzephyrのapiを呼び出す">RustからZephyrのAPIを呼び出す</a></h3>
+<p>こちらの方が難易度が高いです。下準備も色々と必要です。</p>
+<p>一般的なライブラリと異なり、多くの組込みOSでは必要最小限の機能だけを組み込んでバイナリを形成します。ビルド時のコンフィギュレーション次第で、ユーザーアプリケーションが利用できるAPIが増減します。そのため、全てのコンフィギュレーションで利用可能なバインディングを作ることは、難しいです。このケーススタディでも、固定のコンフィギュレーションに対してバインディングを作成します。</p>
+<p>今回、Zephyrは、デフォルトのZephyr kernel APIに加えて、<code>newlib</code>という組込み用標準CライブラリのAPIを有効化します。この<code>newlib</code>を有効化することにより、C標準ライブラリの<strong>一部</strong>がZephyrアプリケーションで利用可能になります。</p>
+<pre><code>cat prj.config
+</code></pre>
+<pre><code># General config
+CONFIG_NEWLIB_LIBC=y
+</code></pre>
+<p>この設定により、次のようなC標準ライブラリAPIが利用可能になります。</p>
+<ul>
+<li>I/O
+<ul>
+<li>printf, fwrite, etc</li>
+</ul>
+</li>
+<li>文字列
+<ul>
+<li>strtoul, atoi, etc</li>
+</ul>
+</li>
+<li>メモリ
+<ul>
+<li>malloc, free, etc</li>
+</ul>
+</li>
+</ul>
+<p>これらAPIのバインディングを自動生成しつつ、Rustっぽく使えるようにラッピングしていきます。</p>
+<h4><a class="header" href="#バインディングの自動生成" id="バインディングの自動生成">バインディングの自動生成</a></h4>
+<p>まず、第一関門です。ここで難しい点は、2つあります。</p>
+<ol>
+<li>OSのコンフィギュレーションによって利用できるAPIが異なる</li>
+<li>一部APIがZephyrのビルドシステムで自動生成するヘッダに依存している</li>
+</ol>
+<p>上記理由から、<strong>一度ターゲットとするZephyrをビルドした後</strong>で、<code>bindgen</code>を使用することにしました。まず、空のアプリケーションを用意して、Zephyrをビルドします。</p>
+<pre><code>cat src/main.c
+</code></pre>
+<pre><code class="language-c">int main(void) {
+	return;
+}
+</code></pre>
+<pre><code># Zephyrプロジェクトのディレクトリ
+source zephyr-env.sh
+
+# ケーススタディプロジェクトのディレクトリ
+west build -b cortex_qemu_m3 hello
+</code></pre>
+<p>これで、<code>build/zephyr/include.generated</code>に必要なヘッダファイルが生成されます。<code>Zephyr</code>の環境変数を利用しながら、<code>bindgen</code>でバインディングを生成します。</p>
+<pre><code>$ bindgen --use-core --ctypes-prefix cty zephyr-sys/headers/bindings.h -o zephyr-sys/src/bindings.rs -- -I${ZEPHYR_BASE}/include -I${ZEPHYR_BASE}/arch/arm/include -I./build/zephyr/include/generated -m32
+</code></pre>
+<p>前述の通り、<code>std</code>クレートにあるFFI型は利用できないため、<code>cty</code>クレートを使います。<code>--ctypes-prefix cty</code>の部分です。</p>
+<p>バインディングを生成するためのヘッダファイルは以下の通りです。</p>
+<pre><code>cat zephyr-sys/headers/bindings.h
+</code></pre>
+<pre><code class="language-c">#include &lt;autoconf.h&gt;
+#include &lt;stdio.h&gt;
+</code></pre>
+<p>Zephyrのビルドシステムで自動生成されるヘッダ<code>autoconf.h</code>内には、アーキテクチャ依存のマクロ定義など、重要な定義が数多く含まれます。Zephyrのヘッダファイルおよびソースファイルは、この<code>autoconf.h</code>に含まれるマクロが定義されていることが前提になっています。そこで、バインディング作成時にも、まず最初に<code>autoconf.h</code>をインクルードしています。</p>
+<p><code>--</code>以降 (<code>-I${ZEPHYR_BASE}</code>から後) のオプションは、<code>clang</code>に与えるオプションです。<code>-I</code>でインクルードパスを、<code>-m32</code>でターゲットアーキテクチャが32ビットであることを指示しています。</p>
+<p>これで、<code>bindings.rs</code>を得ます。例えば、<code>printf</code>のバインディングは、次のように生成されています。</p>
+<pre><code class="language-rust ignore">extern &quot;C&quot; {
+    pub fn printf(fmt: *const cty::c_char, ...) -&gt; cty::c_int;
+}
+</code></pre>
+<p>この<code>bindings.rs</code>をクレートとして利用できるようにします。次の<code>lib.rs</code>を作成します。</p>
+<pre><code class="language-rust ignore">#![no_std]
+#![allow(non_upper_case_globals)]
+#![allow(non_camel_case_types)]
+#![allow(non_snake_case)]
+#![allow(dead_code)]
+
+include!(&quot;bindings.rs&quot;);
+</code></pre>
+<p>Rustとしてはあくまでの<code>no_std</code>な環境となるため、<code>#![no_std]</code>アトリビュートが必要です。バインディングを作成したCソースファイルは、Rustの命名規則に沿っていません。そこで、Rustコンパイラのlintで警告が出ないように、命名規則のlintルールを除外しています。</p>
+<p><code>lib.rs</code>と<code>bindings.rs</code>を<code>zephyr-sys</code>クレートとしてまとめれば、バインディングの生成は完了です。</p>
+<h4><a class="header" href="#ラッピングクレートの作成" id="ラッピングクレートの作成">ラッピングクレートの作成</a></h4>
+<p><code>zephyr-sys</code>クレートのバインディングは、C APIをそのまま変換しただけなので、Rustらしい安全で使いやすいAPIになっていません。例えば、<code>printf</code>をRustから呼び出そうとすると、次のようなコードになります。</p>
+<pre><code class="language-rust ignore">    unsafe {
+        zephyr::printf(b&quot;Hello from %s\0&quot;.as_ptr() as *const cty::c_char,
+                       b&quot;Rust\0&quot;.as_ptr());
+    }
+</code></pre>
+<p>お世辞にも使いやすいとは言えません。その上、文字列をナル文字 (<code>\0</code>) で終端し忘れると、未定義動作に突入します。</p>
+<p>そこで、<code>zephyr-sys</code>をラッピングして、Rustらしく使えるAPIを実装します。ここが、Cとのインテグレーションで一番大変なところです。</p>
+<p>ここでは、Zephyrの<code>newlib</code> APIを使って、アプリケーションから安全に利用できる<code>println!</code>マクロを作ります。ベースは、<a href="../03-bare-metal/print.html">print!マクロ</a>で実装したマクロと同じです。異なる点は、<code>fmt::Write</code>トレイトの<code>write_str</code>メソッドの実装で、Zephyrの<code>fwrite</code>を呼び出す点です。</p>
+<pre><code class="language-rust ignore">/// Pseudo writer which uses Zephyr `fwrite` API.
+/// Because `fwrite` does not guarantee its atomicity, this wrapper
+/// does not provide any lock mechanism.
+pub struct DebugWriter {}
+
+impl fmt::Write for DebugWriter {
+    fn write_str(&amp;mut self, s: &amp;str) -&gt; fmt::Result {
+        // safe: `fwrite` does not need to guarantee the atomicity.
+        unsafe {
+            zephyr_sys::fwrite(s.as_ptr() as *const cty::c_void, s.len(), 1, stdout_as_ptr_mut());
+        }
+        Ok(())
+    }
+}
+</code></pre>
+<p>今回の実装では、マルチスレッドで動作した場合のアトミック性については考慮しません。Zephyrの<code>fwrite</code> API自体がアトミック性を保証していないため、Rust側で工夫をしても、システム全体のアトミック性が保証できないためです。</p>
+<p>もし、C APIが (例えばMutexなどにより) アトミック性を保証する仕組みを持つ場合、<code>DebugWriter</code>を空実装にせず、然るべきロック機能を持たせると良いでしょう。</p>
+<p>今回、<code>fwrite</code>を用いて<code>println!</code>マクロを実装した理由は、ランタイムコストを減らすためです。別解として、<code>printf</code>を用いる実装が考えられますが、文字列のフォーマットはRust処理系で安全性が保証されているため、Cのフォーマットを使う理由がありません。それどころか、<code>printf</code>のフォーマット処理分、余分なランタイムコストがかかります。</p>
+<p>Rustの<code>str</code>は、バイト数を取得する<code>len</code>メソッドを備えているため、<code>stdout</code>に対して、指定バイト数書き込む実装にすると、ランタイムコストが少なくなります。</p>
+<p>最後になりますが、このクレートを<code>zephyr</code>クレートとします。<code>Cargo.toml</code>ファイルに<code>zephyr-sys</code>クレートへの依存関係を追加します。</p>
+<pre><code class="language-toml">[dependencies]
+cty = &quot;0.2.0&quot;
+zephyr-sys = { path = &quot;../zephyr-sys&quot; }
+</code></pre>
+<h4><a class="header" href="#アプリケーション作成" id="アプリケーション作成">アプリケーション作成</a></h4>
+<p>アプリケーションは、上記で作成した<code>println!</code>マクロを呼び出すだけです。</p>
+<pre><code class="language-rust ignore">use zephyr::{print, println};
+
+#[no_mangle]
+pub extern &quot;C&quot; fn rust_main() {
+    println!(&quot;Hello {}&quot;, &quot;Rust&quot;);
+}
+</code></pre>
+<p>このクレートを<code>hello</code>クレートとして、<code>zephyr</code>クレートへの依存を追加します。</p>
+<pre><code class="language-toml">[dependencies]
+cty = &quot;0.2.0&quot;
+zephyr = { path = &quot;../zephyr&quot; }
+</code></pre>
+<p>このクレートは、staticライブラリとしてビルドし、Zephyrとリンクします。</p>
+<pre><code class="language-toml">[lib]
+name = &quot;rustlib&quot;
+crate-type = [&quot;staticlib&quot;]
+</code></pre>
+<p>このクレートは、<code>Makefile</code>を使ってビルドします。これは主にZephyrとのインテグレーション上の理由です。おおよそ、次のコマンドが実行されるように<code>Makefile</code>を作成します。</p>
+<pre><code>cargo build
+cargo objcopy -- --weaken lib/librustlib.a
+cbindgen src/lib.rs -l c -o lib/rustlib.h
+</code></pre>
+<p><code>cargo</code>でプロジェクトのstaticライブラリを作成し、<code>objcopy</code>でシンボルを<code>weak</code>にします。これは、Rustコンパイラビルトインの<code>memcopy</code>や<code>memset</code>といった関数が、Zephyrのシンボルと衝突してしまうためです。</p>
+<blockquote>
+<p>余談ですが、現状、Rustにはビルド後のバイナリやライブラリを操作するための<strong>ポストビルドスクリプト</strong>の仕組みがありません。
+今回のように、<code>objcopy</code>などを使いたい場合には、<code>Makefile</code>など外部ビルドシステムに依存しなければなりません。</p>
+</blockquote>
+<p>また、このクレートはCから呼び出されるため、Cのバインディングを生成します (先述の通り)。</p>
+<h4><a class="header" href="#ビルドシステムへのインテグレーション" id="ビルドシステムへのインテグレーション">ビルドシステムへのインテグレーション</a></h4>
+<p>最後の仕事です。Zephyrはビルドシステムに<code>CMake</code>を採用しています。Zephyrのビルドプロセス中で外部ビルドシステムを呼び出し、ライブラリをリンクする方法が確立されています。</p>
+<p>詳細な説明は省略しますが、<code>cmake</code>の<code>ExternalProject</code>を用いて、<code>CMakeLists.txt</code>を次の通り記述します。</p>
+<pre><code class="language-cmake"># Include External Rust Library
+include(ExternalProject)
+
+set(rust_prj hello)
+set(rust_src_dir   ${CMAKE_CURRENT_SOURCE_DIR}/${rust_prj})
+set(rust_build_dir ${CMAKE_CURRENT_BINARY_DIR}/${rust_prj})
+
+ExternalProject_Add(
+  rust_project                 # Name for custom target
+  PREFIX     ${rust_build_dir} # Root dir for entire project
+  SOURCE_DIR ${rust_src_dir}
+  BINARY_DIR ${rust_src_dir}   # This particular build system is invoked from the root
+  CONFIGURE_COMMAND &quot;&quot;         # Skip configuring the project, e.g. with autoconf
+  BUILD_COMMAND make
+  INSTALL_COMMAND &quot;&quot;      # This particular build system has no install command
+  BUILD_BYPRODUCTS ${rust_src_dir}/lib/librust.a
+)
+
+add_library(rust_lib STATIC IMPORTED GLOBAL)
+add_dependencies(
+  rust_lib
+  rust_project
+)
+
+set_target_properties(rust_lib PROPERTIES IMPORTED_LOCATION ${rust_src_dir}/lib/librust.a)
+set_target_properties(rust_lib PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${rust_src_dir}/lib)
+
+target_link_libraries(app PUBLIC rust_lib)
+</code></pre>
+<p>今回は、先の手順で作成した<code>Makefile</code>を呼び出す形にしました。これでようやく全ての準備が整いました。</p>
+<h4><a class="header" href="#動作確認" id="動作確認">動作確認</a></h4>
+<p>次のCアプリケーションを作成して、<code>src/main.c</code>とします。</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main(void) {
+	rust_main();
+}
+</code></pre>
+<p>次のコマンドで今回のプロジェクトをビルドし、QEMUで実行できます。</p>
+<pre><code>mkdir build &amp;&amp; cd $_
+cmake -GNinja -DBOARD=qemu_cortex_m3 ..
+ninja run
+</code></pre>
+<p>実行すると無事に<code>Hello Rust</code>が表示されます。</p>
+<pre><code>To exit from QEMU enter: 'CTRL+a, x'[QEMU] CPU: cortex-m3
+qemu-system-arm: warning: nic stellaris_enet.0 has no peer
+***** Booting Zephyr OS zephyr-v1.14.0 *****
+Hello Rust
+</code></pre>
+<h3><a class="header" href="#考察" id="考察">考察</a></h3>
+<p>この通り、RTOSのような複雑なCプロジェクトとRustとのインテグレーションには、特有の困難さがあります。まず、ラッピングするAPIの数が膨大です。今回は、単一機能に対してのみラッピングAPIを作成しましたが、これをRTOSがアプリケーションに提供するAPIの数分こなさなければなりません。</p>
+<p>加えて、RTOSではターゲットシステムごとに、アプリケーションが利用できるAPIが増減します。この要素をどのように統一的に扱うか、を解決する必要があります。今後のコミュニティの動きに注目しましょう。</p>
+<h2><a class="header" href="#コラムマイコン上でrustで書いたwasmアプリケーションが動く" id="コラムマイコン上でrustで書いたwasmアプリケーションが動く">コラム〜マイコン上でRustで書いたWASMアプリケーションが動く！？〜</a></h2>
+<p>2019年5月、<a href="https://github.com/intel/wasm-micro-runtime">WebAssembly Micro Runtime</a>というマイコン上で動作するWASMランタイムが公開されました。このWASMランタイムは、Zephyr上で動かすことができます。</p>
+<p>それほど苦労せずに、256KBのRAMが搭載されているマイコン上でRustのアプリケーションを実行できました。アプリケーション実行までの簡単な手順を<a href="https://tomo-wait-for-it-yuki.hatenablog.com/entry/2019/06/16/133344?_ga=2.61433454.350764793.1560857949-1518570932.1554416614">WebAssembly Micro RuntimeでRustアプリをマイコンで動かす！</a>で公開しています。ランタイムの性能が気になるところですが、WASMが動くようになればターゲットアーキテクチャを気にしなくてもRustアプリケーションが動かせるようになるため、今後もWASM Micro Runtimeに注目しましょう。</p>
+<h4><a class="header" href="#参考" id="参考">参考</a></h4>
+<p><a href="https://github.com/hashmismatch/freertos.rs">freertos.rs</a></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../06-ffi/rust-with-c.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../07-linux/embedded-linux.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../06-ffi/rust-with-c.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../07-linux/embedded-linux.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+        <script src="../ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
